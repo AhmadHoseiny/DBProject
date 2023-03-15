@@ -10,5 +10,9 @@ public class ReadConfigFile {
         prop.load(ip);
         return prop;
     }
+    public static int getMaximumRowsCountInTablePage() throws IOException{
+        Properties prop = ReadConfigFile.getProperties();
+        return Integer.parseInt(prop.getProperty("MaximumRowsCountInTablePage")) ;
+    }
 
 }
