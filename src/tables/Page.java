@@ -6,7 +6,7 @@ import java.util.*;
 import exceptions.DBAppException;
 import helper_classes.*;
 public class Page implements Serializable{
-    Vector<Vector<Object>> page;
+    private Vector<Vector<Object>> page;
 
     public Vector<Vector<Object>> getPage() {
         return page;
