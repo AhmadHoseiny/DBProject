@@ -2,20 +2,19 @@ package tables;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import exceptions.DBAppException;
 import helper_classes.*;
 
 public class Table implements Serializable {
-    private String tableName;
-    private String clusteringKey;
+    private final String tableName;
+    private final String clusteringKey;
     private Vector<String> colNames;
     private Vector<String> colTypes;
     private Vector<String> colMin;
     private Vector<String> colMax;
-    private Vector<Page> table;
+    private transient Vector<Page> table;
 
     public String getTableName() {
         return tableName;
@@ -45,16 +44,19 @@ public class Table implements Serializable {
         return table;
     }
 
+    public void setTable(Vector<Page> t) { this.table = t; }
+
     public Table(String strTableName,
                  String strClusteringKeyColumn,
                  Hashtable<String, String> htblColNameType,
                  Hashtable<String, String> htblColNameMin,
-                 Hashtable<String, String> htblColNameMax) throws DBAppException {
+                 Hashtable<String, String> htblColNameMax) throws DBAppException, IOException {
 
         if(htblColNameType.size() != htblColNameMin.size() ||
                 htblColNameMin.size() !=  htblColNameMax.size() ||
                 htblColNameType.size() != htblColNameMax.size())
             throw new DBAppException("The input data is inconsistent");
+
 
         this.tableName = strTableName;
         this.clusteringKey = strClusteringKeyColumn;
@@ -68,8 +70,9 @@ public class Table implements Serializable {
 
         for(Map.Entry<String, String> e : htblColNameType.entrySet()){
 
-            if(e.getKey().equals(this.clusteringKey))
+            if(e.getKey().equals(this.clusteringKey)) {
                 continue;
+            }
             colNames.add(e.getKey());
             colTypes.add(e.getValue());
 
@@ -84,36 +87,47 @@ public class Table implements Serializable {
 
         this.table = new Vector<>();
 
-        new File("Serialized Files/" + this.tableName).mkdirs();
+
+//        Vector<Object> details = new Vector<>();
+//        details.add(strClusteringKeyColumn);
+//        details.add(htblColNameType);
+//        details.add(htblColNameMin);
+//        details.add(htblColNameMax);
+//
+//        FileOutputStream fileOut =
+//                new FileOutputStream("Serialized Database/" +
+//                        tableName + ".ser");
+//        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+//        out.writeObject(details);
+//        out.close();
+//        fileOut.close();
+
     }
 
 
-    public Table() {
+    public boolean isValidTuple(Hashtable<String, Object> htblColNameValue) {
 
-    }
+//        for(int i = 0; i < colNames.size(); i++){
+//
+//            switch (colTypes.get(i)) {
+//
+//                case "java.lang.Integer" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Integer; break;
+//                case "java.lang.String" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof String; break;
+//                case "java.lang.Double" :
+//                case "java.lang.double" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Double; break;
+//                case "java.util.Date" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Date; break;
+//                default: isValid &= false;
+//
+//            }
+//
+//        }
 
-    public void createTable(String strTableName,
-                            String strClusteringKeyColumn,
-                            Hashtable<String,String> htblColNameType,
-                            Hashtable<String,String> htblColNameMin,
-                            Hashtable<String,String> htblColNameMax )
-            throws DBAppException, IOException {
-        Table t = new Table(strTableName, strClusteringKeyColumn, htblColNameType, htblColNameMin, htblColNameMax);
-        Serializer.serializeTable(t, strTableName);
-    }
-
-    public void insertIntoTable(String strTableName,
-                                Hashtable<String,Object> htblColNameValue)
-            throws DBAppException, IOException, ClassNotFoundException, ParseException {
-        Table t = Serializer.deserializeTable(strTableName);
-        t.insertTuple(htblColNameValue);
-        Serializer.serializeTable(t, strTableName);
-    }
-
-    public boolean isValidTuple(Hashtable<String, Object> htblColNameValue) throws ParseException {
+//        Vector<Comparable> tuple = new Vector<>();
+//        for(String colName : colNames){
+//            tuple.add((Comparable)htblColNameValue.get(colName));
+//        }
 
         boolean isValid = true;
-        SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH);
 
         for(int i = 0; i < colNames.size(); i++){
 
@@ -126,7 +140,7 @@ public class Table implements Serializable {
                 case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMin.get(i))>=0 ; break;
                 case "java.lang.Double" :
                 case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMin.get(i)))>=0 ; break;
-                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(formatter.parse(colMin.get(i)))>=0 ; break;
+                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMin.get(i)))>=0 ; break;
                 default: isValid &= false;
 
             }
@@ -137,7 +151,7 @@ public class Table implements Serializable {
 //                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMax.get(i))>=0 ; break;
 //                case "java.lang.Double" :
 //                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMax.get(i)))>=0 ; break;
-//                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(formatter.parse(colMax.get(i)))>=0 ; break;
+//                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMax.get(i)))>=0 ; break;
 //                default: isValid &= false;
 //
 //            }
@@ -160,13 +174,16 @@ public class Table implements Serializable {
     }
 
     public void insertTuple(Hashtable<String, Object> htblColNameValue)
-            throws DBAppException, IOException, ClassNotFoundException, ParseException {
+            throws DBAppException, IOException, ClassNotFoundException {
 
         //Don't forget to check between min & max
         if(!isValidTuple(htblColNameValue))
             throw new DBAppException("The values inserted do not respect the constraints");
 
-        if(this.table.isEmpty()){
+        String directoryPath = "Serialized Database/" + this.tableName;
+        File directory = new File(directoryPath);
+
+        if(directory.isDirectory() && directory.listFiles().length == 0){
 
             Page page = new Page();
             this.table.add(page);
@@ -176,7 +193,7 @@ public class Table implements Serializable {
 
         }
 
-        File folder = new File("Serialized Files/" + tableName);
+        File folder = new File("Serialized Database/" + tableName);
         int fileCount = folder.listFiles().length;
 
         int i;
@@ -184,7 +201,7 @@ public class Table implements Serializable {
 
         for(i=fileCount-1 ; i>=0 ; i--){
 
-            Page curPage = Serializer.deserializePage(this.getTableName(), i);
+            Page curPage = Serializer.deserializePage(tableName, i);
             int retVal = curPage.insertToSorted(colNames, htblColNameValue, (i==0)?true:false);
 
             if(retVal == 0){
@@ -219,6 +236,23 @@ public class Table implements Serializable {
             Serializer.serializePage(page, this.getTableName(), fileCount);
 
         }
+
+    }
+
+    public void updateTuple(Hashtable<String, Object> htblColNameValue)
+            throws DBAppException, IOException, ClassNotFoundException {
+
+        //Don't forget to check between min & max
+        if(!isValidTuple(htblColNameValue))
+            throw new DBAppException("The values inserted do not respect the constraints");
+
+        String directoryPath = "Serialized Database/" + this.tableName;
+        File directory = new File(directoryPath);
+
+        File folder = new File("Serialized Database/" + tableName);
+        int fileCount = folder.listFiles().length;
+
+        int i;
 
     }
 

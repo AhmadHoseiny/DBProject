@@ -80,4 +80,27 @@ public class Page implements Serializable{
         }
         return null;
     }
+
+    public boolean updateTuple(String strClusteringVal, Vector<String> colNames, Hashtable<String, Object> htblColNameValue) {
+        Vector<Object> tuple = new Vector<>();
+        Vector<String> tmp = new Vector<>();
+        tmp = colNames;
+        tmp.removeElementAt(0);
+        for(String colName : tmp){
+            tuple.add(htblColNameValue.get(colName));
+        }
+
+        int s = page.size();
+        for(int i=s-1 ; i>=0 ; i--){
+            Vector<Object> curTuple = page.get(i);
+            Comparable curKey = (Comparable) curTuple.get(0);
+            if(curKey.compareTo(strClusteringVal)==0){
+                page.insertElementAt(tuple, i);
+                page.removeElementAt(i+1);
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
