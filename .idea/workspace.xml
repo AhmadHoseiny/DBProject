@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Updated some implementations">
+    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Implemented the update table feature&#10;Updated the insert into table feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/Serializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679164449599</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implemented the update table feature&#10;Updated the insert into table feature">
+      <created>1679175399950</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679175399950</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +156,8 @@
     <MESSAGE value="Trial Setups 2.0" />
     <MESSAGE value="Added serializeTable and deserializeTable methods&#10;Updated isValidTuple method&#10;Added createTable and insertIntoTable methods&#10;Added an empty constructor in Table class&#10;added an extra exception due to the use of date formatter&#10;abstracted the creation and tuple-adding of tables to be SQL-like" />
     <MESSAGE value="Updated some implementations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated some implementations" />
+    <MESSAGE value="Implemented the update table feature&#10;Updated the insert into table feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the update table feature&#10;Updated the insert into table feature" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

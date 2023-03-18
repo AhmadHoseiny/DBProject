@@ -141,33 +141,33 @@ public class Table implements Serializable {
 
             switch (colTypes.get(i)) {
 
-                case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMin.get(i)))>=0 ; break;
-                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMin.get(i))>=0 ; break;
-                case "java.lang.Double" :
-                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMin.get(i)))>=0 ; break;
-                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMin.get(i)))>=0 ; break;
-                default: isValid &= false;
-
-            }
-
-//            switch (colTypes.get(i)) {
-//
-//                case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMax.get(i)))>=0 ; break;
-//                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMax.get(i))>=0 ; break;
-//                case "java.lang.Double" :
-//                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMax.get(i)))>=0 ; break;
-//                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMax.get(i)))>=0 ; break;
-//                default: isValid &= false;
-//
-//            }
-
-            switch (colTypes.get(i)) {
-
                 case "java.lang.Integer" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Integer; break;
                 case "java.lang.String" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof String; break;
                 case "java.lang.Double" :
                 case "java.lang.double" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Double; break;
                 case "java.util.Date" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Date; break;
+                default: isValid &= false;
+
+            }
+
+            switch (colTypes.get(i)) {
+
+                case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMin.get(i))) >= 0 ; break;
+                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMin.get(i)) >= 0 ; break;
+                case "java.lang.Double" :
+                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMin.get(i))) >= 0 ; break;
+                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMin.get(i))) >= 0 ; break;
+                default: isValid &= false;
+
+            }
+
+            switch (colTypes.get(i)) {
+
+                case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMax.get(i))) <= 0 ; break;
+                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMax.get(i)) <= 0 ; break;
+                case "java.lang.Double" :
+                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMax.get(i))) <= 0 ; break;
+                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMax.get(i))) <= 0 ; break;
                 default: isValid &= false;
 
             }
