@@ -14,6 +14,7 @@ public class Table implements Serializable {
     private Vector<String> colTypes;
     private Vector<String> colMin;
     private Vector<String> colMax;
+    private HashMap<Integer, Comparable> dataIndex;
     private transient Vector<Page> table;
 
     public String getTableName() {
@@ -64,6 +65,7 @@ public class Table implements Serializable {
         this.colTypes = new Vector<>();
         this.colMin = new Vector<>();
         this.colMax = new Vector<>();
+        this.dataIndex = new HashMap<>();
 
         colNames.add(this.clusteringKey);
         colTypes.add(htblColNameType.get(this.clusteringKey));
@@ -134,6 +136,9 @@ public class Table implements Serializable {
 //            isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMin.get(i))>=0 ;
 //            isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMax.get(i))<=0 ;
 
+            if (!htblColNameValue.containsKey(colNames.get(i)))
+                continue;
+
             switch (colTypes.get(i)) {
 
                 case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMin.get(i)))>=0 ; break;
@@ -173,6 +178,27 @@ public class Table implements Serializable {
 
     }
 
+    public int getPageIndex(Comparable clusteringKeyVal) {
+        File folder = new File("Serialized Database/" + tableName);
+        int fileCount = folder.listFiles().length;
+
+        int lo = 0;
+        int hi = fileCount - 1;
+
+        while (lo <= hi) {
+            int mid = lo + (hi - lo >> 1);
+//            System.out.println(dataIndex.get(mid).getClass());
+//            System.out.println(clusteringKeyVal.getClass());
+            if (dataIndex.get(mid).compareTo(clusteringKeyVal) > 0) {
+                hi = mid - 1;
+            }
+            else {
+                lo = mid + 1;
+            }
+        }
+        return hi;
+    }
+
     public void insertTuple(Hashtable<String, Object> htblColNameValue)
             throws DBAppException, IOException, ClassNotFoundException {
 
@@ -180,45 +206,50 @@ public class Table implements Serializable {
         if(!isValidTuple(htblColNameValue))
             throw new DBAppException("The values inserted do not respect the constraints");
 
+        if (htblColNameValue.get(colNames.get(0)) == null)
+            throw new DBAppException("Tuple has no clustering key value");
+
+
         String directoryPath = "Serialized Database/" + this.tableName;
         File directory = new File(directoryPath);
+
+        if(!directory.isDirectory())
+            throw new DBAppException("This table does not exist!");
 
         if(directory.isDirectory() && directory.listFiles().length == 0){
 
             Page page = new Page();
             this.table.add(page);
             page.insertToSorted(colNames, htblColNameValue, true);
+            dataIndex.put(0, (Comparable) htblColNameValue.get(clusteringKey));
             Serializer.serializePage(page, this.getTableName(), 0);
             return;
 
         }
 
-        File folder = new File("Serialized Database/" + tableName);
-        int fileCount = folder.listFiles().length;
+        int ans = getPageIndex((Comparable) htblColNameValue.get(this.getClusteringKey()));
 
-        int i;
+        Page curPage = Serializer.deserializePage(tableName, ans);
         Vector<Object> lastTuple = null;
+        int retVal = curPage.insertToSorted(colNames, htblColNameValue, (ans==0)?true:false);
 
-        for(i=fileCount-1 ; i>=0 ; i--){
-
-            Page curPage = Serializer.deserializePage(tableName, i);
-            int retVal = curPage.insertToSorted(colNames, htblColNameValue, (i==0)?true:false);
-
-            if(retVal == 0){
-                Serializer.serializePage(curPage, this.getTableName(), i);
-                return;
-            }
-            if(retVal == 1){
-                lastTuple = curPage.getPage().remove(curPage.getPage().size()-1);
-                Serializer.serializePage(curPage, this.getTableName(), i);
-                break;
-            }
-
+        if(retVal == 0){
+            Serializer.serializePage(curPage, this.getTableName(), ans);
+            return;
+        }
+        if(retVal == 1){
+            lastTuple = curPage.getPage().remove(curPage.getPage().size()-1);
+            Serializer.serializePage(curPage, this.getTableName(), ans);
         }
 
-        for(int j=i+1 ; j<fileCount ; j++){
+        //the next loop is for the case when we shift every tuple in all the pages below the one we are inserting in
+        int j = 0;
+        File folder = new File("Serialized Database/" + tableName);
+        int fileCount = folder.listFiles().length;
+        for(j=ans+1 ; j<fileCount ; j++){
 
             Page page = Serializer.deserializePage(this.getTableName(), j);
+            dataIndex.put(j, (Comparable) lastTuple.get(0));
             lastTuple = page.insertAtBeginning(lastTuple);
             Serializer.serializePage(page, this.getTableName(), j);
 
@@ -229,22 +260,73 @@ public class Table implements Serializable {
             Page page = new Page();
             this.table.add(page);
             Hashtable<String, Object> ht = new Hashtable<>();
-            for(int j=0 ; j<colNames.size() ; j++){
-                ht.put(colNames.get(j), lastTuple.get(j));
+            for(int k=0 ; k<colNames.size() ; k++){
+                ht.put(colNames.get(k), lastTuple.get(k));
             }
             page.insertToSorted(colNames, ht, true);
+            dataIndex.put(j, (Comparable) lastTuple.get(0));
             Serializer.serializePage(page, this.getTableName(), fileCount);
 
         }
 
+
+
+
+
+
+
+//        int i;
+//        Vector<Object> lastTuple = null;
+//
+//        for(i=fileCount-1 ; i>=0 ; i--){
+//
+//            Page curPage = Serializer.deserializePage(tableName, i);
+//            int retVal = curPage.insertToSorted(colNames, htblColNameValue, (i==0)?true:false);
+//
+//            if(retVal == 0){
+//                Serializer.serializePage(curPage, this.getTableName(), i);
+//                return;
+//            }
+//            if(retVal == 1){
+//                lastTuple = curPage.getPage().remove(curPage.getPage().size()-1);
+//                Serializer.serializePage(curPage, this.getTableName(), i);
+//                break;
+//            }
+//
+//        }
+//
+//        for(int j=i+1 ; j<fileCount ; j++){
+//
+//            Page page = Serializer.deserializePage(this.getTableName(), j);
+//            lastTuple = page.insertAtBeginning(lastTuple);
+//            Serializer.serializePage(page, this.getTableName(), j);
+//
+//        }
+//
+//        if(lastTuple != null){
+//
+//            Page page = new Page();
+//            this.table.add(page);
+//            Hashtable<String, Object> ht = new Hashtable<>();
+//            for(int j=0 ; j<colNames.size() ; j++){
+//                ht.put(colNames.get(j), lastTuple.get(j));
+//            }
+//            page.insertToSorted(colNames, ht, true);
+//            Serializer.serializePage(page, this.getTableName(), fileCount);
+//
+//        }
+
     }
 
-    public void updateTuple(Hashtable<String, Object> htblColNameValue)
+    public void updateTuple(String strClusteringKey, Hashtable<String, Object> htblColNameValue)
             throws DBAppException, IOException, ClassNotFoundException {
 
         //Don't forget to check between min & max
         if(!isValidTuple(htblColNameValue))
             throw new DBAppException("The values inserted do not respect the constraints");
+
+        if(htblColNameValue.containsKey(this.getClusteringKey()))
+            throw new DBAppException("Unauthorized attempted to update clustering key");
 
         String directoryPath = "Serialized Database/" + this.tableName;
         File directory = new File(directoryPath);
@@ -252,7 +334,11 @@ public class Table implements Serializable {
         File folder = new File("Serialized Database/" + tableName);
         int fileCount = folder.listFiles().length;
 
-        int i;
+        int index = getPageIndex(strClusteringKey);
+
+        Page p = Serializer.deserializePage(tableName, index);
+        p.updateTuple(strClusteringKey, colNames, htblColNameValue);
+        Serializer.serializePage(p, this.getTableName(), index);
 
     }
 

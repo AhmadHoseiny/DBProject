@@ -54,11 +54,31 @@ public class Serializer {
         in.close();
         fileIn.close();
 
-//        Table t = new Table(tableName, (String) details.elementAt(0),
-//                (Hashtable<String, String>) details.elementAt(1),
-//                (Hashtable<String, String>) details.elementAt(2),
-//                (Hashtable<String, String>) details.elementAt(3));
-
         return t;
     }
+
+//    public static void serializeDetails(String tableName, HashMap<Integer, String> data) throws IOException {
+//        String directoryPath = "Serialized Database/" + tableName;
+//        File directory = new File(directoryPath);
+//
+//        FileOutputStream fileOut =
+//                new FileOutputStream("Serialized Database/" +
+//                        tableName + "/" +  "Data.ser");
+//        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+//        out.writeObject(data);
+//        out.close();
+//        fileOut.close();
+//    }
+
+//    public static HashMap<Integer, String> deserializeDetails(String tableName) throws IOException, ClassNotFoundException {
+//        FileInputStream fileIn = new FileInputStream("Serialized Database/" +
+//                tableName + "/" + "Data.ser");
+//        ObjectInputStream in = new ObjectInputStream(fileIn);
+//        HashMap<Integer, String> data = (HashMap<Integer, String>) in.readObject();
+//        in.close();
+//        fileIn.close();
+//
+//        return data;
+//    }
+
 }

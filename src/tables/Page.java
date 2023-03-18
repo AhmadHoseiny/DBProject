@@ -81,26 +81,34 @@ public class Page implements Serializable{
         return null;
     }
 
-    public boolean updateTuple(String strClusteringVal, Vector<String> colNames, Hashtable<String, Object> htblColNameValue) {
-        Vector<Object> tuple = new Vector<>();
-        Vector<String> tmp = new Vector<>();
-        tmp = colNames;
-        tmp.removeElementAt(0);
-        for(String colName : tmp){
-            tuple.add(htblColNameValue.get(colName));
+    public Integer getTupleIndex (String strClusteringVal) {
+        int lo = 0;
+        int hi = this.getPage().size() - 1;
+
+
+        while (lo <= hi) {
+            int mid = lo + (hi - lo >> 1);
+            Comparable cur = (Comparable) this.getPage().get(mid).get(0);
+            if (cur.compareTo(strClusteringVal) > 0)
+                hi = mid - 1;
+            else
+                lo = mid + 1;
         }
 
-        int s = page.size();
-        for(int i=s-1 ; i>=0 ; i--){
-            Vector<Object> curTuple = page.get(i);
-            Comparable curKey = (Comparable) curTuple.get(0);
-            if(curKey.compareTo(strClusteringVal)==0){
-                page.insertElementAt(tuple, i);
-                page.removeElementAt(i+1);
-                return true;
-            }
-        }
+        Comparable cur = (Comparable) this.getPage().get(hi).get(0);
+        return (cur.compareTo(strClusteringVal) == 0)?hi:null;
+    }
 
-        return false;
+    public void updateTuple(String strClusteringVal, Vector<String> colNames, Hashtable<String, Object> htblColNameValue) throws DBAppException {
+
+        Integer index = getTupleIndex(strClusteringVal);
+        if (index == null)
+            throw new DBAppException("The input clustering key to be updated does not exist");
+
+        Vector<Object> tupleToBeUpdated = this.getPage().get(index);
+        for (int i = 0; i < colNames.size(); i++)
+            if (htblColNameValue.containsKey(colNames.get(i)))
+                tupleToBeUpdated.set(i, htblColNameValue.get(colNames.get(i)));
+
     }
 }
