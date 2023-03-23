@@ -1,7 +1,6 @@
 package tables;
 
 import java.io.*;
-import java.text.ParseException;
 import java.util.*;
 
 import exceptions.DBAppException;
@@ -161,16 +160,18 @@ public class Table implements Serializable {
 
             }
 
-            switch (colTypes.get(i)) {
+//            switch (colTypes.get(i)) {
+//
+//                case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMax.get(i))) <= 0 ; break;
+//                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMax.get(i)) <= 0 ; break;
+//                case "java.lang.Double" :
+//                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMax.get(i))) <= 0 ; break;
+//                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMax.get(i))) <= 0 ; break;
+//                default: isValid &= false;
+//
+//            }
 
-                case "java.lang.Integer" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Integer.parseInt(colMax.get(i))) <= 0 ; break;
-                case "java.lang.String" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(colMax.get(i)) <= 0 ; break;
-                case "java.lang.Double" :
-                case "java.lang.double" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Double.parseDouble(colMax.get(i))) <= 0 ; break;
-                case "java.util.Date" : isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(Date.parse(colMax.get(i))) <= 0 ; break;
-                default: isValid &= false;
-
-            }
+//            System.out.println("isValid = " + isValid);
 
         }
 
@@ -339,6 +340,88 @@ public class Table implements Serializable {
         Page p = Serializer.deserializePage(tableName, index);
         p.updateTuple(strClusteringKey, colNames, htblColNameValue);
         Serializer.serializePage(p, this.getTableName(), index);
+
+    }
+
+    //implement a method that takes a clustering key and deletes its tuple from a specific page after deserializnig it and then serializing it again after deleting the tuple from it
+    public void deleteTuple(Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+
+        String directoryPath = "Serialized Database/" + this.tableName;
+        File directory = new File(directoryPath);
+
+        if(!directory.isDirectory()) {
+            throw new DBAppException("This table does not exist!");
+        }
+
+
+        //a unique row
+        if (htblColNameValue.containsKey(getClusteringKey())){
+            Integer index = getPageIndex((Comparable) htblColNameValue.get(getColNames().get(0)));
+            Page p = Serializer.deserializePage(tableName, index);
+            boolean nonEmptyPage = p.deleteSingleTuple((Comparable) htblColNameValue.get(getColNames().get(0)), colNames, htblColNameValue);
+            //System.out.println(nonEmptyPage);
+            if (nonEmptyPage) {
+                Comparable minKey = (Comparable) p.getPage().get(0).get(0);
+                dataIndex.put(index, minKey);
+                Serializer.serializePage(p, this.getTableName(), index);
+            }
+            else {
+                File folder = new File("Serialized Database/" + tableName);
+                int fileCount = folder.listFiles().length;
+                File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + index + ".ser");
+                boolean deleted = fileToDelete.delete();
+               // System.out.println(deleted);
+                for(int i=index + 1 ; i<fileCount ; i++){
+                    File fileToRename = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
+                    File newFile = new File("Serialized Database/" + tableName + "/Page_" + (i-1) + ".ser");
+                    fileToRename.renameTo(newFile);
+                    dataIndex.put(i-1, dataIndex.get(i));
+                }
+                dataIndex.remove(fileCount-1);
+
+
+            }
+        }
+        else{
+            File folder = new File("Serialized Database/" + tableName);
+            int fileCount = folder.listFiles().length;
+            LinkedList<Integer> pagesToDelete = new LinkedList<>();
+            for(int i=0 ; i<fileCount ; i++){
+                Page p = Serializer.deserializePage(tableName, i);
+                boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue);
+                if (nonEmptyPage) {
+                    Comparable minKey = (Comparable) p.getPage().get(0).get(0);
+                    dataIndex.put(i, minKey);
+                    Serializer.serializePage(p, this.getTableName(), i);
+                }
+                else {
+                    pagesToDelete.add(i);
+                }
+            }
+
+            int j = 0;
+            for (int i = 0; i < fileCount; i++) {
+                if(!pagesToDelete.isEmpty() && i==pagesToDelete.peekFirst()) {
+                    File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
+                    fileToDelete.delete();
+                    pagesToDelete.removeFirst();
+                    j++;
+                }
+                else {
+                    File fileToRename = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
+                    File newFile = new File("Serialized Database/" + tableName + "/Page_" + (i-j) + ".ser");
+                    fileToRename.renameTo(newFile);
+                    dataIndex.put(i-j, dataIndex.get(i));
+                }
+            }
+            for(int i=0 ; i<j ; i++){
+                dataIndex.remove(fileCount-1-i);
+            }
+
+        }
+
+
+
 
     }
 

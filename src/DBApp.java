@@ -34,8 +34,8 @@ public class DBApp {
         htblColNameMax.put("gpa", "6.0");
 
         DBApp dbApp = new DBApp();
-//        dbApp.createTable("Student", "id", htblColNameType,
-//                htblColNameMin, htblColNameMax);
+        dbApp.createTable("Student", "id", htblColNameType,
+                htblColNameMin, htblColNameMax);
 
         Hashtable<String, Object> htblColNameValue = new Hashtable( );
 //        htblColNameValue.put("id", "1");
@@ -66,12 +66,26 @@ public class DBApp {
 //        htblColNameValue.put("name", new String("Logine" ) );
 //        htblColNameValue.put("gpa", 4.95);
 //        dbApp.insertIntoTable("Student", htblColNameValue);
-
-
+//
+//        htblColNameValue = new Hashtable( );
+//        htblColNameValue.put("id", "7");
+//        htblColNameValue.put("name", new String("Omar" ) );
+//        htblColNameValue.put("gpa", 4.0);
+//        dbApp.insertIntoTable("Student", htblColNameValue);
+//
 //        htblColNameValue.put("gpa", 0.95);
-//        dbApp.updateTable("Student", "3", htblColNameValue);
+//        dbApp.updateTable("Student", "4", htblColNameValue);
 
-//        dbApp.printTable("Student");
+//        htblColNameValue = new Hashtable( );
+//        htblColNameValue.put("gpa", 0.95);
+//        dbApp.deleteFromTable("Student", htblColNameValue);
+//
+        htblColNameValue = new Hashtable( );
+        htblColNameValue.put("id", "2");
+        dbApp.deleteFromTable("Student", htblColNameValue);
+
+
+        dbApp.printTable("Student");
 
     }
 
@@ -99,6 +113,14 @@ public class DBApp {
             throws DBAppException, IOException, ClassNotFoundException {
         Table t = Serializer.deserializeTable(strTableName);
         t.updateTuple(strClusteringKeyValue, htblColNameValue);
+        Serializer.serializeTable(t, strTableName);
+    }
+
+    public void deleteFromTable(String strTableName,
+                                Hashtable<String,Object> htblColNameValue)
+            throws DBAppException, IOException, ClassNotFoundException {
+        Table t = Serializer.deserializeTable(strTableName);
+        t.deleteTuple(htblColNameValue);
         Serializer.serializeTable(t, strTableName);
     }
 

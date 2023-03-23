@@ -81,7 +81,7 @@ public class Page implements Serializable{
         return null;
     }
 
-    public Integer getTupleIndex (String strClusteringVal) {
+    public Integer getTupleIndex (Comparable strClusteringVal) {
         int lo = 0;
         int hi = this.getPage().size() - 1;
 
@@ -111,4 +111,95 @@ public class Page implements Serializable{
                 tupleToBeUpdated.set(i, htblColNameValue.get(colNames.get(i)));
 
     }
+
+    //implement a method that deletes a tuple from the page after deserializing it and serializing it again
+    public void deleteTuple(String strClusteringVal) throws DBAppException {
+        Integer index = getTupleIndex(strClusteringVal);
+        if (index == null)
+            throw new DBAppException("The input clustering key to be deleted does not exist");
+
+        this.getPage().remove(index.intValue());
+    }
+
+    //returns false when page is empty after deletion
+    public boolean deleteSingleTuple(Comparable strClusteringVal, Vector<String> colNames, Hashtable<String, Object> htblColNameValue) throws DBAppException {
+        Integer index = getTupleIndex(strClusteringVal);
+        if (index == null)
+            throw new DBAppException("The input clustering key to be deleted does not exist");
+        boolean valueExists = true;
+        for(int i = 0; i < colNames.size(); i++) {
+            String colName = colNames.get(i);
+            Comparable value = (Comparable) htblColNameValue.get(colName);
+            if(value != null)
+                valueExists &= value.equals(this.getPage().get(index).get(i));
+        }
+
+        if(valueExists)
+            this.getPage().remove(index.intValue());
+        else
+            throw new DBAppException("The input criteria to be deleted does not exist");
+
+        if(this.getPage().size() == 0)
+            return false;
+
+        return true;
+    }
+
+    //returns false when page is empty after deletion
+    public boolean deleteAllMatchingTuples(Vector<String> colNames, Hashtable<String, Object> htblColNameValue){
+
+        for(int i = 0; i < this.getPage().size(); i++){
+            Vector<Object> tuple = this.getPage().get(i);
+            boolean valueExists = true;
+            for(int j = 0; j < colNames.size(); j++) {
+                String colName = colNames.get(j);
+                Comparable value = (Comparable) htblColNameValue.get(colName);
+                if(value != null)
+                    valueExists &= value.equals(tuple.get(j));
+            }
+            if(valueExists)
+                this.getPage().remove(i--);
+
+        }
+
+        if(this.getPage().size() == 0)
+            return false;
+
+        return true;
+
+
+////        Vector<String> colNames = new Vector<>();
+//        for(String colName : htblColNameValue.keySet()){
+//            colNames.add(colName);
+//        }
+//        Collections.sort(colNames);
+//        Integer index = getTupleIndex(strClusteringVal);
+//        if (index == null)
+//            throw new DBAppException("The input clustering key to be deleted does not exist");
+//
+//        Vector<Vector<Object>> tuplesToBeDeleted = new Vector<>();
+//        for(int i = index; i < this.getPage().size(); i++){
+//            Vector<Object> tuple = this.getPage().get(i);
+//            boolean valueExists = true;
+//            for(int j = 0; j < colNames.size(); j++) {
+//                String colName = colNames.get(j);
+//                Comparable value = (Comparable) htblColNameValue.get(colName);
+//                if(value != null)
+//                    valueExists &= value.equals(tuple.get(j));
+//            }
+//            if(valueExists)
+//                tuplesToBeDeleted.add(tuple);
+//        }
+//
+//        for(Vector<Object> tuple : tuplesToBeDeleted){
+//            this.getPage().remove(tuple);
+//        }
+
+
+
+    }
+
 }
+
+
+

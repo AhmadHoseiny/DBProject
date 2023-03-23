@@ -20,11 +20,12 @@ public class Serializer {
     public static Page deserializePage(String tableName, int pageIndex)
             throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("Serialized Database/" +
-                tableName+ "/Page_" + pageIndex + ".ser");
+                tableName + "/Page_" + pageIndex + ".ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         Page p = (Page) in.readObject();
         in.close();
         fileIn.close();
+
         return p;
     }
 
