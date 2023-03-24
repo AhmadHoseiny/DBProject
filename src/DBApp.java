@@ -29,47 +29,49 @@ public class DBApp {
         htblColNameMin.put("gpa", "0.01");
 
         Hashtable<String, String> htblColNameMax = new Hashtable<>();
-        htblColNameMax.put("id", "100");
+        htblColNameMax.put("id", "999");
         htblColNameMax.put("name", "zzzzzzzzzzzzzzzzzzzzz");
         htblColNameMax.put("gpa", "6.0");
 
         DBApp dbApp = new DBApp();
 //        dbApp.createTable("Student", "id", htblColNameType,
 //                htblColNameMin, htblColNameMax);
+//
+/*
+        6
+        1 AhmedNoor 0.95
+        3 AhmedOmar 1.95
+        2 AhmedAli 2.95
+        5 Sayed 3.95
+        4 Logine 4.95
+        7 Omar 4.0
+*/
+        Scanner sc = new Scanner(System.in);
 
-        Hashtable<String, Object> htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("id", "1");
-//        htblColNameValue.put("name", new String("Ahmed Noor" ) );
+        int n = sc.nextInt();
+        for(int i=0 ; i<n ; i++){
+            Hashtable<String, Object> htblColNameValue = new Hashtable( );
+            String id = sc.next();
+            String name = sc.next();
+            double gpa = sc.nextDouble();
+            htblColNameValue.put("id", id);
+            htblColNameValue.put("name", name);
+            htblColNameValue.put("gpa", gpa);
+            dbApp.insertIntoTable("Student", htblColNameValue);
+        }
+
+//        htblColNameValue = new Hashtable( );
 //        htblColNameValue.put("gpa", 0.95);
-//        dbApp.insertIntoTable("Student", htblColNameValue);
+//        dbApp.updateTable("Student", "4", htblColNameValue);
 //
 //        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("id", "3");
-//        htblColNameValue.put("name", new String("Ahmed Omar" ) );
-//        htblColNameValue.put("gpa", 1.95);
-//        dbApp.insertIntoTable("Student", htblColNameValue);
-//
-//        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("id", "2");
-//        htblColNameValue.put("name", new String("Ahmed Ali" ) );
-//        htblColNameValue.put("gpa", 2.95);
-//        dbApp.insertIntoTable("Student", htblColNameValue);
-//
-//        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("id", "5");
-//        htblColNameValue.put("name", new String("Sayed" ) );
-//        htblColNameValue.put("gpa", 3.95);
-//        dbApp.insertIntoTable("Student", htblColNameValue);
-//
-//        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("id", "4");
-//        htblColNameValue.put("name", new String("Logine" ) );
 //        htblColNameValue.put("gpa", 4.95);
-//        dbApp.insertIntoTable("Student", htblColNameValue);
+//        dbApp.deleteFromTable("Student", htblColNameValue);
+//
+//        htblColNameValue = new Hashtable( );
+//        htblColNameValue.put("id", "1");
+//        dbApp.deleteFromTable("Student", htblColNameValue);
 
-
-//        htblColNameValue.put("gpa", 0.95);
-//        dbApp.updateTable("Student", "3", htblColNameValue);
 
 //        dbApp.printTable("Student");
 
@@ -99,6 +101,14 @@ public class DBApp {
             throws DBAppException, IOException, ClassNotFoundException {
         Table t = Serializer.deserializeTable(strTableName);
         t.updateTuple(strClusteringKeyValue, htblColNameValue);
+        Serializer.serializeTable(t, strTableName);
+    }
+
+    public void deleteFromTable(String strTableName,
+                                Hashtable<String,Object> htblColNameValue)
+            throws DBAppException, IOException, ClassNotFoundException {
+        Table t = Serializer.deserializeTable(strTableName);
+        t.deleteTuple(htblColNameValue);
         Serializer.serializeTable(t, strTableName);
     }
 

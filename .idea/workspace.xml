@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Implemented the update table feature&#10;Updated the insert into table feature">
+    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/Serializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,9 +64,16 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
+      <module name="DBProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="DBProject" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -72,6 +82,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -135,7 +146,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679175399950</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated isValidTuple method">
+      <created>1679175789610</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679175789610</updated>
+    </task>
+    <task id="LOCAL-00009" summary="commit">
+      <created>1679604181726</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679604181726</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +182,9 @@
     <MESSAGE value="Added serializeTable and deserializeTable methods&#10;Updated isValidTuple method&#10;Added createTable and insertIntoTable methods&#10;Added an empty constructor in Table class&#10;added an extra exception due to the use of date formatter&#10;abstracted the creation and tuple-adding of tables to be SQL-like" />
     <MESSAGE value="Updated some implementations" />
     <MESSAGE value="Implemented the update table feature&#10;Updated the insert into table feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented the update table feature&#10;Updated the insert into table feature" />
+    <MESSAGE value="Updated isValidTuple method" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
