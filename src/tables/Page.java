@@ -17,12 +17,19 @@ public class Page implements Serializable{
     }
 
 //    returns last tuple if page is full, null otherwise
-    public Vector<Object> insertToSorted(Vector<String> colNames, Hashtable<String, Object> htblColNameValue) throws IOException, DBAppException {
 
+    public  Vector<Object> getInFormOfTuple(Vector<String> colNames,
+                                                  Hashtable<String, Object> htblColNameValue){
         Vector<Object> tuple = new Vector<>();
         for(String colName : colNames){
             tuple.add(htblColNameValue.get(colName));
         }
+        return tuple;
+    }
+
+    public Vector<Object> insertToSorted(Vector<String> colNames, Hashtable<String, Object> htblColNameValue) throws IOException, DBAppException {
+
+        Vector<Object> tuple = getInFormOfTuple(colNames, htblColNameValue);
 
         String strClusteringKey = colNames.get(0);
         Comparable strClusteringVal = (Comparable) htblColNameValue.get(strClusteringKey);
@@ -39,10 +46,7 @@ public class Page implements Serializable{
 
     public void insertTuple(Vector<String> colNames, Hashtable<String, Object> htblColNameValue) {
 
-        Vector<Object> tuple = new Vector<>();
-        for(String colName : colNames){
-            tuple.add(htblColNameValue.get(colName));
-        }
+        Vector<Object> tuple = getInFormOfTuple(colNames, htblColNameValue);
 
         this.getPage().add(tuple);
 
@@ -142,7 +146,6 @@ public class Page implements Serializable{
             }
             if(valueExists)
                 this.getPage().remove(i--);
-
         }
 
         if(this.getPage().size() == 0)

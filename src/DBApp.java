@@ -33,7 +33,9 @@ public class DBApp {
         htblColNameMax.put("name", "zzzzzzzzzzzzzzzzzzzzz");
         htblColNameMax.put("gpa", "6.0");
 
-        DBApp dbApp = new DBApp();
+
+
+//        DBApp dbApp = new DBApp();
 //        dbApp.createTable("Student", "id", htblColNameType,
 //                htblColNameMin, htblColNameMax);
 //
@@ -46,19 +48,19 @@ public class DBApp {
         4 Logine 4.95
         7 Omar 4.0
 */
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        for(int i=0 ; i<n ; i++){
-            Hashtable<String, Object> htblColNameValue = new Hashtable( );
-            String id = sc.next();
-            String name = sc.next();
-            double gpa = sc.nextDouble();
-            htblColNameValue.put("id", id);
-            htblColNameValue.put("name", name);
-            htblColNameValue.put("gpa", gpa);
-            dbApp.insertIntoTable("Student", htblColNameValue);
-        }
+//        Scanner sc = new Scanner(System.in);
+//
+//        int n = sc.nextInt();
+//        for(int i=0 ; i<n ; i++){
+//            Hashtable<String, Object> htblColNameValue = new Hashtable( );
+//            String id = sc.next();
+//            String name = sc.next();
+//            double gpa = sc.nextDouble();
+//            htblColNameValue.put("id", id);
+//            htblColNameValue.put("name", name);
+//            htblColNameValue.put("gpa", gpa);
+//            dbApp.insertIntoTable("Student", htblColNameValue);
+//        }
 
 //        htblColNameValue = new Hashtable( );
 //        htblColNameValue.put("gpa", 0.95);

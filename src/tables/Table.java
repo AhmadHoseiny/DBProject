@@ -10,9 +10,9 @@ public class Table implements Serializable {
     private final String tableName;
     private final String clusteringKey;
     private Vector<String> colNames;
-    private Vector<String> colTypes;
-    private Vector<Comparable> colMin;
-    private Vector<Comparable> colMax;
+    private transient Vector<String> colTypes;
+    private transient Vector<Comparable> colMin;
+    private transient Vector<Comparable> colMax;
     private HashMap<Integer, Comparable> minPerPage;
     private transient Vector<Page> table;
 
@@ -44,7 +44,11 @@ public class Table implements Serializable {
         return table;
     }
 
-    public void initializeTable() {
+    public void initializeTable() throws IOException {
+        this.colTypes = new Vector<>();
+        this.colMin = new Vector<>();
+        this.colMax = new Vector<>();
+        CSVFileManipulator.read(this.tableName, this.colNames, this.colTypes, this.colMin, this.colMax);
         this.table = new Vector<>();
     }
 
@@ -63,65 +67,19 @@ public class Table implements Serializable {
                 htblColNameType.size() != htblColNameMax.size())
             throw new DBAppException("The input data is inconsistent");
 
-
+        // Initialize table
         this.tableName = strTableName;
         this.clusteringKey = strClusteringKeyColumn;
         this.colNames = new Vector<>();
-        this.colTypes = new Vector<>();
-        this.colMin = new Vector<>();
-        this.colMax = new Vector<>();
         this.minPerPage = new HashMap<>();
-
         colNames.add(this.clusteringKey);
-        colTypes.add(htblColNameType.get(this.clusteringKey));
-
         for(Map.Entry<String, String> e : htblColNameType.entrySet()){
-
-            if(e.getKey().equals(this.clusteringKey)) {
+            if(e.getKey().equals(this.clusteringKey))
                 continue;
-            }
             colNames.add(e.getKey());
-            colTypes.add(e.getValue());
-
         }
-
-
-
-        for(int i = 0; i < colNames.size(); i++){
-
-            Comparable colMinVal;
-            Comparable colMaxVal;
-
-            switch (colTypes.get(i)) {
-
-                case "java.lang.Integer":
-                    colMinVal = Integer.parseInt(htblColNameMin.get(colNames.get(i)));
-                    colMaxVal = Integer.parseInt(htblColNameMax.get(colNames.get(i)));
-                    break;
-                case "java.lang.String":
-                    colMinVal = htblColNameMin.get(colNames.get(i));
-                    colMaxVal = htblColNameMax.get(colNames.get(i));
-                    break;
-                case "java.lang.Double":
-                case "java.lang.double":
-                    colMinVal = Double.parseDouble(htblColNameMin.get(colNames.get(i)));
-                    colMaxVal = Double.parseDouble(htblColNameMax.get(colNames.get(i)));
-                    break;
-                case "java.util.Date":
-                    colMinVal = Date.parse(htblColNameMin.get(colNames.get(i)));
-                    colMaxVal = Date.parse(htblColNameMax.get(colNames.get(i)));
-                    break;
-                default:
-                    throw new DBAppException("Invalid column type");
-            }
-
-            colMin.add(colMinVal);
-            colMax.add(colMaxVal);
-
-        }
-        
-        this.table = new Vector<>();
-        
+        CSVFileManipulator.write(strTableName, htblColNameType, htblColNameMin, htblColNameMax, colNames);
+        this.initializeTable();
     }
 
 
@@ -249,7 +207,8 @@ public class Table implements Serializable {
 
         }
         int index = getPageIndex(clusteringKeyVal);
-
+        if (index == -1)
+            throw new DBAppException("The input clustering key does not exist");
 
         Page p = Serializer.deserializePage(tableName, index);
         p.updateTuple(clusteringKeyVal, colNames, htblColNameValue);
@@ -266,13 +225,26 @@ public class Table implements Serializable {
         if(!directory.isDirectory()) {
             throw new DBAppException("This table does not exist!");
         }
-
+        if(!isValidTuple(htblColNameValue)) {
+            throw new DBAppException("The values you are trying to delete do not respect the constraints");
+        }
+        File folder = new File("Serialized Database/" + tableName);
+        int fileCount = folder.listFiles().length;
+        //if the table is empty, we delete all records (truncate)
+        if(htblColNameValue.isEmpty()){
+            for(int i=0 ; i<fileCount ; i++){
+                File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
+                fileToDelete.delete();
+            }
+            minPerPage.clear();
+            return;
+        }
 
         //a unique row
-        if (htblColNameValue.containsKey(getClusteringKey())){
+        if (htblColNameValue.containsKey(this.getClusteringKey())){
             int index = getPageIndex((Comparable) htblColNameValue.get(getColNames().get(0)));
             if (index == -1) {
-                throw new DBAppException("Tuple does not exist");
+                throw new DBAppException("No matching Tuples to be deleted exist");
             }
             Page p = Serializer.deserializePage(tableName, index);
             boolean nonEmptyPage = p.deleteSingleTuple((Comparable) htblColNameValue.get(getColNames().get(0)), colNames, htblColNameValue);
@@ -282,8 +254,6 @@ public class Table implements Serializable {
                 Serializer.serializePage(p, this.getTableName(), index);
             }
             else {
-                File folder = new File("Serialized Database/" + tableName);
-                int fileCount = folder.listFiles().length;
                 File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + index + ".ser");
                 fileToDelete.delete();
                 for(int i=index + 1 ; i<fileCount ; i++){
@@ -293,12 +263,10 @@ public class Table implements Serializable {
                     minPerPage.put(i-1, minPerPage.get(i));
                 }
                 minPerPage.remove(fileCount-1);
-                
+
             }
         }
         else{
-            File folder = new File("Serialized Database/" + tableName);
-            int fileCount = folder.listFiles().length;
             LinkedList<Integer> pagesToDelete = new LinkedList<>();
             for(int i=0 ; i<fileCount ; i++){
                 Page p = Serializer.deserializePage(tableName, i);
