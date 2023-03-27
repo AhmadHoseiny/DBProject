@@ -145,6 +145,11 @@ public class Table implements Serializable {
         File directory = new File(directoryPath);
         int fileCount = directory.listFiles().length;
 
+        for(Map.Entry<String, Object> e : htblColNameValue.entrySet()){
+            if(!this.getColNames().contains(e.getKey()))
+                throw new DBAppException("Invalid column name " + e.getKey());
+        }
+
 //       if the table is empty
         if(fileCount == 0){
 
@@ -195,6 +200,11 @@ public class Table implements Serializable {
         if(htblColNameValue.containsKey(this.getClusteringKey()))
             throw new DBAppException("Unauthorized attempted to update clustering key");
 
+        for(Map.Entry<String, Object> e : htblColNameValue.entrySet()){
+            if(!this.getColNames().contains(e.getKey()))
+                throw new DBAppException("Invalid column name " + e.getKey());
+        }
+
        Comparable clusteringKeyVal;
         switch (colTypes.get(0)) {
 
@@ -238,6 +248,11 @@ public class Table implements Serializable {
             }
             minPerPage.clear();
             return;
+        }
+
+        for(Map.Entry<String, Object> e : htblColNameValue.entrySet()){
+            if(!this.getColNames().contains(e.getKey()))
+                throw new DBAppException("Invalid column name " + e.getKey());
         }
 
         //a unique row
