@@ -62,6 +62,7 @@ public class DBApp {
 //            dbApp.insertIntoTable("Student", htblColNameValue);
 //        }
 
+        Hashtable htblColNameValue;
 //        htblColNameValue = new Hashtable( );
 //        htblColNameValue.put("gpa", 0.95);
 //        dbApp.updateTable("Student", "4", htblColNameValue);
@@ -71,7 +72,7 @@ public class DBApp {
 //        dbApp.deleteFromTable("Student", htblColNameValue);
 //
 //        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("id", "1");
+//        htblColNameValue.put("gpas", "0.08");
 //        dbApp.deleteFromTable("Student", htblColNameValue);
 
 

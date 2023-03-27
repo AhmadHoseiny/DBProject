@@ -138,13 +138,16 @@ public class Page implements Serializable{
         for(int i = 0; i < this.getPage().size(); i++){
             Vector<Object> tuple = this.getPage().get(i);
             boolean valueExists = true;
+            boolean hasOneValidConditionAtLeast = false;
             for(int j = 0; j < colNames.size(); j++) {
                 String colName = colNames.get(j);
                 Comparable value = (Comparable) htblColNameValue.get(colName);
-                if(value != null)
+                if(value != null){
                     valueExists &= value.equals(tuple.get(j));
+                    hasOneValidConditionAtLeast = true;
+                }
             }
-            if(valueExists)
+            if(valueExists && hasOneValidConditionAtLeast)
                 this.getPage().remove(i--);
         }
 
