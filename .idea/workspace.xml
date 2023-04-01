@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="commit">
+    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Misnamed column name handled (in delete)">
+      <change afterPath="$PROJECT_DIR$/src/helper_classes/Operator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helper_classes/SQLTerm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/Serializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -96,6 +95,9 @@
       <updated>1678888951797</updated>
       <workItem from="1678961130037" duration="570000" />
       <workItem from="1678975379735" duration="10537000" />
+      <workItem from="1679776550565" duration="12328000" />
+      <workItem from="1679927340655" duration="2073000" />
+      <workItem from="1680384553345" duration="1234000" />
     </task>
     <task id="LOCAL-00001" summary="Trial Setups 2.0">
       <created>1678902844097</created>
@@ -160,7 +162,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679604181726</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Meta Data added">
+      <created>1679788574474</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679788574474</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Misnamed column name handled (in delete)">
+      <created>1679929366630</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679929366630</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +200,9 @@
     <MESSAGE value="Implemented the update table feature&#10;Updated the insert into table feature" />
     <MESSAGE value="Updated isValidTuple method" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="Meta Data added" />
+    <MESSAGE value="Misnamed column name handled (in delete)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Misnamed column name handled (in delete)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
