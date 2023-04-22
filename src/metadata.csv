@@ -1,6 +1,12 @@
-Student,id,java.lang.String,true,false,1,999
+Student,id,java.lang.Integer,true,false,1,999
 Student,gpa,java.lang.double,false,false,0.01,6.0
 Student,name,java.lang.String,false,false,A,zzzzzzzzzzzzzzzzzzzzz
-Student,id,java.lang.String,true,false,1,999
+Student,id,java.lang.Integer,true,false,1,999
+Student,gpa,java.lang.double,false,false,0.01,6.0
+Student,name,java.lang.String,false,false,A,zzzzzzzzzzzzzzzzzzzzz
+Student,id,java.lang.Integer,true,false,1,999
+Student,gpa,java.lang.double,false,false,0.01,6.0
+Student,name,java.lang.String,false,false,A,zzzzzzzzzzzzzzzzzzzzz
+Student,id,java.lang.Integer,true,false,1,999
 Student,gpa,java.lang.double,false,false,0.01,6.0
 Student,name,java.lang.String,false,false,A,zzzzzzzzzzzzzzzzzzzzz

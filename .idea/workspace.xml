@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Misnamed column name handled (in delete)">
-      <change afterPath="$PROJECT_DIR$/src/helper_classes/Operator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/helper_classes/SQLTerm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tables/MyIterator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serialized Database/Student.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_0.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_2.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/Operator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/SQLTerm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/metadata.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -49,20 +56,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/GUC/6th semester/Databases/Project/DBProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
@@ -97,7 +105,9 @@
       <workItem from="1678975379735" duration="10537000" />
       <workItem from="1679776550565" duration="12328000" />
       <workItem from="1679927340655" duration="2073000" />
-      <workItem from="1680384553345" duration="1234000" />
+      <workItem from="1680384553345" duration="1418000" />
+      <workItem from="1680442356430" duration="66000" />
+      <workItem from="1682193424419" duration="9308000" />
     </task>
     <task id="LOCAL-00001" summary="Trial Setups 2.0">
       <created>1678902844097</created>
