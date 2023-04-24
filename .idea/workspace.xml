@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Updated Exception Handling">
+      <change afterPath="$PROJECT_DIR$/src/helper_classes/main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index/Leaf.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index/NonLeaf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/Operator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tables/MyIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_3.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper_classes/CSVFileManipulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tables/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/index/Octree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +70,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.DBApp">
+  <component name="RunManager">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="DBProject" />
