@@ -20,26 +20,26 @@ public class DBApp {
 
     public static void main(String[] args) throws IOException, DBAppException, ClassNotFoundException {
 
-        Hashtable htblColNameType = new Hashtable( );
-        htblColNameType.put("id", "java.lang.Integer");
-        htblColNameType.put("name", "java.lang.String");
-        htblColNameType.put("gpa", "java.lang.double");
-
-        Hashtable<String, String> htblColNameMin = new Hashtable<>();
-        htblColNameMin.put("id", "1");
-        htblColNameMin.put("name", "A");
-        htblColNameMin.put("gpa", "0.01");
-
-        Hashtable<String, String> htblColNameMax = new Hashtable<>();
-        htblColNameMax.put("id", "999");
-        htblColNameMax.put("name", "zzzzzzzzzzzzzzzzzzzzz");
-        htblColNameMax.put("gpa", "6.0");
+//        Hashtable htblColNameType = new Hashtable( );
+//        htblColNameType.put("id", "java.lang.Integer");
+//        htblColNameType.put("name", "java.lang.String");
+//        htblColNameType.put("gpa", "java.lang.double");
+//
+//        Hashtable<String, String> htblColNameMin = new Hashtable<>();
+//        htblColNameMin.put("id", "1");
+//        htblColNameMin.put("name", "A");
+//        htblColNameMin.put("gpa", "0.01");
+//
+//        Hashtable<String, String> htblColNameMax = new Hashtable<>();
+//        htblColNameMax.put("id", "999");
+//        htblColNameMax.put("name", "zzzzzzzzzzzzzzzzzzzzz");
+//        htblColNameMax.put("gpa", "6.0");
 
 
 
         DBApp dbApp = new DBApp();
-        dbApp.createTable("Student", "id", htblColNameType,
-                htblColNameMin, htblColNameMax);
+//        dbApp.createTable("Student", "id", htblColNameType,
+//                htblColNameMin, htblColNameMax);
 
 /*
         6
@@ -85,41 +85,42 @@ public class DBApp {
 //        dbApp.deleteFromTable("Student", htblColNameValue);
 
 
-//        dbApp.printTable("Student");
+        dbApp.printTable("Student");
+
 //
-//        Scanner sc = new Scanner(System.in);
-//        int n = sc.nextInt();
-//        SQLTerm[] arrSQLTerms = new SQLTerm[n];
-//        for(int i=0 ; i<n ; i++){
-//            arrSQLTerms[i] = new SQLTerm();
-//            arrSQLTerms[i]._strTableName = "Student";
-//            arrSQLTerms[i]._strColumnName= sc.next();
-//            arrSQLTerms[i]._strOperator = sc.next();
-//            int type = sc.nextInt();  //1 --> int, 2 --> double, 3 --> string
-//            String s = sc.next();
-//            switch (type){
-//                case 1:
-//                    arrSQLTerms[i]._objValue = Integer.parseInt(s);
-//                    break;
-//                case 2:
-//                    arrSQLTerms[i]._objValue = Double.parseDouble(s);
-//                    break;
-//                case 3:
-//                    arrSQLTerms[i]._objValue = s;
-//                    break;
-//            }
-//        }
-//        String[]strarrOperators = new String[n-1];
-//        for(int i=0 ; i<n-1 ; i++){
-//            strarrOperators[i] = sc.next();
-//        }
-//
-//        Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
-//        System.out.println("{");
-//        while(resultSet.hasNext()){
-//            System.out.println(resultSet.next());
-//        }
-//        System.out.println("}");
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        SQLTerm[] arrSQLTerms = new SQLTerm[n];
+        for(int i=0 ; i<n ; i++){
+            arrSQLTerms[i] = new SQLTerm();
+            arrSQLTerms[i]._strTableName = "Student";
+            arrSQLTerms[i]._strColumnName= sc.next();
+            arrSQLTerms[i]._strOperator = sc.next();
+            int type = sc.nextInt();  //1 --> int, 2 --> double, 3 --> string
+            String s = sc.next();
+            switch (type){
+                case 1:
+                    arrSQLTerms[i]._objValue = Integer.parseInt(s);
+                    break;
+                case 2:
+                    arrSQLTerms[i]._objValue = Double.parseDouble(s);
+                    break;
+                case 3:
+                    arrSQLTerms[i]._objValue = s;
+                    break;
+            }
+        }
+        String[]strarrOperators = new String[n-1];
+        for(int i=0 ; i<n-1 ; i++){
+            strarrOperators[i] = sc.next();
+        }
+
+        Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
+        System.out.println("{");
+        while(resultSet.hasNext()){
+            System.out.println(resultSet.next());
+        }
+        System.out.println("}");
 
 
     }
