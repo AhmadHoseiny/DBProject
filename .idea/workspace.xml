@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Select Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 =======
@@ -20,6 +21,9 @@
       <change beforePath="$PROJECT_DIR$/src/tables/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/index/Octree.java" afterDir="false" />
 >>>>>>> 6aa175ae13a749a9caaa81d3ef79072b90f2abc1
     </list>
+=======
+    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Updated Exception Handling" />
+>>>>>>> 010f0132c8f7b35c43c71f903d6cbee1a1c91603
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
