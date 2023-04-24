@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Misnamed column name handled (in delete)">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_15_2023_7_52_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_15_2023_7_52_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Updated Exception Handling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serialized Database/Student.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_0.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_1.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/metadata.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679929366630</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Updated Exception Handling">
+      <created>1682297323592</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682297323592</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +214,8 @@
     <MESSAGE value="commit" />
     <MESSAGE value="Meta Data added" />
     <MESSAGE value="Misnamed column name handled (in delete)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Misnamed column name handled (in delete)" />
+    <MESSAGE value="Updated Exception Handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Exception Handling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
