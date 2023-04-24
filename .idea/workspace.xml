@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Select Added">
+    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Misnamed column name handled (in delete)">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_15_2023_7_52_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_15_2023_7_52_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serialized Database/Student.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_0.ser" beforeDir="false" />
@@ -104,10 +105,7 @@
       <workItem from="1679927340655" duration="2073000" />
       <workItem from="1680384553345" duration="1418000" />
       <workItem from="1680442356430" duration="66000" />
-      <workItem from="1682193424419" duration="10636000" />
-      <workItem from="1682265248488" duration="18000" />
-      <workItem from="1682265463966" duration="21000" />
-      <workItem from="1682269043722" duration="448000" />
+      <workItem from="1682193424419" duration="9308000" />
     </task>
     <task id="LOCAL-00001" summary="Trial Setups 2.0">
       <created>1678902844097</created>
@@ -186,42 +184,7 @@
       <option name="project" value="LOCAL" />
       <updated>1679929366630</updated>
     </task>
-    <task id="LOCAL-00012" summary="Misnamed column name handled (in delete)">
-      <created>1682204366486</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1682204366486</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Misnamed column name handled (in delete)">
-      <created>1682204370950</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1682204370950</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Misnamed column name handled (in delete)">
-      <created>1682204385857</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1682204385857</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Meta Data added">
-      <created>1682204396715</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1682204396715</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Select Added">
-      <created>1682204426712</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1682204426712</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,10 +208,9 @@
     <MESSAGE value="Implemented the update table feature&#10;Updated the insert into table feature" />
     <MESSAGE value="Updated isValidTuple method" />
     <MESSAGE value="commit" />
-    <MESSAGE value="Misnamed column name handled (in delete)" />
     <MESSAGE value="Meta Data added" />
-    <MESSAGE value="Select Added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Select Added" />
+    <MESSAGE value="Misnamed column name handled (in delete)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Misnamed column name handled (in delete)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
