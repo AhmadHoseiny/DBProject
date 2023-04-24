@@ -255,6 +255,13 @@ public class DBApp {
 
     }
 
+    public void createIndex(String strTableName,
+                            String[] strarrColName) throws DBAppException {
+
+
+
+    }
+
 
 
 }
