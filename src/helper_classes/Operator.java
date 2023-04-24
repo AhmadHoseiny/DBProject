@@ -1,5 +1,7 @@
 package helper_classes;
 
+import exceptions.DBAppException;
+
 public class Operator {
 
     String strOperator;
@@ -8,7 +10,7 @@ public class Operator {
         this.strOperator = strOperator;
     }
 
-    public boolean compare(Comparable val1, Comparable val2) {
+    public boolean compare(Comparable val1, Comparable val2) throws DBAppException {
         switch (strOperator) {
             case "=":
                 return val1.compareTo(val2) == 0;
@@ -23,7 +25,7 @@ public class Operator {
             case "!=":
                 return val1.compareTo(val2) != 0;
             default:
-                return false;
+                throw new DBAppException("Invalid operator");
         }
     }
 }

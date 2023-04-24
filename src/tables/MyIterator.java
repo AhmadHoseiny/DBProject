@@ -77,7 +77,7 @@ public class MyIterator implements Iterator{
         this.nextTuple = null;
     }
 
-    public boolean existsInResultSet(Vector<Object> tuple){
+    public boolean existsInResultSet(Vector<Object> tuple) throws DBAppException {
         Vector<String> colNames = table.getColNames();
         HashMap<String, Integer> revColName = new HashMap<>();
         for(int i=0 ; i<colNames.size() ; i++)
@@ -111,7 +111,7 @@ public class MyIterator implements Iterator{
     }
 
 
-    private void doNextJob() throws IOException, ClassNotFoundException {
+    private void doNextJob() throws IOException, ClassNotFoundException, DBAppException {
         nextCalled = true;
         if(this.page == null){
             this.page = Serializer.deserializePage(table.getTableName(), pageIndex);
