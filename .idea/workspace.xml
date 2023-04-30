@@ -4,42 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/DBApp.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/courses_table.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pcs_table.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/students_table.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/transcripts_table.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Milestone1PrivateTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DBProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBApp.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exceptions/DBAppException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/DBAppException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Operator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/ReadConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/SQLTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper_classes/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Leaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index/NonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Octree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/metadata.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
+    <list default="true" id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Finalizing Milestone 1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +47,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
     "last_directory_selection": "D:/GUC/IntelliJ workspace/DBProject/src/test/java",
+    "last_opened_file_path": "C:/Users/ALBORAQ/Downloads",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -131,6 +98,18 @@
       <option name="presentableId" value="Default" />
       <updated>1682541808013</updated>
     </task>
+    <task id="LOCAL-00001" summary="Finalizing Milestone 1">
+      <created>1682861552589</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682861552589</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Finalizing Milestone 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalizing Milestone 1" />
   </component>
 </project>
