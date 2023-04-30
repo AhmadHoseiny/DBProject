@@ -19,7 +19,7 @@ public class Page implements Serializable{
 //    returns last tuple if page is full, null otherwise
 
     public  Vector<Object> getInFormOfTuple(Vector<String> colNames,
-                                                  Hashtable<String, Object> htblColNameValue){
+                                            Hashtable<String, Object> htblColNameValue){
         Vector<Object> tuple = new Vector<>();
         for(String colName : colNames){
             tuple.add(htblColNameValue.get(colName));
@@ -73,8 +73,10 @@ public class Page implements Serializable{
         if (index == -1)
             return 0;
         Comparable cur = (Comparable) this.getPage().get(index).get(0);
-        if (cur.compareTo(strClusteringVal) == 0)
+        if (cur.compareTo(strClusteringVal) == 0) {
+            System.out.println(cur + " " + strClusteringVal);
             throw new DBAppException("Duplicate Clustering Key");
+        }
 
         return index + 1;
     }

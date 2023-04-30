@@ -1,6 +1,7 @@
 package helper_classes;
 import exceptions.DBAppException;
 
+import java.text.*;
 import java.util.*;
 import java.io.*;
 public class CSVFileManipulator {
@@ -9,31 +10,38 @@ public class CSVFileManipulator {
         boolean isValid = true;
         switch (colType) {
             case "java.lang.Integer" :  try {
-                                            Integer.parseInt(colMin);
-                                            Integer.parseInt(colMax);
+                                            if (Integer.parseInt(colMin) > Integer.parseInt(colMax))
+                                                isValid &= false;
                                         } catch (Exception e) {
                                             isValid &= false;
                                         }
+                                            break;
+            case "java.lang.String" :   if (colMin.compareTo(colMax) > 0)
+                                            isValid &= false;
                                         break;
-            case "java.lang.String" :  break;
             case "java.lang.Double" :
             case "java.lang.double" :   try {
-                                            Double.parseDouble(colMin);
-                                            Double.parseDouble(colMax);
+                                            if (Double.parseDouble(colMin) > Double.parseDouble(colMax))
+                                                isValid &= false;
                                         } catch (Exception e) {
                                             isValid &= false;
                                         }
                                         break;
             case "java.util.Date" :     try {
-                                            Date.parse(colMin);
-                                            Date.parse(colMax);
+                                            String pattern = "yyyy-MM-dd";
+                                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                                            Date dateMin = simpleDateFormat.parse(colMin);
+                                            Date dateMax = simpleDateFormat.parse(colMax);
+                                            if (dateMin.compareTo(dateMax) > 0)
+                                                isValid &= false;
                                         } catch (Exception e) {
+
                                             isValid &= false;
                                         }
                                         break;
             default: isValid &= false;
         }
-        isValid &= colMin.compareTo(colMax) <= 0; // min <= max
+
         if(!isValid)
             throw new DBAppException("Invalid min/max values for column type");
     }
@@ -42,7 +50,7 @@ public class CSVFileManipulator {
                              Hashtable<String, String> htblColNameMin,
                              Hashtable<String, String> htblColNameMax,
                              Vector<String> colNames) throws IOException, DBAppException {
-        String fileName = "src/metadata.csv";
+        String fileName = "src/main/resources/metadata.csv";
         FileWriter csvWriter = new FileWriter(fileName, true);
         for(int i=0 ; i<colNames.size() ; i++){
             String colName = colNames.get(i);
@@ -50,7 +58,7 @@ public class CSVFileManipulator {
             String colMin = htblColNameMin.get(colName);
             String colMax = htblColNameMax.get(colName);
             validate(colType, colMin, colMax);
-            String[] data = {strTableName, colName, colType, "false", "false", colMin, colMax};
+            String[] data = {strTableName, colName, colType, "false", "null", "null", colMin, colMax};
             // this is the clustering key
             if(i==0)
                 data[3] = "true";
@@ -67,8 +75,8 @@ public class CSVFileManipulator {
                             Vector<String> colTypes,
                             Vector<Comparable> colMin,
                             Vector<Comparable> colMax
-                            ) throws IOException {
-        String fileName = "src/metadata.csv";
+    ) throws IOException, ParseException {
+        String fileName = "src/main/resources/metadata.csv";
         File file = new File(fileName);
         Scanner fileScanner = new Scanner(file);
         HashMap<String, String> htblColNameType = new HashMap<>();
@@ -84,7 +92,8 @@ public class CSVFileManipulator {
             String colName = lineScanner.next();
             htblColNameType.put(colName, lineScanner.next());
             lineScanner.next(); //clustered key
-            lineScanner.next(); //indexed key
+            lineScanner.next(); //index name
+            lineScanner.next(); //index type
             htblColNameMin.put(colName, lineScanner.next());
             htblColNameMax.put(colName, lineScanner.next());
             lineScanner.close();
@@ -95,21 +104,27 @@ public class CSVFileManipulator {
             colTypes.add(htblColNameType.get(colName));
             switch (htblColNameType.get(colName)) {
                 case "java.lang.Integer" :  colMin.add(Integer.parseInt(htblColNameMin.get(colName)));
-                                            colMax.add(Integer.parseInt(htblColNameMax.get(colName)));
-                                            break;
+                    colMax.add(Integer.parseInt(htblColNameMax.get(colName)));
+                    break;
                 case "java.lang.String" :   colMin.add(htblColNameMin.get(colName));
-                                            colMax.add(htblColNameMax.get(colName));
-                                            break;
+                    colMax.add(htblColNameMax.get(colName));
+                    break;
                 case "java.lang.Double" :
                 case "java.lang.double" :   colMin.add(Double.parseDouble(htblColNameMin.get(colName)));
-                                            colMax.add(Double.parseDouble(htblColNameMax.get(colName)));
-                                            break;
-                case "java.util.Date" :     colMin.add(Date.parse(htblColNameMin.get(colName)));
-                                            colMax.add(Date.parse(htblColNameMax.get(colName)));
-                                            break;
+                    colMax.add(Double.parseDouble(htblColNameMax.get(colName)));
+                    break;
+                case "java.util.Date" :     String pattern = "yyyy-MM-dd";
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                    Date dateMin = simpleDateFormat.parse(htblColNameMin.get(colName));
+                    Date dateMax = simpleDateFormat.parse(htblColNameMax.get(colName));
+                    colMin.add(dateMin);
+                    colMax.add(dateMax);
+                    break;
                 default: break;
             }
         }
     }
+
+
 
 }

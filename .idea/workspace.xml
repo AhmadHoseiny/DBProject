@@ -4,12 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2d039af1-5062-4b84-9e5e-5fbb7cd99e0b" name="Changes" comment="Updated Exception Handling">
+    <list default="true" id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Updated Exception Handling">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_2.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DBProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serialized Database/Student/Page_3.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DBApp.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exceptions/DBAppException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/DBAppException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/Operator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/ReadConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/SQLTerm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tables/MyIterator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,22 +66,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/GUC/6th semester/Databases/Project/DBProject&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/GUC/6th semester/Databases/Project/DBProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Application.DBApp">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GUC\IntelliJ workspace\DBProject\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="DBProject" />

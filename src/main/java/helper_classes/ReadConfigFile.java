@@ -6,7 +6,7 @@ public class ReadConfigFile {
 
     public static Properties getProperties() throws IOException {
         Properties prop=new Properties();
-        FileInputStream ip = new FileInputStream("src/DBApp.config");
+        FileInputStream ip = new FileInputStream("src/main/resources/DBApp.config");
         prop.load(ip);
         return prop;
     }

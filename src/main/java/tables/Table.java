@@ -1,6 +1,8 @@
 package tables;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import exceptions.DBAppException;
@@ -15,6 +17,8 @@ public class Table implements Serializable {
     private transient Vector<Comparable> colMax;
     private HashMap<Integer, Comparable> minPerPage;
     private transient Vector<Page> table;
+
+    static final String directoryPathResourcesData = "src/main/resources/Data/";
 
     public String getTableName() {
         return tableName;
@@ -44,7 +48,7 @@ public class Table implements Serializable {
         return table;
     }
 
-    public void initializeTable() throws IOException {
+    public void initializeTable() throws IOException, ParseException {
         this.colTypes = new Vector<>();
         this.colMin = new Vector<>();
         this.colMax = new Vector<>();
@@ -60,7 +64,7 @@ public class Table implements Serializable {
                  String strClusteringKeyColumn,
                  Hashtable<String, String> htblColNameType,
                  Hashtable<String, String> htblColNameMin,
-                 Hashtable<String, String> htblColNameMax) throws DBAppException, IOException {
+                 Hashtable<String, String> htblColNameMax) throws DBAppException, IOException, ParseException {
 
         if(htblColNameType.size() != htblColNameMin.size() ||
                 htblColNameMin.size() !=  htblColNameMax.size() ||
@@ -102,7 +106,7 @@ public class Table implements Serializable {
                 default: isValid &= false;
 
             }
-            
+
             isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(((Comparable)colMin.get(i)))>=0 ;
             isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(((Comparable)colMax.get(i)))<=0 ;
 
@@ -113,7 +117,7 @@ public class Table implements Serializable {
     }
 
     public int getPageIndex(Comparable clusteringKeyVal) {
-        File folder = new File("Serialized Database/" + tableName);
+        File folder = new File(directoryPathResourcesData + tableName);
         int fileCount = folder.listFiles().length;
 
         int lo = 0;
@@ -141,7 +145,7 @@ public class Table implements Serializable {
         if (htblColNameValue.get(colNames.get(0)) == null)
             throw new DBAppException("Tuple has no clustering key value");
 
-        String directoryPath = "Serialized Database/" + this.tableName;
+        String directoryPath = directoryPathResourcesData + this.tableName;
         File directory = new File(directoryPath);
         int fileCount = directory.listFiles().length;
 
@@ -191,11 +195,14 @@ public class Table implements Serializable {
     }
 
     public void updateTuple(String strClusteringKey, Hashtable<String, Object> htblColNameValue)
-            throws DBAppException, IOException, ClassNotFoundException {
+            throws DBAppException, IOException, ClassNotFoundException, ParseException {
 
         //Don't forget to check between min & max
         if(!isValidTuple(htblColNameValue))
             throw new DBAppException("The values inserted do not respect the constraints");
+
+        if(strClusteringKey == null)
+            throw new DBAppException("Tuple has no clustering key value");
 
         if(htblColNameValue.containsKey(this.getClusteringKey()))
             throw new DBAppException("Unauthorized attempted to update clustering key");
@@ -205,14 +212,16 @@ public class Table implements Serializable {
                 throw new DBAppException("Invalid column name " + e.getKey());
         }
 
-       Comparable clusteringKeyVal;
+        Comparable clusteringKeyVal;
         switch (colTypes.get(0)) {
 
             case "java.lang.Integer" : clusteringKeyVal = Integer.parseInt(strClusteringKey); break;
             case "java.lang.String" : clusteringKeyVal = strClusteringKey; break;
             case "java.lang.Double" :
             case "java.lang.double" : clusteringKeyVal = Double.parseDouble(strClusteringKey); break;
-            case "java.util.Date" : clusteringKeyVal = Date.parse(strClusteringKey); break;
+            case "java.util.Date" : String pattern = "yyyy-MM-dd";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                clusteringKeyVal = simpleDateFormat.parse(strClusteringKey); break;
             default: throw new DBAppException("Invalid clustering key type");
 
         }
@@ -229,7 +238,7 @@ public class Table implements Serializable {
     //implement a method that takes a clustering key and deletes its tuple from a specific page after deserializnig it and then serializing it again after deleting the tuple from it
     public void deleteTuple(Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
 
-        String directoryPath = "Serialized Database/" + this.tableName;
+        String directoryPath = directoryPathResourcesData + this.tableName;
         File directory = new File(directoryPath);
 
         if(!directory.isDirectory()) {
@@ -238,12 +247,12 @@ public class Table implements Serializable {
         if(!isValidTuple(htblColNameValue)) {
             throw new DBAppException("The values you are trying to delete do not respect the constraints");
         }
-        File folder = new File("Serialized Database/" + tableName);
+        File folder = new File(directoryPathResourcesData + tableName);
         int fileCount = folder.listFiles().length;
         //if the table is empty, we delete all records (truncate)
         if(htblColNameValue.isEmpty()){
             for(int i=0 ; i<fileCount ; i++){
-                File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
+                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
                 fileToDelete.delete();
             }
             minPerPage.clear();
@@ -269,11 +278,11 @@ public class Table implements Serializable {
                 Serializer.serializePage(p, this.getTableName(), index);
             }
             else {
-                File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + index + ".ser");
+                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + index + ".ser");
                 fileToDelete.delete();
                 for(int i=index + 1 ; i<fileCount ; i++){
-                    File fileToRename = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
-                    File newFile = new File("Serialized Database/" + tableName + "/Page_" + (i-1) + ".ser");
+                    File fileToRename = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
+                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i-1) + ".ser");
                     fileToRename.renameTo(newFile);
                     minPerPage.put(i-1, minPerPage.get(i));
                 }
@@ -299,14 +308,14 @@ public class Table implements Serializable {
             int j = 0;
             for (int i = 0; i < fileCount; i++) {
                 if(!pagesToDelete.isEmpty() && i==pagesToDelete.peekFirst()) {
-                    File fileToDelete = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
+                    File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
                     fileToDelete.delete();
                     pagesToDelete.removeFirst();
                     j++;
                 }
                 else {
-                    File fileToRename = new File("Serialized Database/" + tableName + "/Page_" + i + ".ser");
-                    File newFile = new File("Serialized Database/" + tableName + "/Page_" + (i-j) + ".ser");
+                    File fileToRename = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
+                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i-j) + ".ser");
                     fileToRename.renameTo(newFile);
                     minPerPage.put(i-j, minPerPage.get(i));
                 }
@@ -316,7 +325,7 @@ public class Table implements Serializable {
             }
 
         }
-        
+
     }
-    
+
 }
