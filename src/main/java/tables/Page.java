@@ -103,31 +103,42 @@ public class Page implements Serializable {
     }
 
     public void updateTuple(Comparable strClusteringVal, Vector<String> colNames, Hashtable<String, Object> htblColNameValue) throws DBAppException {
-
-        int index = getTupleIndex(strClusteringVal);
-        Vector<Object> tupleToBeUpdated = this.getPage().get(index);
-        for (int i = 0; i < colNames.size(); i++)
-            if (htblColNameValue.containsKey(colNames.get(i)))
-                tupleToBeUpdated.set(i, htblColNameValue.get(colNames.get(i)));
+        try {
+            int index = getTupleIndex(strClusteringVal);
+            Vector<Object> tupleToBeUpdated = this.getPage().get(index);
+            for (int i = 0; i < colNames.size(); i++)
+                if (htblColNameValue.containsKey(colNames.get(i)))
+                    tupleToBeUpdated.set(i, htblColNameValue.get(colNames.get(i)));
+        } catch (DBAppException e) {
+            if (!e.getMessage().equals("The input clustering key does not exist")) {
+                throw new DBAppException(e.getMessage());
+            }
+        }
 
     }
 
     //returns false when page is empty after deletion
     public boolean deleteSingleTuple(Comparable strClusteringVal, Vector<String> colNames, Hashtable<String, Object> htblColNameValue) throws DBAppException {
-        int index = getTupleIndex(strClusteringVal);
+        try {
+            int index = getTupleIndex(strClusteringVal);
 
-        boolean valueExists = true;
-        for (int i = 0; i < colNames.size(); i++) {
-            String colName = colNames.get(i);
-            Comparable value = (Comparable) htblColNameValue.get(colName);
-            if (value != null)
-                valueExists &= value.equals(this.getPage().get(index).get(i));
+            boolean valueExists = true;
+            for (int i = 0; i < colNames.size(); i++) {
+                String colName = colNames.get(i);
+                Comparable value = (Comparable) htblColNameValue.get(colName);
+                if (value != null)
+                    valueExists &= value.equals(this.getPage().get(index).get(i));
+            }
+
+            if (valueExists)
+                this.getPage().remove(index);
+            else
+                throw new DBAppException("The input criteria to be deleted does not exist");
+        } catch (DBAppException e) {
+            if (!e.getMessage().equals("The input criteria to be deleted does not exist") && !e.getMessage().equals("The input clustering key does not exist")) {
+                throw new DBAppException(e.getMessage());
+            }
         }
-
-        if (valueExists)
-            this.getPage().remove(index);
-        else
-            throw new DBAppException("The input criteria to be deleted does not exist");
 
         if (this.getPage().size() == 0)
             return false;

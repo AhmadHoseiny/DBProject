@@ -6,3 +6,5 @@
 (6) If no records matching the input criteria in both update and delete, nothing is done and no exception is thrown.
 (7) At Update, if strClusteringKey is null, an exception is thrown.
 (8) At Insert, if the row to be inserted doesn't contain a value for the Clustering key, an exception is thrown.
+(9) We placed the metadata file in the resources directory
+(10) We placed the Data directory in the resources directory to store serialized pages and tables

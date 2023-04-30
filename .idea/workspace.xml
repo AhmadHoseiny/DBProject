@@ -5,36 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Finalizing Milestone 1">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assumptions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DBProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assumptions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assumptions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/DBAppException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/DBAppException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DBApp.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Page.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
