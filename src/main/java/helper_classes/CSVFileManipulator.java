@@ -10,17 +10,19 @@ public class CSVFileManipulator {
         boolean isValid = true;
         switch (colType) {
             case "java.lang.Integer" :  try {
-                                            Integer.parseInt(colMin);
-                                            Integer.parseInt(colMax);
+                                            if (Integer.parseInt(colMin) > Integer.parseInt(colMax))
+                                                isValid &= false;
                                         } catch (Exception e) {
                                             isValid &= false;
                                         }
                                         break;
-            case "java.lang.String" :  break;
+            case "java.lang.String" :   if (colMin.compareTo(colMax) > 0)
+                                            isValid &= false;
+                                        break;
             case "java.lang.Double" :
             case "java.lang.double" :   try {
-                                            Double.parseDouble(colMin);
-                                            Double.parseDouble(colMax);
+                                            if (Double.parseDouble(colMin) > Double.parseDouble(colMax))
+                                                isValid &= false;
                                         } catch (Exception e) {
                                             isValid &= false;
                                         }
@@ -31,6 +33,8 @@ public class CSVFileManipulator {
                                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                                             Date dateMin = simpleDateFormat.parse(colMin);
                                             Date dateMax = simpleDateFormat.parse(colMax);
+                                            if (dateMin.compareTo(dateMax) > 0)
+                                                isValid &= false;
                                         } catch (Exception e) {
 
                                             isValid &= false;
@@ -38,7 +42,6 @@ public class CSVFileManipulator {
                                         break;
             default: isValid &= false;
         }
-        isValid &= colMin.compareTo(colMax) <= 0; // min <= max
 
         if(!isValid)
             throw new DBAppException("Invalid min/max values for column type");
