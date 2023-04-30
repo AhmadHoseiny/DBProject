@@ -5,7 +5,8 @@ import java.util.*;
 
 import exceptions.DBAppException;
 import helper_classes.*;
-public class Page implements Serializable{
+
+public class Page implements Serializable {
     private Vector<Vector<Object>> page;
 
     public Vector<Vector<Object>> getPage() {
@@ -18,10 +19,10 @@ public class Page implements Serializable{
 
 //    returns last tuple if page is full, null otherwise
 
-    public  Vector<Object> getInFormOfTuple(Vector<String> colNames,
-                                            Hashtable<String, Object> htblColNameValue){
+    public Vector<Object> getInFormOfTuple(Vector<String> colNames,
+                                           Hashtable<String, Object> htblColNameValue) {
         Vector<Object> tuple = new Vector<>();
-        for(String colName : colNames){
+        for (String colName : colNames) {
             tuple.add(htblColNameValue.get(colName));
         }
         return tuple;
@@ -52,7 +53,7 @@ public class Page implements Serializable{
 
     }
 
-    public Integer binarySearch (Comparable strClusteringVal) {
+    public Integer binarySearch(Comparable strClusteringVal) {
         int lo = 0;
         int hi = this.getPage().size() - 1;
 
@@ -68,7 +69,7 @@ public class Page implements Serializable{
         return hi;
     }
 
-    public int getIndexToInsertAt ( Comparable strClusteringVal ) throws DBAppException {
+    public int getIndexToInsertAt(Comparable strClusteringVal) throws DBAppException {
         int index = binarySearch(strClusteringVal);
         if (index == -1)
             return 0;
@@ -81,7 +82,7 @@ public class Page implements Serializable{
         return index + 1;
     }
 
-    public int getTupleIndex ( Comparable strClusteringVal ) throws DBAppException {
+    public int getTupleIndex(Comparable strClusteringVal) throws DBAppException {
         int index = binarySearch(strClusteringVal);
         if (index == -1)
             throw new DBAppException("The input clustering key does not exist");
@@ -95,8 +96,8 @@ public class Page implements Serializable{
     public Vector<Object> insertAtBeginning(Vector<Object> tuple) throws IOException {
         page.insertElementAt(tuple, 0);
         int maxSize = ReadConfigFile.getMaximumRowsCountInTablePage();
-        if(page.size()==maxSize+1){
-            return this.getPage().remove(this.getPage().size()-1);
+        if (page.size() == maxSize + 1) {
+            return this.getPage().remove(this.getPage().size() - 1);
         }
         return null;
     }
@@ -116,46 +117,46 @@ public class Page implements Serializable{
         int index = getTupleIndex(strClusteringVal);
 
         boolean valueExists = true;
-        for(int i = 0; i < colNames.size(); i++) {
+        for (int i = 0; i < colNames.size(); i++) {
             String colName = colNames.get(i);
             Comparable value = (Comparable) htblColNameValue.get(colName);
-            if(value != null)
+            if (value != null)
                 valueExists &= value.equals(this.getPage().get(index).get(i));
         }
 
-        if(valueExists)
+        if (valueExists)
             this.getPage().remove(index);
         else
             throw new DBAppException("The input criteria to be deleted does not exist");
 
-        if(this.getPage().size() == 0)
+        if (this.getPage().size() == 0)
             return false;
 
         return true;
     }
 
     //returns false when page is empty after deletion
-    public boolean deleteAllMatchingTuples(Vector<String> colNames, Hashtable<String, Object> htblColNameValue){
+    public boolean deleteAllMatchingTuples(Vector<String> colNames, Hashtable<String, Object> htblColNameValue) {
 
-        for(int i = 0; i < this.getPage().size(); i++){
+        for (int i = 0; i < this.getPage().size(); i++) {
             Vector<Object> tuple = this.getPage().get(i);
             boolean valueExists = true;
-            for(int j = 0; j < colNames.size(); j++) {
+            for (int j = 0; j < colNames.size(); j++) {
                 String colName = colNames.get(j);
-                if(htblColNameValue.containsKey(colName) && htblColNameValue.get(colName) == null){
+                if (htblColNameValue.containsKey(colName) && htblColNameValue.get(colName) == null) {
                     valueExists &= tuple.get(j) == null;
                     continue;
                 }
                 Comparable value = (Comparable) htblColNameValue.get(colName);
-                if(value != null){
+                if (value != null) {
                     valueExists &= value.equals(tuple.get(j));
                 }
             }
-            if(valueExists)
+            if (valueExists)
                 this.getPage().remove(i--);
         }
 
-        if(this.getPage().size() == 0)
+        if (this.getPage().size() == 0)
             return false;
 
         return true;

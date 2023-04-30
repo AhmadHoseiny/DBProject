@@ -15,7 +15,7 @@ public class DBApp {
 
     public void init() {
         File directory = new File(directoryPathResourcesData);
-        if(!directory.isDirectory())
+        if (!directory.isDirectory())
             new File(directoryPathResourcesData).mkdirs();
     }
 
@@ -26,9 +26,9 @@ public class DBApp {
 
     public void createTable(String strTableName,
                             String strClusteringKeyColumn,
-                            Hashtable<String,String> htblColNameType,
-                            Hashtable<String,String> htblColNameMin,
-                            Hashtable<String,String> htblColNameMax )
+                            Hashtable<String, String> htblColNameType,
+                            Hashtable<String, String> htblColNameMin,
+                            Hashtable<String, String> htblColNameMax)
             throws DBAppException {
 
         try {
@@ -45,7 +45,7 @@ public class DBApp {
     }
 
     public void insertIntoTable(String strTableName,
-                                Hashtable<String,Object> htblColNameValue)
+                                Hashtable<String, Object> htblColNameValue)
             throws DBAppException {
         try {
             Table t = Serializer.deserializeTable(strTableName);
@@ -58,7 +58,7 @@ public class DBApp {
 
     public void updateTable(String strTableName,
                             String strClusteringKeyValue,
-                            Hashtable<String,Object> htblColNameValue )
+                            Hashtable<String, Object> htblColNameValue)
             throws DBAppException {
         try {
             Table t = Serializer.deserializeTable(strTableName);
@@ -70,7 +70,7 @@ public class DBApp {
     }
 
     public void deleteFromTable(String strTableName,
-                                Hashtable<String,Object> htblColNameValue)
+                                Hashtable<String, Object> htblColNameValue)
             throws DBAppException {
         try {
             Table t = Serializer.deserializeTable(strTableName);
