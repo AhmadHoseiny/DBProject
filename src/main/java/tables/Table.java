@@ -66,8 +66,8 @@ public class Table implements Serializable {
                  Hashtable<String, String> htblColNameMin,
                  Hashtable<String, String> htblColNameMax) throws DBAppException, IOException, ParseException {
 
-        if(htblColNameType.size() != htblColNameMin.size() ||
-                htblColNameMin.size() !=  htblColNameMax.size() ||
+        if (htblColNameType.size() != htblColNameMin.size() ||
+                htblColNameMin.size() != htblColNameMax.size() ||
                 htblColNameType.size() != htblColNameMax.size())
             throw new DBAppException("The input data is inconsistent");
 
@@ -77,8 +77,8 @@ public class Table implements Serializable {
         this.colNames = new Vector<>();
         this.minPerPage = new HashMap<>();
         colNames.add(this.clusteringKey);
-        for(Map.Entry<String, String> e : htblColNameType.entrySet()){
-            if(e.getKey().equals(this.clusteringKey))
+        for (Map.Entry<String, String> e : htblColNameType.entrySet()) {
+            if (e.getKey().equals(this.clusteringKey))
                 continue;
             colNames.add(e.getKey());
         }
@@ -86,33 +86,53 @@ public class Table implements Serializable {
         this.initializeTable();
     }
 
-
-    public boolean isValidTuple(Hashtable<String, Object> htblColNameValue) {
-
+    public boolean isValidTupleType(Hashtable<String, Object> htblColNameValue) {
         boolean isValid = true;
-
-        for(int i = 0; i < colNames.size(); i++){
-
+        for (int i = 0; i < colNames.size(); i++) {
             if (!htblColNameValue.containsKey(colNames.get(i)))
                 continue;
 
             switch (colTypes.get(i)) {
 
-                case "java.lang.Integer" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Integer; break;
-                case "java.lang.String" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof String; break;
-                case "java.lang.Double" :
-                case "java.lang.double" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Double; break;
-                case "java.util.Date" : isValid &= htblColNameValue.get(colNames.get(i)) instanceof Date; break;
-                default: isValid &= false;
+                case "java.lang.Integer":
+                    isValid &= htblColNameValue.get(colNames.get(i)) instanceof Integer;
+                    break;
+                case "java.lang.String":
+                    isValid &= htblColNameValue.get(colNames.get(i)) instanceof String;
+                    break;
+                case "java.lang.Double":
+                case "java.lang.double":
+                    isValid &= htblColNameValue.get(colNames.get(i)) instanceof Double;
+                    break;
+                case "java.util.Date":
+                    isValid &= htblColNameValue.get(colNames.get(i)) instanceof Date;
+                    break;
+                default:
+                    isValid &= false;
 
             }
-            
-            isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(((Comparable)colMin.get(i)))>=0 ;
-            isValid &= ((Comparable)htblColNameValue.get(colNames.get(i))).compareTo(((Comparable)colMax.get(i)))<=0 ;
+        }
+        return isValid;
+    }
+
+    public boolean isValidTupleMinMax(Hashtable<String, Object> htblColNameValue) {
+        boolean isValid = true;
+
+        for (int i = 0; i < colNames.size(); i++) {
+
+            if (!htblColNameValue.containsKey(colNames.get(i)))
+                continue;
+            isValid &= ((Comparable) htblColNameValue.get(colNames.get(i))).compareTo(((Comparable) colMin.get(i))) >= 0;
+            isValid &= ((Comparable) htblColNameValue.get(colNames.get(i))).compareTo(((Comparable) colMax.get(i))) <= 0;
 
         }
 
         return isValid;
+    }
+
+    public boolean isValidTuple(Hashtable<String, Object> htblColNameValue) {
+
+        return isValidTupleType(htblColNameValue) && isValidTupleMinMax(htblColNameValue);
 
     }
 
@@ -127,35 +147,47 @@ public class Table implements Serializable {
             int mid = lo + (hi - lo >> 1);
             if (minPerPage.get(mid).compareTo(clusteringKeyVal) > 0) {
                 hi = mid - 1;
-            }
-            else {
+            } else {
                 lo = mid + 1;
             }
         }
         return hi;
     }
 
+    public boolean checkNoNulls(Hashtable<String, Object> htblColNameValue) throws DBAppException {
+        for (int i = 0; i < colNames.size(); i++) {
+            if (!htblColNameValue.containsKey(colNames.get(i)))
+                return false;
+        }
+        return true;
+    }
+
     public void insertTuple(Hashtable<String, Object> htblColNameValue)
             throws DBAppException, IOException, ClassNotFoundException {
 
-        //Don't forget to check between min & max
-        if(!isValidTuple(htblColNameValue))
-            throw new DBAppException("The values inserted do not respect the constraints");
-
         if (htblColNameValue.get(colNames.get(0)) == null)
             throw new DBAppException("Tuple has no clustering key value");
+
+        if (!checkNoNulls(htblColNameValue)) {
+            return;
+        }
+
+        //Don't forget to check between min & max
+        if (!isValidTuple(htblColNameValue)) {
+            throw new DBAppException("The values inserted do not respect the constraints");
+        }
 
         String directoryPath = directoryPathResourcesData + this.tableName;
         File directory = new File(directoryPath);
         int fileCount = directory.listFiles().length;
 
-        for(Map.Entry<String, Object> e : htblColNameValue.entrySet()){
-            if(!this.getColNames().contains(e.getKey()))
+        for (Map.Entry<String, Object> e : htblColNameValue.entrySet()) {
+            if (!this.getColNames().contains(e.getKey()))
                 throw new DBAppException("Invalid column name " + e.getKey());
         }
 
 //       if the table is empty
-        if(fileCount == 0){
+        if (fileCount == 0) {
 
             Page page = new Page();
             this.table.add(page);
@@ -172,18 +204,18 @@ public class Table implements Serializable {
         }
 
         Page curPage = Serializer.deserializePage(tableName, pageIndex);
-        Vector<Object> lastTuple  = curPage.insertToSorted(colNames, htblColNameValue);
+        Vector<Object> lastTuple = curPage.insertToSorted(colNames, htblColNameValue);
         minPerPage.put(pageIndex, (Comparable) curPage.getPage().get(0).get(0));
         Serializer.serializePage(curPage, this.getTableName(), pageIndex);
         pageIndex++;
-        while(lastTuple != null && pageIndex<fileCount){
+        while (lastTuple != null && pageIndex < fileCount) {
             curPage = Serializer.deserializePage(tableName, pageIndex);
-            lastTuple  = curPage.insertAtBeginning(lastTuple);
+            lastTuple = curPage.insertAtBeginning(lastTuple);
             minPerPage.put(pageIndex, (Comparable) curPage.getPage().get(0).get(0));
             Serializer.serializePage(curPage, this.getTableName(), pageIndex);
             pageIndex++;
         }
-        if(lastTuple != null){
+        if (lastTuple != null) {
             //create new page
             Page page = new Page();
             this.table.add(page);
@@ -198,36 +230,45 @@ public class Table implements Serializable {
             throws DBAppException, IOException, ClassNotFoundException, ParseException {
 
         //Don't forget to check between min & max
-        if(!isValidTuple(htblColNameValue))
+        if (!isValidTuple(htblColNameValue))
             throw new DBAppException("The values inserted do not respect the constraints");
 
-        if(strClusteringKey == null)
+        if (strClusteringKey == null)
             throw new DBAppException("Tuple has no clustering key value");
 
-        if(htblColNameValue.containsKey(this.getClusteringKey()))
+        if (htblColNameValue.containsKey(this.getClusteringKey()))
             throw new DBAppException("Unauthorized attempted to update clustering key");
 
-        for(Map.Entry<String, Object> e : htblColNameValue.entrySet()){
-            if(!this.getColNames().contains(e.getKey()))
+        for (Map.Entry<String, Object> e : htblColNameValue.entrySet()) {
+            if (!this.getColNames().contains(e.getKey()))
                 throw new DBAppException("Invalid column name " + e.getKey());
         }
 
-       Comparable clusteringKeyVal;
+        Comparable clusteringKeyVal;
         switch (colTypes.get(0)) {
 
-            case "java.lang.Integer" : clusteringKeyVal = Integer.parseInt(strClusteringKey); break;
-            case "java.lang.String" : clusteringKeyVal = strClusteringKey; break;
-            case "java.lang.Double" :
-            case "java.lang.double" : clusteringKeyVal = Double.parseDouble(strClusteringKey); break;
-            case "java.util.Date" : String pattern = "yyyy-MM-dd";
+            case "java.lang.Integer":
+                clusteringKeyVal = Integer.parseInt(strClusteringKey);
+                break;
+            case "java.lang.String":
+                clusteringKeyVal = strClusteringKey;
+                break;
+            case "java.lang.Double":
+            case "java.lang.double":
+                clusteringKeyVal = Double.parseDouble(strClusteringKey);
+                break;
+            case "java.util.Date":
+                String pattern = "yyyy-MM-dd";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                clusteringKeyVal = simpleDateFormat.parse(strClusteringKey); break;
-            default: throw new DBAppException("Invalid clustering key type");
+                clusteringKeyVal = simpleDateFormat.parse(strClusteringKey);
+                break;
+            default:
+                throw new DBAppException("Invalid clustering key type");
 
         }
         int index = getPageIndex(clusteringKeyVal);
-        if (index == -1)
-            throw new DBAppException("The input clustering key does not exist");
+        if (index == -1) //clustering key does not exist
+            return;
 
         Page p = Serializer.deserializePage(tableName, index);
         p.updateTuple(clusteringKeyVal, colNames, htblColNameValue);
@@ -241,17 +282,17 @@ public class Table implements Serializable {
         String directoryPath = directoryPathResourcesData + this.tableName;
         File directory = new File(directoryPath);
 
-        if(!directory.isDirectory()) {
+        if (!directory.isDirectory()) {
             throw new DBAppException("This table does not exist!");
         }
-        if(!isValidTuple(htblColNameValue)) {
+        if (!isValidTupleType(htblColNameValue)) { // The values you are trying to delete do not respect the constraints
             throw new DBAppException("The values you are trying to delete do not respect the constraints");
         }
         File folder = new File(directoryPathResourcesData + tableName);
         int fileCount = folder.listFiles().length;
         //if the table is empty, we delete all records (truncate)
-        if(htblColNameValue.isEmpty()){
-            for(int i=0 ; i<fileCount ; i++){
+        if (htblColNameValue.isEmpty()) {
+            for (int i = 0; i < fileCount; i++) {
                 File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
                 fileToDelete.delete();
             }
@@ -259,16 +300,16 @@ public class Table implements Serializable {
             return;
         }
 
-        for(Map.Entry<String, Object> e : htblColNameValue.entrySet()){
-            if(!this.getColNames().contains(e.getKey()))
+        for (Map.Entry<String, Object> e : htblColNameValue.entrySet()) {
+            if (!this.getColNames().contains(e.getKey()))
                 throw new DBAppException("Invalid column name " + e.getKey());
         }
 
         //a unique row
-        if (htblColNameValue.containsKey(this.getClusteringKey())){
+        if (htblColNameValue.containsKey(this.getClusteringKey())) {
             int index = getPageIndex((Comparable) htblColNameValue.get(getColNames().get(0)));
-            if (index == -1) {
-                throw new DBAppException("No matching Tuples to be deleted exist");
+            if (index == -1) { // No matching Tuples to be deleted exist
+                return;
             }
             Page p = Serializer.deserializePage(tableName, index);
             boolean nonEmptyPage = p.deleteSingleTuple((Comparable) htblColNameValue.get(getColNames().get(0)), colNames, htblColNameValue);
@@ -276,56 +317,52 @@ public class Table implements Serializable {
                 Comparable minKey = (Comparable) p.getPage().get(0).get(0);
                 minPerPage.put(index, minKey);
                 Serializer.serializePage(p, this.getTableName(), index);
-            }
-            else {
+            } else {
                 File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + index + ".ser");
                 fileToDelete.delete();
-                for(int i=index + 1 ; i<fileCount ; i++){
+                for (int i = index + 1; i < fileCount; i++) {
                     File fileToRename = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
-                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i-1) + ".ser");
+                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i - 1) + ".ser");
                     fileToRename.renameTo(newFile);
-                    minPerPage.put(i-1, minPerPage.get(i));
+                    minPerPage.put(i - 1, minPerPage.get(i));
                 }
-                minPerPage.remove(fileCount-1);
+                minPerPage.remove(fileCount - 1);
 
             }
-        }
-        else{
+        } else {
             LinkedList<Integer> pagesToDelete = new LinkedList<>();
-            for(int i=0 ; i<fileCount ; i++){
+            for (int i = 0; i < fileCount; i++) {
                 Page p = Serializer.deserializePage(tableName, i);
                 boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue);
                 if (nonEmptyPage) {
                     Comparable minKey = (Comparable) p.getPage().get(0).get(0);
                     minPerPage.put(i, minKey);
                     Serializer.serializePage(p, this.getTableName(), i);
-                }
-                else {
+                } else {
                     pagesToDelete.add(i);
                 }
             }
 
             int j = 0;
             for (int i = 0; i < fileCount; i++) {
-                if(!pagesToDelete.isEmpty() && i==pagesToDelete.peekFirst()) {
+                if (!pagesToDelete.isEmpty() && i == pagesToDelete.peekFirst()) {
                     File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
                     fileToDelete.delete();
                     pagesToDelete.removeFirst();
                     j++;
-                }
-                else {
+                } else {
                     File fileToRename = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
-                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i-j) + ".ser");
+                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i - j) + ".ser");
                     fileToRename.renameTo(newFile);
-                    minPerPage.put(i-j, minPerPage.get(i));
+                    minPerPage.put(i - j, minPerPage.get(i));
                 }
             }
-            for(int i=0 ; i<j ; i++){
-                minPerPage.remove(fileCount-1-i);
+            for (int i = 0; i < j; i++) {
+                minPerPage.remove(fileCount - 1 - i);
             }
 
         }
-        
+
     }
-    
+
 }

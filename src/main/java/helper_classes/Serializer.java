@@ -1,9 +1,11 @@
 package helper_classes;
+
 import java.io.*;
 import java.text.ParseException;
 
 import exceptions.DBAppException;
 import tables.*;
+
 public class Serializer {
 
     static final String directoryPathResourcesData = "src/main/resources/Data/";
@@ -12,7 +14,7 @@ public class Serializer {
             throws IOException {
         FileOutputStream fileOut =
                 new FileOutputStream(directoryPathResourcesData +
-                        tableName+ "/Page_" + pageIndex + ".ser");
+                        tableName + "/Page_" + pageIndex + ".ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(p);
         out.close();
@@ -35,7 +37,7 @@ public class Serializer {
 
         String directoryPath = directoryPathResourcesData + tableName;
         File directory = new File(directoryPath);
-        if(!directory.isDirectory())
+        if (!directory.isDirectory())
             new File(directoryPath).mkdirs();
 
         FileOutputStream fileOut =
@@ -53,7 +55,7 @@ public class Serializer {
                 tableName + ".ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         Table t = (Table) in.readObject();
-        if(t == null)
+        if (t == null)
             throw new DBAppException("Table does not exist");
         t.initializeTable();
         in.close();

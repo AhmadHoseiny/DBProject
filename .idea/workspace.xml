@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Finalizing Milestone 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assumptions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assumptions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Page.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -23,10 +30,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c331d449-afe5-4091-8e1e-c0ad060896e3" />
+        <option name="url" value="https://github.com/AhmadHoseiny/DBProject.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2OyngQ2C79GzCGVFckPSVR6uxWz" />
+  <component name="ProjectId" id="2N3NkX0lIBQmrujGOqfUMZZ27ha" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -34,82 +54,186 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true",
-    "last_directory_selection": "D:/GUC/IntelliJ workspace/DBProject/src/test/java",
-    "last_opened_file_path": "C:/Users/ALBORAQ/Downloads",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GUC/6th semester/Databases/Project/DBProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GUC\IntelliJ workspace\DBProject" />
       <recent name="D:\GUC\IntelliJ workspace\DBProject\src\main\resources" />
-      <recent name="D:\GUC\IntelliJ workspace\DBProject\src\resources" />
-      <recent name="D:\GUC\IntelliJ workspace\DBProject\src\tests" />
-      <recent name="D:\GUC\IntelliJ workspace\DBProject\src" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="tests" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Milestone1PrivateTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.DBApp">
+    <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="DBProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.Milestone1PrivateTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="DBProject" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Milestone1PrivateTests" />
+        <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="" />
-      <created>1682541808013</created>
+      <changelist id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Finalizing Milestone 1" />
+      <created>1678888951797</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1682541808013</updated>
+      <updated>1678888951797</updated>
+      <workItem from="1678961130037" duration="570000" />
+      <workItem from="1678975379735" duration="10537000" />
+      <workItem from="1679776550565" duration="12328000" />
+      <workItem from="1679927340655" duration="2073000" />
+      <workItem from="1680384553345" duration="1418000" />
+      <workItem from="1680442356430" duration="66000" />
+      <workItem from="1682193424419" duration="9308000" />
     </task>
-    <task id="LOCAL-00001" summary="Finalizing Milestone 1">
-      <created>1682861552589</created>
+    <task id="LOCAL-00001" summary="Trial Setups 2.0">
+      <created>1678902844097</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1682861552589</updated>
+      <updated>1678902844097</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Trial Setups 2.0">
+      <created>1678903186782</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678903186782</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Trial Setups 2.0">
+      <created>1678910232312</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678910232312</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added serializeTable and deserializeTable methods&#10;Updated isValidTuple method&#10;Added createTable and insertIntoTable methods&#10;Added an empty constructor in Table class&#10;added an extra exception due to the use of date formatter&#10;abstracted the creation and tuple-adding of tables to be SQL-like">
+      <created>1678996494063</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678996494063</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added serializeTable and deserializeTable methods&#10;Updated isValidTuple method&#10;Added createTable and insertIntoTable methods&#10;Added an empty constructor in Table class&#10;added an extra exception due to the use of date formatter&#10;abstracted the creation and tuple-adding of tables to be SQL-like">
+      <created>1678996899709</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678996899709</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated some implementations">
+      <created>1679164449599</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679164449599</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implemented the update table feature&#10;Updated the insert into table feature">
+      <created>1679175399950</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679175399950</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated isValidTuple method">
+      <created>1679175789610</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679175789610</updated>
+    </task>
+    <task id="LOCAL-00009" summary="commit">
+      <created>1679604181726</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679604181726</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Meta Data added">
+      <created>1679788574474</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679788574474</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Misnamed column name handled (in delete)">
+      <created>1679929366630</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679929366630</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Updated Exception Handling">
+      <created>1682297323592</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682297323592</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Finalizing Milestone 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalizing Milestone 1" />
+    <MESSAGE value="Trial Setups 2.0" />
+    <MESSAGE value="Added serializeTable and deserializeTable methods&#10;Updated isValidTuple method&#10;Added createTable and insertIntoTable methods&#10;Added an empty constructor in Table class&#10;added an extra exception due to the use of date formatter&#10;abstracted the creation and tuple-adding of tables to be SQL-like" />
+    <MESSAGE value="Updated some implementations" />
+    <MESSAGE value="Implemented the update table feature&#10;Updated the insert into table feature" />
+    <MESSAGE value="Updated isValidTuple method" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="Meta Data added" />
+    <MESSAGE value="Misnamed column name handled (in delete)" />
+    <MESSAGE value="Updated Exception Handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Exception Handling" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.InvalidClassException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

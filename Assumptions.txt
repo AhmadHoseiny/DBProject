@@ -1,0 +1,10 @@
+(1) The column names and table names are case-sensitive. [i.e "Age" and "agE" are considered two different column Names]
+(2) Rows with null values are not inserted [just ignored, no exception is thrown]
+(3) At Delete, if the Hashtable is empty, all records are deleted.
+(4) At Update, if the input HashTable (input criteria) is empty, nothing is done and no exception is thrown.
+(5) If a column in the Hashtable passed to either update or delete doesn't exist, an exception is thrown.
+(6) If no records matching the input criteria in both update and delete, nothing is done and no exception is thrown.
+(7) At Update, if strClusteringKey is null, an exception is thrown.
+(8) At Insert, if the row to be inserted doesn't contain a value for the Clustering key, an exception is thrown.
+(9) We placed the metadata file in the resources directory
+(10) We placed the Data directory in the resources directory to store serialized pages and tables
