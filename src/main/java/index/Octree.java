@@ -57,11 +57,9 @@ public class Octree implements Serializable {
             Node child = ((NonLeaf) cur).getChildren()[index];
             return findNode(child, keyData);
         }
-
-
     }
 
-    public void insert (Vector<Comparable> keyData, int pageIndex, int rowIndex) {
+    public void insert (Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
         OctreeInserter octreeInserter = new OctreeInserter(this);
         octreeInserter.insert(keyData, pageIndex, rowIndex);

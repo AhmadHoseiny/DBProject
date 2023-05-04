@@ -1,5 +1,8 @@
 package index;
 
+import helper_classes.ReadConfigFile;
+
+import java.io.IOException;
 import java.util.Vector;
 
 public class OctreeInserter {
@@ -7,62 +10,61 @@ public class OctreeInserter {
     public OctreeInserter(Octree octree) {
         this.octree = octree;
     }
-    public void insert (Vector<Comparable> keyData, int pageIndex, int rowIndex) {
+    public void insert (Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
         Node cur = octree.findNode(octree.root, keyData);
         insertHelper(keyData, pageIndex, rowIndex, cur);
 
     }
 
-    public void insertOptimized (Vector<Comparable> keyData, int pageIndex, int rowIndex, Node optimizedRoot) {
+    public void insertOptimized (Vector<Comparable> keyData, int pageIndex, int rowIndex, Node optimizedRoot) throws IOException {
 
         Node cur = octree.findNode(optimizedRoot, keyData);
         insertHelper(keyData, pageIndex, rowIndex, cur);
 
     }
 
-    public void insertHelper (Vector<Comparable> keyData, int pageIndex, int rowIndex, Node cur) {
+    public void insertHelper (Vector<Comparable> keyData, int pageIndex, int rowIndex, Node cur) throws IOException {
 
-        //if the leaf is empty or the keyData is a duplicate, keyData is directly inserted
-        if(!((Leaf) cur).hasData || isDuplicateKeyData(keyData, cur)){
-            ((Leaf) cur).insertData(keyData, pageIndex, rowIndex);
+        //if the leaf had space, insert the data into it (it also includes duplicates handling)
+        if(((Leaf) cur).insertData(keyData, pageIndex, rowIndex)){
+            return;
         }
-        else{ //otherwise, the node is split
+        //otherwise, the node needs to be split
 
-            //create a newNode and set its limits to the limits of the current node
-            //this newNode will replace the cur node
-            Node newNode = new NonLeaf();
-            newNode.set(cur.leftLimit, cur.rightLimit, octree.typePerCol);
+        // create a newNode and set its limits to the limits of the current node
+        //this newNode will replace the cur node
+        Node newNode = new NonLeaf();
+        newNode.set(cur.leftLimit, cur.rightLimit, octree.typePerCol);
 
-            //create all the children of the newNode
-            ((NonLeaf)newNode).split(octree.typePerCol);
+        //create all the children of the newNode
+        ((NonLeaf)newNode).split(octree.typePerCol);
 
-            //tell the newNode who its parent is and what is its index in the parent's children array
-            newNode.setParent(cur.getParent());
-            newNode.setIndexInParent(cur.getIndexInParent());
+        //tell the newNode who its parent is and what is its index in the parent's children array
+        newNode.setParent(cur.getParent());
+        newNode.setIndexInParent(cur.getIndexInParent());
 
-            //tell the parent of the newNode that newNode is its child,
-            //or if it is the root, set the root to be the newNode
-            if (cur.getParent() == null)
-                octree.root = newNode;
-            else
-                ((NonLeaf) cur.getParent()).getChildren()[cur.getIndexInParent()] = newNode;
+        //tell the parent of the newNode that newNode is its child,
+        //or if it is the root, set the root to be the newNode
+        if (cur.getParent() == null)
+            octree.root = newNode;
+        else
+            ((NonLeaf) cur.getParent()).getChildren()[cur.getIndexInParent()] = newNode;
 
-            //Insert all data (they may be more than 1 (duplicates)) that were in cur into newNode's children
-            for (int i = 0; i < ((Leaf) cur).pageIndex.size(); i++)
-                this.insertOptimized(((Leaf) cur).keyData, ((Leaf) cur).pageIndex.get(i), ((Leaf) cur).rowIndex.get(i), newNode);
-
-            //Finally, insert the new keyData into newNode's children
-            this.insertOptimized(keyData, pageIndex, rowIndex, newNode);
+        //Insert all data (including duplicates) that were in cur into newNode's children
+        int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
+        for(int i=0 ; i<maximumEntriesInOctreeNode ; i++){
+            Vector<Comparable> keyDataInCur = ((Leaf) cur).keyDataVector.get(i);
+            Vector<Integer> pageIndexInCur = ((Leaf) cur).pageIndexVector.get(i);
+            for(int j=0 ; j<pageIndexInCur.size() ; j++){
+                this.insertOptimized(keyDataInCur, pageIndexInCur.get(j), ((Leaf) cur).rowIndexVector.get(i).get(j), newNode);
+            }
         }
+
+        //Finally, insert the new keyData into newNode's children
+        this.insertOptimized(keyData, pageIndex, rowIndex, newNode);
 
     }
-    public boolean isDuplicateKeyData(Vector<Comparable> keyData, Node cur) {
-        boolean isDuplicate = true;
-        for(int i=0 ; i<3 ; i++){
-            isDuplicate &= keyData.get(i).equals(((Leaf) cur).keyData.get(i));
-        }
-        return isDuplicate;
-    }
+
 
 }
