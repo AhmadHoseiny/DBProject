@@ -1,14 +1,18 @@
 package tables;
 
-import java.io.*;
+import exceptions.DBAppException;
+import helper_classes.CSVFileManipulator;
+import helper_classes.Serializer;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import exceptions.DBAppException;
-import helper_classes.*;
-
 public class Table implements Serializable {
+    static final String directoryPathResourcesData = "src/main/resources/Data/";
     private final String tableName;
     private final String clusteringKey;
     private Vector<String> colNames;
@@ -19,7 +23,31 @@ public class Table implements Serializable {
     private HashMap<Integer, Comparable> minPerPage;
     private transient Vector<Page> table;
 
-    static final String directoryPathResourcesData = "src/main/resources/Data/";
+    public Table(String strTableName,
+                 String strClusteringKeyColumn,
+                 Hashtable<String, String> htblColNameType,
+                 Hashtable<String, String> htblColNameMin,
+                 Hashtable<String, String> htblColNameMax) throws DBAppException, IOException, ParseException {
+
+        if (htblColNameType.size() != htblColNameMin.size() ||
+                htblColNameMin.size() != htblColNameMax.size() ||
+                htblColNameType.size() != htblColNameMax.size())
+            throw new DBAppException("The input data is inconsistent");
+
+        // Initialize table
+        this.tableName = strTableName;
+        this.clusteringKey = strClusteringKeyColumn;
+        this.colNames = new Vector<>();
+        this.minPerPage = new HashMap<>();
+        colNames.add(this.clusteringKey);
+        for (Map.Entry<String, String> e : htblColNameType.entrySet()) {
+            if (e.getKey().equals(this.clusteringKey))
+                continue;
+            colNames.add(e.getKey());
+        }
+        CSVFileManipulator.write(strTableName, htblColNameType, htblColNameMin, htblColNameMax, colNames);
+        this.initializeTable();
+    }
 
     public String getTableName() {
         return tableName;
@@ -49,7 +77,6 @@ public class Table implements Serializable {
         return table;
     }
 
-
     public Vector<String> getIndexName() {
         return indexNames;
     }
@@ -58,44 +85,15 @@ public class Table implements Serializable {
         return minPerPage;
     }
 
-
-
-
     public void initializeTable() throws IOException, ParseException {
         this.colTypes = new Vector<>();
         this.colMin = new Vector<>();
         this.colMax = new Vector<>();
         this.indexNames = new Vector<>();
         CSVFileManipulator.read(this.tableName, this.colNames,
-                            this.colTypes, this.colMin, this.colMax,
-                            this.indexNames);
+                this.colTypes, this.colMin, this.colMax,
+                this.indexNames);
         this.table = new Vector<>();
-    }
-
-    public Table(String strTableName,
-                 String strClusteringKeyColumn,
-                 Hashtable<String, String> htblColNameType,
-                 Hashtable<String, String> htblColNameMin,
-                 Hashtable<String, String> htblColNameMax) throws DBAppException, IOException, ParseException {
-
-        if (htblColNameType.size() != htblColNameMin.size() ||
-                htblColNameMin.size() != htblColNameMax.size() ||
-                htblColNameType.size() != htblColNameMax.size())
-            throw new DBAppException("The input data is inconsistent");
-
-        // Initialize table
-        this.tableName = strTableName;
-        this.clusteringKey = strClusteringKeyColumn;
-        this.colNames = new Vector<>();
-        this.minPerPage = new HashMap<>();
-        colNames.add(this.clusteringKey);
-        for (Map.Entry<String, String> e : htblColNameType.entrySet()) {
-            if (e.getKey().equals(this.clusteringKey))
-                continue;
-            colNames.add(e.getKey());
-        }
-        CSVFileManipulator.write(strTableName, htblColNameType, htblColNameMin, htblColNameMax, colNames);
-        this.initializeTable();
     }
 
     public boolean isValidTupleType(Hashtable<String, Object> htblColNameValue) {
@@ -149,7 +147,7 @@ public class Table implements Serializable {
     }
 
     public int getPageIndex(Comparable clusteringKeyVal) {
-        File folder = new File(directoryPathResourcesData + tableName+"/Pages");
+        File folder = new File(directoryPathResourcesData + tableName + "/Pages");
         int fileCount = folder.listFiles().length;
 
         int lo = 0;
@@ -300,7 +298,7 @@ public class Table implements Serializable {
         if (!isValidTupleType(htblColNameValue)) { // The values you are trying to delete do not respect the constraints
             throw new DBAppException("The values you are trying to delete do not respect the constraints");
         }
-        File folder = new File(directoryPathResourcesData + tableName+"/Pages");
+        File folder = new File(directoryPathResourcesData + tableName + "/Pages");
         int fileCount = folder.listFiles().length;
         //if the table is empty, we delete all records (truncate)
         if (htblColNameValue.isEmpty()) {

@@ -1,7 +1,8 @@
 package helper_classes;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public class ReadConfigFile {
 
@@ -16,6 +17,7 @@ public class ReadConfigFile {
         Properties prop = ReadConfigFile.getProperties();
         return Integer.parseInt(prop.getProperty("MaximumRowsCountinTablePage"));
     }
+
     public static int getMaximumEntriesInOctreeNode() throws IOException {
         Properties prop = ReadConfigFile.getProperties();
         return Integer.parseInt(prop.getProperty("MaximumEntriesinOctreeNode"));

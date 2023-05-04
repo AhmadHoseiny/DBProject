@@ -11,23 +11,23 @@ public class MetadataValidator {
         switch (colType) {
             case "java.lang.Integer":
                 try {
-                    if (Integer.compare(Integer.parseInt(colMin), Integer.parseInt(colMax)) > 0)
-                        isValid &= false;
+                    if (Integer.parseInt(colMin) > Integer.parseInt(colMax))
+                        isValid = false;
                 } catch (Exception e) {
-                    isValid &= false;
+                    isValid = false;
                 }
                 break;
             case "java.lang.String":
                 if (colMin.compareTo(colMax) > 0)
-                    isValid &= false;
+                    isValid = false;
                 break;
             case "java.lang.Double":
             case "java.lang.double":
                 try {
                     if (Double.compare(Double.parseDouble(colMin), Double.parseDouble(colMax)) > 0)
-                        isValid &= false;
+                        isValid = false;
                 } catch (Exception e) {
-                    isValid &= false;
+                    isValid = false;
                 }
                 break;
             case "java.util.Date":
@@ -37,13 +37,13 @@ public class MetadataValidator {
                     Date dateMin = simpleDateFormat.parse(colMin);
                     Date dateMax = simpleDateFormat.parse(colMax);
                     if (dateMin.compareTo(dateMax) > 0)
-                        isValid &= false;
+                        isValid = false;
                 } catch (Exception e) {
-                    isValid &= false;
+                    isValid = false;
                 }
                 break;
             default:
-                isValid &= false;
+                isValid = false;
         }
 
         if (!isValid)

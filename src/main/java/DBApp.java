@@ -1,48 +1,68 @@
-import java.io.*;
+import exceptions.DBAppException;
+import helper_classes.AllRecordInIndexInserter;
+import helper_classes.IndexNameGetter;
+import helper_classes.SQLTerm;
+import helper_classes.Serializer;
+import index.Octree;
+import tables.MyIterator;
+import tables.Page;
+import tables.Table;
+
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
-import exceptions.*;
-import helper_classes.*;
-import index.Octree;
-import tables.*;
-
 public class DBApp {
+
+    static final String directoryPathResourcesData = "src/main/resources/Data/";
 
     public DBApp() {
         this.init();
     }
 
-    static final String directoryPathResourcesData = "src/main/resources/Data/";
-
-    public void init() {
-        File directory = new File(directoryPathResourcesData);
-        if (!directory.isDirectory())
-            new File(directoryPathResourcesData).mkdirs();
-    }
-
     public static void main(String[] args) throws DBAppException, IOException, ParseException, ClassNotFoundException {
 
+//        testCreateStudentTable();
 
+//        testInsertInStudentTable();
 
-//        Hashtable htblColNameType = new Hashtable( );
-//        htblColNameType.put("id", "java.lang.Integer");
-//        htblColNameType.put("name", "java.lang.String");
-//        htblColNameType.put("gpa", "java.lang.double");
-//
-//        Hashtable<String, String> htblColNameMin = new Hashtable<>();
-//        htblColNameMin.put("id", "1");
-//        htblColNameMin.put("name", "A");
-//        htblColNameMin.put("gpa", "0.01");
-//
-//        Hashtable<String, String> htblColNameMax = new Hashtable<>();
-//        htblColNameMax.put("id", "32");
-//        htblColNameMax.put("name", "ZZZZZZZZZZZ");
-//        htblColNameMax.put("gpa", "10.0");
-////
+//        testUpdateStudentTable();
+
+//        testDeleteFromStudentTable();
+
+//        testPrintTableStudent();
+
+//        testSQLTerm();
+
+//        testCreateIndex();
+
+//        testPrintIndex();
+
+    }
+
+    public static void testCreateStudentTable() throws DBAppException {
+        Hashtable htblColNameType = new Hashtable();
+        htblColNameType.put("id", "java.lang.Integer");
+        htblColNameType.put("name", "java.lang.String");
+        htblColNameType.put("gpa", "java.lang.double");
+
+        Hashtable<String, String> htblColNameMin = new Hashtable<>();
+        htblColNameMin.put("id", "1");
+        htblColNameMin.put("name", "A");
+        htblColNameMin.put("gpa", "0.01");
+
+        Hashtable<String, String> htblColNameMax = new Hashtable<>();
+        htblColNameMax.put("id", "32");
+        htblColNameMax.put("name", "ZZZZZZZZZZZ");
+        htblColNameMax.put("gpa", "10.0");
+
         DBApp dbApp = new DBApp();
-//        dbApp.createTable("Student", "id", htblColNameType,
-//                htblColNameMin, htblColNameMax);
+        dbApp.createTable("Student", "id", htblColNameType,
+                htblColNameMin, htblColNameMax);
+    }
+
+    public static void testInsertInStudentTable() throws DBAppException {
 
 /*
         7
@@ -64,80 +84,77 @@ public class DBApp {
         11 ZIAD 0.9
 */
 
-//        Hashtable<String, Object> htblColNameValue;
-//
-//        Scanner sc = new Scanner(System.in);
-////
-//        int n = sc.nextInt();
-//        for(int i=0 ; i<n ; i++){
-//            htblColNameValue = new Hashtable();
-//            int id = sc.nextInt();
-//            String name = sc.next();
-//            double gpa = sc.nextDouble();
-//            htblColNameValue.put("id", id);
-//            htblColNameValue.put("name", name);
-//            htblColNameValue.put("gpa", gpa);
-//            dbApp.insertIntoTable("Student", htblColNameValue);
-//        }
+        Hashtable<String, Object> htblColNameValue;
 
-//        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("gpas", 0.95);
-//        dbApp.updateTable("Student", "4", htblColNameValue);
+        Scanner sc = new Scanner(System.in);
 
-//        htblColNameValue = new Hashtable( );
-//        dbApp.deleteFromTable("Student", htblColNameValue);
-//
-//        htblColNameValue = new Hashtable( );
-//        htblColNameValue.put("gpas", "0.08");
-//        dbApp.deleteFromTable("Student", htblColNameValue);
+        DBApp dbApp = new DBApp();
 
-//        System.out.println("Courses");
-//        dbApp.printTable("courses");
-//        System.out.println();
-//        System.out.println("PCs");
-//        dbApp.printTable("pcs");
-//        System.out.println();
-//        System.out.println("Students");
-//        dbApp.printTable("students");
-//        System.out.println();
-//        System.out.println("Transcripts");
-//        dbApp.printTable("transcripts");
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            htblColNameValue = new Hashtable();
+            int id = sc.nextInt();
+            String name = sc.next();
+            double gpa = sc.nextDouble();
+            htblColNameValue.put("id", id);
+            htblColNameValue.put("name", name);
+            htblColNameValue.put("gpa", gpa);
+            dbApp.insertIntoTable("Student", htblColNameValue);
+        }
 
-//
-//        Scanner sc = new Scanner(System.in);
-//        int n = sc.nextInt();
-//        SQLTerm[] arrSQLTerms = new SQLTerm[n];
-//        for(int i=0 ; i<n ; i++){
-//            arrSQLTerms[i] = new SQLTerm();
-//            arrSQLTerms[i]._strTableName = "Student";
-//            arrSQLTerms[i]._strColumnName= sc.next();
-//            arrSQLTerms[i]._strOperator = sc.next();
-//            int type = sc.nextInt();  //1 --> int, 2 --> double, 3 --> string
-//            String s = sc.next();
-//            switch (type){
-//                case 1:
-//                    arrSQLTerms[i]._objValue = Integer.parseInt(s);
-//                    break;
-//                case 2:
-//                    arrSQLTerms[i]._objValue = Double.parseDouble(s);
-//                    break;
-//                case 3:
-//                    arrSQLTerms[i]._objValue = s;
-//                    break;
-//            }
-//        }
-//        String[]strarrOperators = new String[n-1];
-//        for(int i=0 ; i<n-1 ; i++){
-//            strarrOperators[i] = sc.next();
-//        }
-//
-//        Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
-//        System.out.println("{");
-//        while(resultSet.hasNext()){
-//            System.out.println(resultSet.next());
-//        }
-//        System.out.println("}");
-//
+    }
+
+    public static void testUpdateStudentTable() throws DBAppException {
+        Hashtable<String, Object> htblColNameValue = new Hashtable();
+        htblColNameValue.put("gpa", 0.95);
+        DBApp dbApp = new DBApp();
+        dbApp.updateTable("Student", "4", htblColNameValue);
+    }
+
+    public static void testDeleteFromStudentTable() throws DBAppException {
+        Hashtable<String, Object> htblColNameValue = new Hashtable();
+        htblColNameValue.put("gpa", 4.95);
+        DBApp dbApp = new DBApp();
+        dbApp.deleteFromTable("Student", htblColNameValue);
+    }
+
+    public static void testSQLTerm() throws DBAppException {
+
+        DBApp dbApp = new DBApp();
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        SQLTerm[] arrSQLTerms = new SQLTerm[n];
+        for (int i = 0; i < n; i++) {
+            arrSQLTerms[i] = new SQLTerm();
+            arrSQLTerms[i]._strTableName = "Student";
+            arrSQLTerms[i]._strColumnName = sc.next();
+            arrSQLTerms[i]._strOperator = sc.next();
+            int type = sc.nextInt();  //1 --> int, 2 --> double, 3 --> string
+            String s = sc.next();
+            switch (type) {
+                case 1:
+                    arrSQLTerms[i]._objValue = Integer.parseInt(s);
+                    break;
+                case 2:
+                    arrSQLTerms[i]._objValue = Double.parseDouble(s);
+                    break;
+                case 3:
+                    arrSQLTerms[i]._objValue = s;
+                    break;
+            }
+        }
+        String[] strarrOperators = new String[n - 1];
+        for (int i = 0; i < n - 1; i++) {
+            strarrOperators[i] = sc.next();
+        }
+
+        Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
+        System.out.println("{");
+        while (resultSet.hasNext()) {
+            System.out.println(resultSet.next());
+        }
+        System.out.println("}");
+
 /*
         3
         id > 1 2
@@ -157,50 +174,30 @@ public class DBApp {
         AND
         -----------------
  */
-//        Scanner sc = new Scanner(System.in);
-//        int n = sc.nextInt();
-//        SQLTerm[] arrSQLTerms = new SQLTerm[n];
-//        for(int i=0 ; i<n ; i++){
-//            arrSQLTerms[i] = new SQLTerm();
-//            arrSQLTerms[i]._strTableName = "Student";
-//            arrSQLTerms[i]._strColumnName= sc.next();
-//            arrSQLTerms[i]._strOperator = sc.next();
-//            int type = sc.nextInt();  //1 --> int, 2 --> double, 3 --> string
-//            String s = sc.next();
-//            switch (type){
-//                case 1:
-//                    arrSQLTerms[i]._objValue = Integer.parseInt(s);
-//                    break;
-//                case 2:
-//                    arrSQLTerms[i]._objValue = Double.parseDouble(s);
-//                    break;
-//                case 3:
-//                    arrSQLTerms[i]._objValue = s;
-//                    break;
-//            }
-//        }
-//        String[]strarrOperators = new String[n-1];
-//        for(int i=0 ; i<n-1 ; i++){
-//            strarrOperators[i] = sc.next();
-//        }
-//
-//        Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
-//        System.out.println("{");
-//        while(resultSet.hasNext()){
-//            System.out.println(resultSet.next());
-//        }
-//        System.out.println("}");
 
+    }
 
+    public static void testCreateIndex() throws DBAppException {
+        DBApp dbApp = new DBApp();
+        String[] strarrColNames = {"id", "name", "gpa"};
+        dbApp.createIndex("Student", strarrColNames);
+    }
 
-        //Creating an Index
-//        String strarrColNames[] = {"id", "name", "gpa"};
-//        dbApp.createIndex("Student", strarrColNames);
-//
-        dbApp.printIndex("Student", new String[]{"gpa", "id", "name"});
+    public static void testPrintIndex() throws DBAppException, IOException, ParseException, ClassNotFoundException {
+        DBApp dbApp = new DBApp();
+        String[] strarrColNames = {"id", "name", "gpa"};
+        dbApp.printIndex("Student", strarrColNames);
+    }
 
+    public static void testPrintTableStudent() throws DBAppException {
+        DBApp dbApp = new DBApp();
+        dbApp.printTable("Student");
+    }
 
-
+    public void init() {
+        File directory = new File(directoryPathResourcesData);
+        if (!directory.isDirectory())
+            new File(directoryPathResourcesData).mkdirs();
     }
 
     public void createTable(String strTableName,
@@ -294,11 +291,9 @@ public class DBApp {
     }
 
 
-
-    //TODO: sort the array strarrColName before anything
     public void createIndex(String strTableName,
-                            String[] strarrColName) throws DBAppException, IOException, ParseException, ClassNotFoundException {
-//        try {
+                            String[] strarrColName) throws DBAppException {
+        try {
 
             File tableToCreate = new File(directoryPathResourcesData + strTableName + ".ser");
             //check that the table exists
@@ -315,15 +310,15 @@ public class DBApp {
             }
 
             //check that the index is on 3 columns
-            if(strarrColName.length != 3){
-               throw new DBAppException("Index can only be created on 3 columns");
+            if (strarrColName.length != 3) {
+                throw new DBAppException("Index can only be created on 3 columns");
             }
 
             //check that the columns exist in the table
             Table t = Serializer.deserializeTable(strTableName);
             Vector<String> tableColNames = t.getColNames();
-            for(int i=0 ; i<strarrColName.length ; i++){
-                if(!tableColNames.contains(strarrColName[i])){
+            for (int i = 0; i < strarrColName.length; i++) {
+                if (!tableColNames.contains(strarrColName[i])) {
                     throw new DBAppException("Column " + strarrColName[i] + " doesn't exist in table " + strTableName);
                 }
             }
@@ -333,15 +328,14 @@ public class DBApp {
             inserter.insertAllRecords();
             Serializer.serializeIndex(ot);
             Serializer.serializeTable(t, strTableName);
-//        }
-//        catch (Exception e){
-//            throw new DBAppException(e.getMessage());
-//        }
+        } catch (Exception e) {
+            throw new DBAppException(e.getMessage());
+        }
 
     }
 
 
-    public void printIndex(String  strTableName, String[] strarrColName) throws IOException, DBAppException, ParseException, ClassNotFoundException {
+    public void printIndex(String strTableName, String[] strarrColName) throws IOException, DBAppException, ParseException, ClassNotFoundException {
         Arrays.sort(strarrColName);
         String indexName = IndexNameGetter.getIndexName(strarrColName);
         Table t = Serializer.deserializeTable(strTableName);

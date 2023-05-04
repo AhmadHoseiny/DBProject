@@ -1,12 +1,13 @@
 package index;
 
-import exceptions.*;
-import helper_classes.*;
-import tables.*;
+import exceptions.DBAppException;
+import helper_classes.CSVFileManipulator;
+import tables.Table;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
-import java.util.*;
+import java.util.Vector;
 
 public class Octree implements Serializable {
     //While deserializing the octree, its corresponding table should also be deserialized, and call initialize() on it.
@@ -18,6 +19,18 @@ public class Octree implements Serializable {
     transient Vector<Comparable> minPerCol;
     transient Vector<Comparable> maxPerCol;
     transient Vector<String> typePerCol;
+
+    //only used when creating a new octree
+    public Octree(Table t, String[] strarrColName) throws DBAppException, IOException, ClassNotFoundException, ParseException {
+        this.strTableName = t.getTableName();
+        this.strarrColName = strarrColName;
+        table = t; //has to be before initializeIndex
+        initializeIndex();
+        this.root = new Leaf();
+        root.set(minPerCol, maxPerCol, typePerCol);
+
+        CSVFileManipulator.updateUponIndexCreation(t, strarrColName);
+    }
 
     public Node getRoot() {
         return root;
@@ -35,6 +48,10 @@ public class Octree implements Serializable {
         return table;
     }
 
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
     public Vector<Comparable> getMinPerCol() {
         return minPerCol;
     }
@@ -47,30 +64,7 @@ public class Octree implements Serializable {
         return typePerCol;
     }
 
-    public void setTable(Table table) {
-        this.table = table;
-    }
-
-
-
-
-
-
-
-    //only used when creating a new octree
-    public Octree (Table t, String[] strarrColName) throws DBAppException, IOException, ClassNotFoundException, ParseException {
-        this.strTableName = t.getTableName();
-        this.strarrColName = strarrColName;
-        table = t; //has to be before initializeIndex
-        initializeIndex();
-        this.root = new Leaf();
-        root.set(minPerCol, maxPerCol, typePerCol);
-
-        CSVFileManipulator.updateUponIndexCreation(t, strarrColName);
-    }
-
-
-    public void initializeIndex () throws DBAppException, IOException, ClassNotFoundException, ParseException {
+    public void initializeIndex() throws DBAppException, IOException, ClassNotFoundException, ParseException {
         minPerCol = new Vector<>();
         maxPerCol = new Vector<>();
         typePerCol = new Vector<>();
@@ -85,10 +79,7 @@ public class Octree implements Serializable {
     }
 
 
-
-
-
-    public Node findNode (Node cur, Vector<Comparable> keyData) {
+    public Node findNode(Node cur, Vector<Comparable> keyData) {
         if (cur instanceof Leaf)
             return cur;
         else {
@@ -98,7 +89,7 @@ public class Octree implements Serializable {
         }
     }
 
-    public void insert (Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
+    public void insert(Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
         OctreeInserter octreeInserter = new OctreeInserter(this);
         octreeInserter.insert(keyData, pageIndex, rowIndex);
@@ -106,15 +97,16 @@ public class Octree implements Serializable {
     }
 
 
-    public void printIndex(){
+    public void printIndex() {
         printIndex(root);
     }
-    public void printIndex(Node cur){
-        if(cur == null)
+
+    public void printIndex(Node cur) {
+        if (cur == null)
             return;
         System.out.println(cur);
-        if(cur instanceof NonLeaf){
-            for(Node child : ((NonLeaf) cur).getChildren()){
+        if (cur instanceof NonLeaf) {
+            for (Node child : ((NonLeaf) cur).getChildren()) {
                 printIndex(child);
             }
         }

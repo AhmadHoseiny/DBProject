@@ -7,27 +7,29 @@ import java.util.Vector;
 
 public class OctreeInserter {
     Octree octree;
+
     public OctreeInserter(Octree octree) {
         this.octree = octree;
     }
-    public void insert (Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
+
+    public void insert(Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
         Node cur = octree.findNode(octree.root, keyData);
         insertHelper(keyData, pageIndex, rowIndex, cur);
 
     }
 
-    public void insertOptimized (Vector<Comparable> keyData, int pageIndex, int rowIndex, Node optimizedRoot) throws IOException {
+    public void insertOptimized(Vector<Comparable> keyData, int pageIndex, int rowIndex, Node optimizedRoot) throws IOException {
 
         Node cur = octree.findNode(optimizedRoot, keyData);
         insertHelper(keyData, pageIndex, rowIndex, cur);
 
     }
 
-    public void insertHelper (Vector<Comparable> keyData, int pageIndex, int rowIndex, Node cur) throws IOException {
+    public void insertHelper(Vector<Comparable> keyData, int pageIndex, int rowIndex, Node cur) throws IOException {
 
         //if the leaf had space, insert the data into it (it also includes duplicates handling)
-        if(((Leaf) cur).insertData(keyData, pageIndex, rowIndex)){
+        if (((Leaf) cur).insertData(keyData, pageIndex, rowIndex)) {
             return;
         }
 //        System.out.println("? " + keyData +"__" + cur);
@@ -39,7 +41,7 @@ public class OctreeInserter {
         newNode.set(cur.leftLimit, cur.rightLimit, octree.typePerCol);
 
         //create all the children of the newNode
-        ((NonLeaf)newNode).split(octree.typePerCol);
+        ((NonLeaf) newNode).split(octree.typePerCol);
 
         //tell the newNode who its parent is and what is its index in the parent's children array
         newNode.setParent(cur.getParent());
@@ -54,10 +56,10 @@ public class OctreeInserter {
 
         //Insert all data (including duplicates) that were in cur into newNode's children
         int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
-        for(int i=0 ; i<maximumEntriesInOctreeNode ; i++){
+        for (int i = 0; i < maximumEntriesInOctreeNode; i++) {
             Vector<Comparable> keyDataInCur = ((Leaf) cur).keyDataVector.get(i);
             Vector<Integer> pageIndexInCur = ((Leaf) cur).pageIndexVector.get(i);
-            for(int j=0 ; j<pageIndexInCur.size() ; j++){
+            for (int j = 0; j < pageIndexInCur.size(); j++) {
                 this.insertOptimized(keyDataInCur, pageIndexInCur.get(j), ((Leaf) cur).rowIndexVector.get(i).get(j), newNode);
             }
         }

@@ -1,10 +1,14 @@
 package helper_classes;
 
-import tables.*;
-import index.*;
+import index.Octree;
+import tables.Page;
+import tables.Table;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Vector;
+
 public class AllRecordInIndexInserter {
 
     static final String directoryPathResourcesData = "src/main/resources/Data/";
@@ -15,14 +19,15 @@ public class AllRecordInIndexInserter {
         this.t = t;
         this.ot = ot;
     }
+
     public void insertAllRecords() throws IOException, ClassNotFoundException {
 
-        File folder = new File(directoryPathResourcesData + t.getTableName()+ "/Pages");
+        File folder = new File(directoryPathResourcesData + t.getTableName() + "/Pages");
         int fileCount = folder.listFiles().length;
 
         Vector<String> colNames = t.getColNames();
         HashMap<String, Integer> colNameToIndex = new HashMap<>();
-        for(int i = 0; i < colNames.size(); i++){
+        for (int i = 0; i < colNames.size(); i++) {
             colNameToIndex.put(colNames.get(i), i);
         }
         for (int i = 0; i < fileCount; i++) { //page number

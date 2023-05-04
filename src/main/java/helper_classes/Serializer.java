@@ -1,11 +1,12 @@
 package helper_classes;
 
+import exceptions.DBAppException;
+import index.Octree;
+import tables.Page;
+import tables.Table;
+
 import java.io.*;
 import java.text.ParseException;
-
-import exceptions.DBAppException;
-import index.*;
-import tables.*;
 
 public class Serializer {
 
@@ -79,7 +80,7 @@ public class Serializer {
     public static Octree deserializeIndex(Table t, String indexName)
             throws IOException, ClassNotFoundException, DBAppException, ParseException {
         FileInputStream fileIn = new FileInputStream(directoryPathResourcesData +
-                t.getTableName() + "/Indices/" + indexName+ ".ser");
+                t.getTableName() + "/Indices/" + indexName + ".ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         Octree ot = (Octree) in.readObject();
         if (ot == null)

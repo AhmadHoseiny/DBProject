@@ -1,20 +1,22 @@
 package tables;
 
-import java.io.*;
-import java.util.*;
-
 import exceptions.DBAppException;
-import helper_classes.*;
+import helper_classes.ReadConfigFile;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Hashtable;
+import java.util.Vector;
 
 public class Page implements Serializable {
     private Vector<Vector<Object>> page;
 
-    public Vector<Vector<Object>> getPage() {
-        return page;
-    }
-
     public Page() {
         page = new Vector<>();
+    }
+
+    public Vector<Vector<Object>> getPage() {
+        return page;
     }
 
 //    returns last tuple if page is full, null otherwise

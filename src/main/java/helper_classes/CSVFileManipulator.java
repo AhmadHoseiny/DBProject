@@ -3,12 +3,14 @@ package helper_classes;
 import exceptions.DBAppException;
 import tables.Table;
 
-import java.text.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.io.*;
 
 public class CSVFileManipulator {
-
 
 
     public static void write(String strTableName,
@@ -101,15 +103,13 @@ public class CSVFileManipulator {
     }
 
 
-
-
     //assume strarrColName is sorted
     //When an index is created, the metadata is updated to reflect that
     public static void updateUponIndexCreation(Table t, String[] strarrColName) throws IOException, ParseException {
         String strTableName = t.getTableName();
         String indexName = IndexNameGetter.getIndexName(strarrColName);
         HashSet<String> hs = new HashSet<>();
-        for(String x : strarrColName){
+        for (String x : strarrColName) {
             hs.add(x);
         }
 
@@ -141,7 +141,7 @@ public class CSVFileManipulator {
             csvWriter.append("\n");
         }
         fileScanner.close();
-        
+
         csvWriter.flush();
         csvWriter.close();
 

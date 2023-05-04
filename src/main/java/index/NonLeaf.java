@@ -5,10 +5,10 @@ import java.util.Vector;
 
 public class NonLeaf extends Node {
 
-    Node[] children;
     static final int MAX_CHILDREN = 8;
+    Node[] children;
 
-    public NonLeaf () {
+    public NonLeaf() {
         this.children = new Node[MAX_CHILDREN];
     }
 
@@ -17,7 +17,7 @@ public class NonLeaf extends Node {
         return children;
     }
 
-    public int getChildIndex (Vector<Comparable> keyData) {
+    public int getChildIndex(Vector<Comparable> keyData) {
         int index = 0;
         Vector<Comparable> mid = this.getMid();
         for (int i = 0; i < 3; i++)
@@ -28,7 +28,7 @@ public class NonLeaf extends Node {
     }
 
     public void split(Vector<String> typePerCol) throws IOException {
-        System.out.println(this.leftLimit +" "+ this.mid +" "+ this.rightLimit);
+        System.out.println(this.leftLimit + " " + this.mid + " " + this.rightLimit);
         for (int i = 0; i < NonLeaf.MAX_CHILDREN; i++) {
             Vector<Comparable> newLeft = new Vector<>();
             Vector<Comparable> newRight = new Vector<>();
@@ -49,7 +49,7 @@ public class NonLeaf extends Node {
         }
     }
 
-    public String toString(){
+    public String toString() {
         return super.toString() + "}";
     }
 }
