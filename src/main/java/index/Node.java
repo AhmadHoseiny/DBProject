@@ -10,15 +10,15 @@ public abstract class Node {
     Integer indexInParent;
 
 
-    public void setBounds(Comparable leftX, Comparable rightX, Comparable leftY, Comparable rightY, Comparable leftZ, Comparable rightZ) {
+    public void setBounds(Vector<Comparable> lefts,Vector<Comparable> rights) {
         leftLimit = new Vector<>();
         rightLimit = new Vector<>();
-        leftLimit.add(leftX);
-        leftLimit.add(leftY);
-        leftLimit.add(leftZ);
-        rightLimit.add(rightX);
-        rightLimit.add(rightY);
-        rightLimit.add(rightZ);
+        for(Comparable x : lefts){
+            leftLimit.add(x);
+        }
+        for (Comparable x : rights){
+            rightLimit.add(x);
+        }
     }
 
 //    public boolean isInside(Comparable x, Comparable y, Comparable z) {
@@ -27,18 +27,23 @@ public abstract class Node {
 //                z.compareTo(leftLimit.get(2)) >= 0 && z.compareTo(rightLimit.get(2)) <= 0;
 //    }
 
+
     public void setMid (Vector<Comparable> minPerCol, Vector<Comparable> maxPerCol, Vector<String> typePerCol) {
 
         for (int i = 0; i < typePerCol.size(); i++) {
             if (typePerCol.get(i).equals("java.lang.Integer")) {
-                int mid = (int) minPerCol.get(i) + (int) maxPerCol.get(i);
-                mid /= 2;
+                int l = (int) minPerCol.get(i);
+                int r = (int) maxPerCol.get(i);
+                int mid = l + ((r-l)>>1);
                 this.mid.add(mid);
-            } else if (typePerCol.get(i).equals("java.lang.Double")) {
-                double mid = (double) minPerCol.get(i) + (double) maxPerCol.get(i);
-                mid /= 2.0;
+            }
+            else if (typePerCol.get(i).equals("java.lang.Double")) {
+                double l = (double) minPerCol.get(i);
+                double r = (double) maxPerCol.get(i);
+                double mid = l + ((r-l)/2.0);
                 this.mid.add(mid);
-            } else if (typePerCol.get(i).equals("java.lang.String")) {
+            }
+            else if (typePerCol.get(i).equals("java.lang.String")) {
                 String s = (String) minPerCol.get(i);
                 String t = (String) maxPerCol.get(i);
                 char le[] = s.toCharArray();
@@ -57,7 +62,8 @@ public abstract class Node {
                     mid[j] = (char)( ((int)leCh + (int)ri[j])>>1);
                 }
                 this.mid.add(new String(mid));
-            } else if (typePerCol.get(i).equals("java.util.Date")) {
+            }
+            else if (typePerCol.get(i).equals("java.util.Date")) {
                 Date min = (Date) minPerCol.get(i);
                 Date max = (Date) maxPerCol.get(i);
                 long mid = min.getTime() + (max.getTime() - min.getTime()) / 2;
@@ -67,7 +73,7 @@ public abstract class Node {
     }
 
     public void set (Vector<Comparable> minPerCol, Vector<Comparable> maxPerCol, Vector<String> typePerCol) {
-        setBounds(minPerCol.get(0), maxPerCol.get(0), minPerCol.get(1), maxPerCol.get(1), minPerCol.get(2), maxPerCol.get(2));
+        setBounds(minPerCol, maxPerCol);
         setMid(minPerCol, maxPerCol, typePerCol);
     }
 
