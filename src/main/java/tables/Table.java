@@ -15,6 +15,7 @@ public class Table implements Serializable {
     private transient Vector<String> colTypes;
     private transient Vector<Comparable> colMin;
     private transient Vector<Comparable> colMax;
+    private transient Vector<String> indexNames; // null represents no index
     private HashMap<Integer, Comparable> minPerPage;
     private transient Vector<Page> table;
 
@@ -48,16 +49,27 @@ public class Table implements Serializable {
         return table;
     }
 
-    public void initializeTable() throws IOException, ParseException {
-        this.colTypes = new Vector<>();
-        this.colMin = new Vector<>();
-        this.colMax = new Vector<>();
-        CSVFileManipulator.read(this.tableName, this.colNames, this.colTypes, this.colMin, this.colMax);
-        this.table = new Vector<>();
+
+    public Vector<String> getIndexName() {
+        return indexNames;
     }
 
     public HashMap<Integer, Comparable> getMinPerPage() {
         return minPerPage;
+    }
+
+
+
+
+    public void initializeTable() throws IOException, ParseException {
+        this.colTypes = new Vector<>();
+        this.colMin = new Vector<>();
+        this.colMax = new Vector<>();
+        this.indexNames = new Vector<>();
+        CSVFileManipulator.read(this.tableName, this.colNames,
+                            this.colTypes, this.colMin, this.colMax,
+                            this.indexNames);
+        this.table = new Vector<>();
     }
 
     public Table(String strTableName,
@@ -137,7 +149,7 @@ public class Table implements Serializable {
     }
 
     public int getPageIndex(Comparable clusteringKeyVal) {
-        File folder = new File(directoryPathResourcesData + tableName);
+        File folder = new File(directoryPathResourcesData + tableName+"/Pages");
         int fileCount = folder.listFiles().length;
 
         int lo = 0;
@@ -177,7 +189,7 @@ public class Table implements Serializable {
             throw new DBAppException("The values inserted do not respect the constraints");
         }
 
-        String directoryPath = directoryPathResourcesData + this.tableName;
+        String directoryPath = directoryPathResourcesData + this.tableName + "/Pages";
         File directory = new File(directoryPath);
         int fileCount = directory.listFiles().length;
 
@@ -288,12 +300,12 @@ public class Table implements Serializable {
         if (!isValidTupleType(htblColNameValue)) { // The values you are trying to delete do not respect the constraints
             throw new DBAppException("The values you are trying to delete do not respect the constraints");
         }
-        File folder = new File(directoryPathResourcesData + tableName);
+        File folder = new File(directoryPathResourcesData + tableName+"/Pages");
         int fileCount = folder.listFiles().length;
         //if the table is empty, we delete all records (truncate)
         if (htblColNameValue.isEmpty()) {
             for (int i = 0; i < fileCount; i++) {
-                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
+                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + i + ".ser");
                 fileToDelete.delete();
             }
             minPerPage.clear();
@@ -318,11 +330,11 @@ public class Table implements Serializable {
                 minPerPage.put(index, minKey);
                 Serializer.serializePage(p, this.getTableName(), index);
             } else {
-                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + index + ".ser");
+                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + index + ".ser");
                 fileToDelete.delete();
                 for (int i = index + 1; i < fileCount; i++) {
-                    File fileToRename = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
-                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i - 1) + ".ser");
+                    File fileToRename = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + i + ".ser");
+                    File newFile = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + (i - 1) + ".ser");
                     fileToRename.renameTo(newFile);
                     minPerPage.put(i - 1, minPerPage.get(i));
                 }
@@ -346,13 +358,13 @@ public class Table implements Serializable {
             int j = 0;
             for (int i = 0; i < fileCount; i++) {
                 if (!pagesToDelete.isEmpty() && i == pagesToDelete.peekFirst()) {
-                    File fileToDelete = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
+                    File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + i + ".ser");
                     fileToDelete.delete();
                     pagesToDelete.removeFirst();
                     j++;
                 } else {
-                    File fileToRename = new File(directoryPathResourcesData + tableName + "/Page_" + i + ".ser");
-                    File newFile = new File(directoryPathResourcesData + tableName + "/Page_" + (i - j) + ".ser");
+                    File fileToRename = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + i + ".ser");
+                    File newFile = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + (i - j) + ".ser");
                     fileToRename.renameTo(newFile);
                     minPerPage.put(i - j, minPerPage.get(i));
                 }

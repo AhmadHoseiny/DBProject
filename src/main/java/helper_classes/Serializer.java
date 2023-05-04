@@ -4,6 +4,7 @@ import java.io.*;
 import java.text.ParseException;
 
 import exceptions.DBAppException;
+import index.*;
 import tables.*;
 
 public class Serializer {
@@ -14,7 +15,7 @@ public class Serializer {
             throws IOException {
         FileOutputStream fileOut =
                 new FileOutputStream(directoryPathResourcesData +
-                        tableName + "/Page_" + pageIndex + ".ser");
+                        tableName + "/Pages/Page_" + pageIndex + ".ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(p);
         out.close();
@@ -24,7 +25,7 @@ public class Serializer {
     public static Page deserializePage(String tableName, int pageIndex)
             throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream(directoryPathResourcesData +
-                tableName + "/Page_" + pageIndex + ".ser");
+                tableName + "/Pages/Page_" + pageIndex + ".ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         Page p = (Page) in.readObject();
         in.close();
@@ -35,11 +36,9 @@ public class Serializer {
 
     public static void serializeTable(Table t, String tableName) throws IOException {
 
-        String directoryPath = directoryPathResourcesData + tableName;
-        File directory = new File(directoryPath);
-        if (!directory.isDirectory())
-            new File(directoryPath).mkdirs();
-
+        DirectoryCreator.createDirectory(directoryPathResourcesData + tableName);
+        DirectoryCreator.createDirectory(directoryPathResourcesData + tableName + "/Pages");
+        DirectoryCreator.createDirectory(directoryPathResourcesData + tableName + "/Indices");
         FileOutputStream fileOut =
                 new FileOutputStream(directoryPathResourcesData +
                         tableName + ".ser");
@@ -62,6 +61,35 @@ public class Serializer {
         fileIn.close();
 
         return t;
+    }
+
+
+    public static void serializeIndex(Octree ot) throws IOException {
+        String tableName = ot.getStrTableName();
+        String indexName = IndexNameGetter.getIndexName(ot.getStrarrColName());
+        FileOutputStream fileOut =
+                new FileOutputStream(directoryPathResourcesData +
+                        tableName + "/Indices/" + indexName + ".ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(ot);
+        out.close();
+        fileOut.close();
+    }
+
+    public static Octree deserializeIndex(Table t, String indexName)
+            throws IOException, ClassNotFoundException, DBAppException, ParseException {
+        FileInputStream fileIn = new FileInputStream(directoryPathResourcesData +
+                t.getTableName() + "/Indices/" + indexName+ ".ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        Octree ot = (Octree) in.readObject();
+        if (ot == null)
+            throw new DBAppException("Index does not exist");
+        ot.setTable(t); //has to be made before initializeIndex
+        ot.initializeIndex();
+        in.close();
+        fileIn.close();
+
+        return ot;
     }
 
 }

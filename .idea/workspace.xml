@@ -5,21 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2023_10_44_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_04_2023_10_44_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_04_2023_3_35_am_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_04_2023_3_35_am__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_04_2023_3_39_am_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_04_2023_3_39_am__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/helper_classes/DirectoryCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/helper_classes/IndexNameGetter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/helper_classes/MetadataValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/index/Incrementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Incrementer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Leaf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Octree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/OctreeInserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/OctreeInserter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DBApp.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/exceptions/DBAppException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/exceptions/DBAppException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/ReadConfigFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/ReadConfigFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Table.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +134,7 @@
       <workItem from="1680442356430" duration="66000" />
       <workItem from="1682193424419" duration="9308000" />
       <workItem from="1683159432924" duration="5679000" />
-      <workItem from="1683204194041" duration="7523000" />
+      <workItem from="1683204194041" duration="24653000" />
     </task>
     <task id="LOCAL-00001" summary="Trial Setups 2.0">
       <created>1678902844097</created>

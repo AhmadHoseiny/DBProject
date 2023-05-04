@@ -19,19 +19,58 @@ public class Octree implements Serializable {
     transient Vector<Comparable> maxPerCol;
     transient Vector<String> typePerCol;
 
-    public Octree (String strTableName, String[] strarrColName) throws DBAppException, IOException, ClassNotFoundException, ParseException {
+    public Node getRoot() {
+        return root;
+    }
 
-        this.strTableName = strTableName;
-        this.strarrColName = strarrColName;
-        table = Serializer.deserializeTable(strTableName);
-        initialize();
-        this.root = new Leaf();
-        root.set(minPerCol, maxPerCol, typePerCol);
+    public String getStrTableName() {
+        return strTableName;
+    }
 
+    public String[] getStrarrColName() {
+        return strarrColName;
+    }
+
+    public Table getTable() {
+        return table;
+    }
+
+    public Vector<Comparable> getMinPerCol() {
+        return minPerCol;
+    }
+
+    public Vector<Comparable> getMaxPerCol() {
+        return maxPerCol;
+    }
+
+    public Vector<String> getTypePerCol() {
+        return typePerCol;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
     }
 
 
-    public void initialize () throws DBAppException, IOException, ClassNotFoundException {
+
+
+
+
+
+    //only used when creating a new octree
+    public Octree (Table t, String[] strarrColName) throws DBAppException, IOException, ClassNotFoundException, ParseException {
+        this.strTableName = t.getTableName();
+        this.strarrColName = strarrColName;
+        table = t; //has to be before initializeIndex
+        initializeIndex();
+        this.root = new Leaf();
+        root.set(minPerCol, maxPerCol, typePerCol);
+
+        CSVFileManipulator.updateUponIndexCreation(t, strarrColName);
+    }
+
+
+    public void initializeIndex () throws DBAppException, IOException, ClassNotFoundException, ParseException {
         minPerCol = new Vector<>();
         maxPerCol = new Vector<>();
         typePerCol = new Vector<>();
@@ -67,5 +106,17 @@ public class Octree implements Serializable {
     }
 
 
-
+    public void printIndex(){
+        printIndex(root);
+    }
+    public void printIndex(Node cur){
+        if(cur == null)
+            return;
+        System.out.println(cur);
+        if(cur instanceof NonLeaf){
+            for(Node child : ((NonLeaf) cur).getChildren()){
+                printIndex(child);
+            }
+        }
+    }
 }

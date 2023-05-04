@@ -30,7 +30,7 @@ public abstract class Node implements Serializable {
 
 
     public void setMid (Vector<Comparable> minPerCol, Vector<Comparable> maxPerCol, Vector<String> typePerCol) {
-
+        this.mid = new Vector<>();
         for (int i = 0; i < typePerCol.size(); i++) {
             if (typePerCol.get(i).equals("java.lang.Integer")) {
                 int l = (int) minPerCol.get(i);
@@ -38,7 +38,7 @@ public abstract class Node implements Serializable {
                 int mid = l + ((r-l)>>1);
                 this.mid.add(mid);
             }
-            else if (typePerCol.get(i).equals("java.lang.Double")) {
+            else if (typePerCol.get(i).equals("java.lang.Double") || typePerCol.get(i).equals("java.lang.double")) {
                 double l = (double) minPerCol.get(i);
                 double r = (double) maxPerCol.get(i);
                 double mid = l + ((r-l)/2.0);
@@ -98,4 +98,9 @@ public abstract class Node implements Serializable {
     public Integer getIndexInParent() {
         return indexInParent;
     }
+
+    public String toString(){
+        return "{" + " Left Limit: " + leftLimit + " Right Limit: " + rightLimit ;
+    }
+
 }

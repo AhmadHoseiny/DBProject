@@ -30,6 +30,7 @@ public class OctreeInserter {
         if(((Leaf) cur).insertData(keyData, pageIndex, rowIndex)){
             return;
         }
+//        System.out.println("? " + keyData +"__" + cur);
         //otherwise, the node needs to be split
 
         // create a newNode and set its limits to the limits of the current node

@@ -21,13 +21,14 @@ public class NonLeaf extends Node {
         int index = 0;
         Vector<Comparable> mid = this.getMid();
         for (int i = 0; i < 3; i++)
-            if (keyData.get(i).compareTo(mid.get(i)) <= 0)
+            if (keyData.get(i).compareTo(mid.get(i)) > 0)
                 index |= 1 << i;
 
         return index;
     }
 
     public void split(Vector<String> typePerCol) throws IOException {
+        System.out.println(this.leftLimit +" "+ this.mid +" "+ this.rightLimit);
         for (int i = 0; i < NonLeaf.MAX_CHILDREN; i++) {
             Vector<Comparable> newLeft = new Vector<>();
             Vector<Comparable> newRight = new Vector<>();
@@ -46,5 +47,9 @@ public class NonLeaf extends Node {
             newChild.setIndexInParent(i);
             this.getChildren()[i] = newChild;
         }
+    }
+
+    public String toString(){
+        return super.toString() + "}";
     }
 }

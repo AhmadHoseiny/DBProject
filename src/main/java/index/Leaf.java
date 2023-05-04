@@ -3,6 +3,7 @@ package index;
 import helper_classes.ReadConfigFile;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Vector;
 
 public class Leaf extends Node {
@@ -15,9 +16,12 @@ public class Leaf extends Node {
     public Leaf () throws IOException {
         this.keyDataVector = new Vector<>();
         int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
+        this.hasData = new Vector<>();
         for(int i=0 ; i<maximumEntriesInOctreeNode ; i++){
             this.hasData.add(false);
         }
+        this.pageIndexVector = new Vector<>();
+        this.rowIndexVector = new Vector<>();
     }
 
     //returns true if the keyData is inserted successfully, false otherwise(needs splitting)
@@ -28,6 +32,8 @@ public class Leaf extends Node {
                 return true;
             }
         }
+        System.out.println("keyDataVector.size() = " + keyDataVector.size() +" maximumEntriesInOctreeNode = " + ReadConfigFile.getMaximumEntriesInOctreeNode()) ;
+        System.out.println(keyData);
         int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
         if(keyDataVector.size() < maximumEntriesInOctreeNode){
             keyDataVector.add(keyData);
@@ -54,4 +60,9 @@ public class Leaf extends Node {
         this.pageIndexVector.get(keyDataIndexInNode).add(pageIndex);
         this.rowIndexVector.get(keyDataIndexInNode).add(rowIndex);
     }
+
+    public String toString(){
+        return super.toString() + " " + keyDataVector.toString() + " " + pageIndexVector.toString() + " " + rowIndexVector.toString() + "}";
+    }
+
 }

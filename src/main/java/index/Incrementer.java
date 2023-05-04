@@ -7,9 +7,9 @@ public class Incrementer {
         if (x instanceof Integer)
             return (Integer) x + 1;
         else if (x instanceof Double)
-            return (Double) x + 1;
+            return (Double) x + 1e-6;
         else if (x instanceof String)
-            return ((String) x).charAt(((String) x).length() - 1) + 1 + "";
+            return ((String) x).substring(0, ((String) x).length()-1) +""+ ((char)(((String) x).charAt(((String) x).length() - 1) + 1));
         else if (x instanceof Date)
             return new Date(((Date) x).getTime() + 1);
         else

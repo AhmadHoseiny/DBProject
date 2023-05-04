@@ -1,6 +1,7 @@
 package helper_classes;
 
 import exceptions.DBAppException;
+import tables.Table;
 
 import java.text.*;
 import java.util.*;
@@ -8,49 +9,7 @@ import java.io.*;
 
 public class CSVFileManipulator {
 
-    public static void validate(String colType, String colMin, String colMax) throws DBAppException {
-        boolean isValid = true;
-        switch (colType) {
-            case "java.lang.Integer":
-                try {
-                    if (Integer.compare(Integer.parseInt(colMin), Integer.parseInt(colMax)) > 0)
-                        isValid &= false;
-                } catch (Exception e) {
-                    isValid &= false;
-                }
-                break;
-            case "java.lang.String":
-                if (colMin.compareTo(colMax) > 0)
-                    isValid &= false;
-                break;
-            case "java.lang.Double":
-            case "java.lang.double":
-                try {
-                    if (Double.compare(Double.parseDouble(colMin), Double.parseDouble(colMax)) > 0)
-                        isValid &= false;
-                } catch (Exception e) {
-                    isValid &= false;
-                }
-                break;
-            case "java.util.Date":
-                try {
-                    String pattern = "yyyy-MM-dd";
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                    Date dateMin = simpleDateFormat.parse(colMin);
-                    Date dateMax = simpleDateFormat.parse(colMax);
-                    if (dateMin.compareTo(dateMax) > 0)
-                        isValid &= false;
-                } catch (Exception e) {
-                    isValid &= false;
-                }
-                break;
-            default:
-                isValid &= false;
-        }
 
-        if (!isValid)
-            throw new DBAppException("Invalid min/max values for column type");
-    }
 
     public static void write(String strTableName,
                              Hashtable<String, String> htblColNameType,
@@ -64,7 +23,7 @@ public class CSVFileManipulator {
             String colType = htblColNameType.get(colName);
             String colMin = htblColNameMin.get(colName);
             String colMax = htblColNameMax.get(colName);
-            validate(colType, colMin, colMax);
+            MetadataValidator.validate(colType, colMin, colMax);
             String[] data = {strTableName, colName, colType, "false", "null", "null", colMin, colMax};
             // this is the clustering key
             if (i == 0)
@@ -81,7 +40,8 @@ public class CSVFileManipulator {
                             Vector<String> colNames,
                             Vector<String> colTypes,
                             Vector<Comparable> colMin,
-                            Vector<Comparable> colMax
+                            Vector<Comparable> colMax,
+                            Vector<String> indexNames
     ) throws IOException, ParseException {
         String fileName = "src/main/resources/metadata.csv";
         File file = new File(fileName);
@@ -89,6 +49,7 @@ public class CSVFileManipulator {
         HashMap<String, String> htblColNameType = new HashMap<>();
         HashMap<String, String> htblColNameMin = new HashMap<>();
         HashMap<String, String> htblColNameMax = new HashMap<>();
+        HashMap<String, String> htblColNameIndexName = new HashMap<>();
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
             Scanner lineScanner = new Scanner(line);
@@ -99,7 +60,7 @@ public class CSVFileManipulator {
             String colName = lineScanner.next();
             htblColNameType.put(colName, lineScanner.next());
             lineScanner.next(); //clustered key
-            lineScanner.next(); //index name
+            htblColNameIndexName.put(colName, lineScanner.next()); //index name
             lineScanner.next(); //index type
             htblColNameMin.put(colName, lineScanner.next());
             htblColNameMax.put(colName, lineScanner.next());
@@ -134,7 +95,60 @@ public class CSVFileManipulator {
                 default:
                     break;
             }
+            String indexName = htblColNameIndexName.get(colName);
+            indexNames.add(indexName.equals("null") ? null : indexName);
         }
+    }
+
+
+
+
+    //assume strarrColName is sorted
+    //When an index is created, the metadata is updated to reflect that
+    public static void updateUponIndexCreation(Table t, String[] strarrColName) throws IOException, ParseException {
+        String strTableName = t.getTableName();
+        String indexName = IndexNameGetter.getIndexName(strarrColName);
+        HashSet<String> hs = new HashSet<>();
+        for(String x : strarrColName){
+            hs.add(x);
+        }
+
+        String oldFileName = "src/main/resources/metadata.csv";
+        File oldFile = new File(oldFileName);
+        Scanner fileScanner = new Scanner(oldFile);
+
+        String newFileName = "src/main/resources/tempMetadata.csv";
+        File newFile = new File(newFileName);
+        FileWriter csvWriter = new FileWriter(newFile, true);
+
+        while (fileScanner.hasNextLine()) {
+            String line = fileScanner.nextLine();
+            Scanner lineScanner = new Scanner(line);
+            lineScanner.useDelimiter(",");
+
+            String data[] = new String[8];
+            for (int i = 0; i < 8; i++) {
+                data[i] = lineScanner.next();
+            }
+            lineScanner.close();
+
+            if (data[0].equals(strTableName) && hs.contains(data[1])) {
+                data[4] = indexName;
+                data[5] = "Octree";
+            }
+
+            csvWriter.append(String.join(",", data));
+            csvWriter.append("\n");
+        }
+        fileScanner.close();
+        
+        csvWriter.flush();
+        csvWriter.close();
+
+        oldFile.delete();
+        newFile.renameTo(new File(oldFileName));
+
+        t.initializeTable();
     }
 
 
