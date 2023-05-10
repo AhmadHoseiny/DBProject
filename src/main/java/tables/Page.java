@@ -2,6 +2,7 @@ package tables;
 
 import exceptions.DBAppException;
 import helper_classes.ReadConfigFile;
+import helper_classes.NullWrapper;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -25,7 +26,10 @@ public class Page implements Serializable {
                                            Hashtable<String, Object> htblColNameValue) {
         Vector<Object> tuple = new Vector<>();
         for (String colName : colNames) {
-            tuple.add(htblColNameValue.get(colName));
+            if (!htblColNameValue.containsKey(colName))
+                tuple.add(new NullWrapper());
+            else
+                tuple.add(htblColNameValue.get(colName));
         }
         return tuple;
     }
@@ -77,7 +81,7 @@ public class Page implements Serializable {
             return 0;
         Comparable cur = (Comparable) this.getPage().get(index).get(0);
         if (cur.compareTo(strClusteringVal) == 0) {
-            System.out.println(cur + " " + strClusteringVal);
+//            System.out.println(cur + " " + strClusteringVal);
             throw new DBAppException("Duplicate Clustering Key");
         }
 
@@ -91,7 +95,7 @@ public class Page implements Serializable {
 
         Comparable cur = (Comparable) this.getPage().get(index).get(0);
         if (cur.compareTo(strClusteringVal) != 0)
-            throw new DBAppException("The input clustering key does not exist");
+            throw new DBAppException("The input clustering key does not exist, cur: " + cur + " strClusteringVal: " + strClusteringVal);
         return index;
     }
 

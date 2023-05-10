@@ -63,7 +63,6 @@ public class OctreeInserter {
                 this.insertOptimized(keyDataInCur, pageIndexInCur.get(j), ((Leaf) cur).rowIndexVector.get(i).get(j), newNode);
             }
         }
-
         //Finally, insert the new keyData into newNode's children
         this.insertOptimized(keyData, pageIndex, rowIndex, newNode);
 

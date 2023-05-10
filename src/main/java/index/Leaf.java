@@ -39,8 +39,8 @@ public class Leaf extends Node {
                 return true;
             }
         }
-        System.out.println("keyDataVector.size() = " + keyDataVector.size() + " maximumEntriesInOctreeNode = " + ReadConfigFile.getMaximumEntriesInOctreeNode());
-        System.out.println(keyData);
+//        System.out.println("keyDataVector.size() = " + keyDataVector.size() + " maximumEntriesInOctreeNode = " + ReadConfigFile.getMaximumEntriesInOctreeNode());
+//        System.out.println(keyData);
         int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
         if (keyDataVector.size() < maximumEntriesInOctreeNode) {
             keyDataVector.add(keyData);
@@ -59,6 +59,20 @@ public class Leaf extends Node {
         }
         this.pageIndexVector.get(keyDataIndexInNode).add(pageIndex);
         this.rowIndexVector.get(keyDataIndexInNode).add(rowIndex);
+    }
+
+    public void updatePointer(Vector<Comparable> keyData, int oldPageIndex, int oldRowIndex, int newPageIndex, int newRowIndex) {
+        for (int i = 0; i < keyDataVector.size(); i++) {
+            if (isDuplicate(keyDataVector.get(i), keyData)) {
+                for (int j = 0; j < pageIndexVector.get(i).size(); j++) {
+                    if (pageIndexVector.get(i).get(j) == oldPageIndex && rowIndexVector.get(i).get(j) == oldRowIndex) {
+                        pageIndexVector.get(i).set(j, newPageIndex);
+                        rowIndexVector.get(i).set(j, newRowIndex);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     public String toString() {

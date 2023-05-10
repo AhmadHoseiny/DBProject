@@ -48,7 +48,6 @@ public class MyIterator implements Iterator {
         this.pageIndex = 0;
         this.rowIndex = -1;
         this.page = Serializer.deserializePage(table.getTableName(), pageIndex);
-        ;
 
         this.nextCalled = false;
         this.nextTuple = null;

@@ -7,6 +7,7 @@ import tables.Table;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.ArrayDeque;
 import java.util.Vector;
 
 public class Octree implements Serializable {
@@ -89,6 +90,20 @@ public class Octree implements Serializable {
         }
     }
 
+//    public Node findAllNodes(Node cur) {
+//        if (cur instanceof Leaf)
+//            return cur;
+//        else {
+//
+//        }
+//    }
+
+
+    public void updatePointer(Vector<Comparable> keyData, int oldPageIndex, int oldRowIndex, int newPageIndex, int newRowIndex) {
+        Node cur = findNode(root, keyData);
+        ((Leaf) cur).updatePointer(keyData, oldPageIndex, oldRowIndex, newPageIndex, newRowIndex);
+    }
+
     public void insert(Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
         OctreeInserter octreeInserter = new OctreeInserter(this);
@@ -97,18 +112,43 @@ public class Octree implements Serializable {
     }
 
 
-    public void printIndex() {
-        printIndex(root);
+    public void printIndexDFS() {
+        printIndexDFS(root);
     }
 
-    public void printIndex(Node cur) {
+    public void printIndexDFS(Node cur) {
         if (cur == null)
             return;
         System.out.println(cur);
         if (cur instanceof NonLeaf) {
             for (Node child : ((NonLeaf) cur).getChildren()) {
-                printIndex(child);
+                printIndexDFS(child);
             }
         }
+    }
+
+    public void printIndexBFS() {
+        ArrayDeque<Node> q = new ArrayDeque();
+        q.add(root);
+        while(!q.isEmpty()){
+            int cnt = 0;
+            ArrayDeque<Node> nxtLevel = new ArrayDeque();
+            while(!q.isEmpty()){
+                Node cur = q.pollFirst();
+                System.out.print(cur +" !! ");
+                cnt++;
+                if(cnt==8){
+                    System.out.println(" *** ");
+                }
+                if(cur instanceof Leaf)
+                    continue;
+                for(Node child : ((NonLeaf) cur).getChildren()){
+                    nxtLevel.addLast(child);
+                }
+            }
+            System.out.println();
+            q = nxtLevel;
+        }
+
     }
 }

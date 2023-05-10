@@ -5,16 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Finalizing Milestone 1">
+      <change afterPath="$PROJECT_DIR$/src/main/java/helper_classes/NullWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Data/Student.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Data/Student/Indices/GpaIdNameIndex.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_0.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_1.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/helper_classes/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/helper_classes/NullWrapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assumptions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assumptions.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/DirectoryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/DirectoryCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/IndexNameGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/IndexNameGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/MetadataValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/MetadataValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/ReadConfigFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/SQLTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/SQLTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Incrementer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Incrementer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Leaf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Node.java" afterDir="false" />
@@ -24,20 +25,12 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DBApp.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Indices/GpaIdNameIndex.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/AllRecordInIndexInserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/AllRecordInIndexInserter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/MetadataValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/MetadataValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/ReadConfigFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/ReadConfigFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/IndexNameGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/IndexNameGetter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/Incrementer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Incrementer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/index/Leaf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Leaf.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/index/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/index/NonLeaf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/NonLeaf.class" afterDir="false" />
@@ -113,7 +106,7 @@
       <recent name="D:\GUC\IntelliJ workspace\DBProject\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DBApp">
+  <component name="RunManager">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="DBProject" />
@@ -138,7 +131,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="" />
+      <changelist id="167d7500-d928-4ced-b757-224c73aab7b6" name="Changes" comment="Finalizing Milestone 1" />
       <created>1678888951797</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

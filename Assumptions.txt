@@ -8,3 +8,5 @@
 (8) At Insert, if the row to be inserted doesn't contain a value for the Clustering key, an exception is thrown.
 (9) We placed the metadata file in the resources directory
 (10) We placed the Data directory in the resources directory to store serialized pages and tables
+------------------------------------------------------------------------------------------------------------------------
+(11) When calculating the middle value between two strings, we concatenate 'a's to the minimum string to equalise its length to the maximum string length to be able to use the recommended GeeksForGeeks algorithm. This would not change the actual minimum string.

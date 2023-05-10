@@ -4,6 +4,7 @@ import helper_classes.IndexNameGetter;
 import helper_classes.SQLTerm;
 import helper_classes.Serializer;
 import index.Octree;
+import index.OctreeInserter;
 import tables.MyIterator;
 import tables.Page;
 import tables.Table;
@@ -41,7 +42,7 @@ public class DBApp {
 
     }
 
-    public static void testCreateStudentTable() throws DBAppException {
+    public static void testCreateStudentTable() throws DBAppException, IOException, ParseException {
         Hashtable htblColNameType = new Hashtable();
         htblColNameType.put("id", "java.lang.Integer");
         htblColNameType.put("name", "java.lang.String");
@@ -49,12 +50,12 @@ public class DBApp {
 
         Hashtable<String, String> htblColNameMin = new Hashtable<>();
         htblColNameMin.put("id", "1");
-        htblColNameMin.put("name", "A");
+        htblColNameMin.put("name", "aaaaaaaaaaa");
         htblColNameMin.put("gpa", "0.01");
 
         Hashtable<String, String> htblColNameMax = new Hashtable<>();
         htblColNameMax.put("id", "32");
-        htblColNameMax.put("name", "ZZZZZZZZZZZ");
+        htblColNameMax.put("name", "zzzzzzzzzzz");
         htblColNameMax.put("gpa", "10.0");
 
         DBApp dbApp = new DBApp();
@@ -62,8 +63,7 @@ public class DBApp {
                 htblColNameMin, htblColNameMax);
     }
 
-    public static void testInsertInStudentTable() throws DBAppException {
-
+    public static void testInsertInStudentTable() throws DBAppException, IOException, ParseException, ClassNotFoundException {
 /*
         7
         1 AhmedNoor 0.95
@@ -75,14 +75,17 @@ public class DBApp {
         11 Abdelrahman 0.9
 
         7
-        1 AHMEDNOOR 0.95
-        3 AHMEDOMAR 1.95
-        2 AHMEDALI 2.95
-        5 SAYED 3.95
-        4 LOGINE 4.95
-        7 OMAR 4.0
-        11 ZIAD 0.9
+1 AHMEDNOOR 0.95
+3 AHMEDOMAR 1.95
+5 SAYED 3.95
+2 AHMEDALI 2.95
+6
+7 OMAR 4.0
+4 LOGINE 4.95
+11 ZIAD 0.9
+10 ABDELRAHMAN 1.2
 */
+
 
         Hashtable<String, Object> htblColNameValue;
 
@@ -95,10 +98,10 @@ public class DBApp {
             htblColNameValue = new Hashtable();
             int id = sc.nextInt();
             String name = sc.next();
-            double gpa = sc.nextDouble();
+//            double gpa = sc.nextDouble();
             htblColNameValue.put("id", id);
             htblColNameValue.put("name", name);
-            htblColNameValue.put("gpa", gpa);
+//            htblColNameValue.put("gpa", gpa);
             dbApp.insertIntoTable("Student", htblColNameValue);
         }
 
@@ -177,7 +180,7 @@ public class DBApp {
 
     }
 
-    public static void testCreateIndex() throws DBAppException {
+    public static void testCreateIndex() throws DBAppException, IOException, ParseException, ClassNotFoundException {
         DBApp dbApp = new DBApp();
         String[] strarrColNames = {"id", "name", "gpa"};
         dbApp.createIndex("Student", strarrColNames);
@@ -205,31 +208,40 @@ public class DBApp {
                             Hashtable<String, String> htblColNameType,
                             Hashtable<String, String> htblColNameMin,
                             Hashtable<String, String> htblColNameMax)
-            throws DBAppException {
+            throws DBAppException, IOException, ParseException {
 
-        try {
+//        try {
             File tableToCreate = new File(directoryPathResourcesData + strTableName + ".ser");
             if (tableToCreate.exists()) {
                 throw new DBAppException("Table already exists");
             }
             Table t = new Table(strTableName, strClusteringKeyColumn, htblColNameType, htblColNameMin, htblColNameMax);
             Serializer.serializeTable(t, strTableName);
-        } catch (Exception e) {
-            throw new DBAppException(e.getMessage());
-        }
+//        } catch (Exception e) {
+//            throw new DBAppException(e.getMessage());
+//        }
 
     }
 
     public void insertIntoTable(String strTableName,
                                 Hashtable<String, Object> htblColNameValue)
-            throws DBAppException {
-        try {
-            Table t = Serializer.deserializeTable(strTableName);
-            t.insertTuple(htblColNameValue);
-            Serializer.serializeTable(t, strTableName);
-        } catch (Exception e) {
-            throw new DBAppException(e.getMessage());
-        }
+            throws DBAppException, IOException, ClassNotFoundException, ParseException {
+//        try {
+        Table t = Serializer.deserializeTable(strTableName);
+//        String filePath = directoryPathResourcesData + strTableName + "/Pages";
+//        File tablesDirectory = new File(filePath);
+//        int fileCount = tablesDirectory.list().length;
+        t.insertTuple(htblColNameValue);
+//        for (String colName : t.getColNames()) {
+//            if (!htblColNameValue.containsKey(colName)) {
+//                Serializer.serializeTable(t, strTableName);
+//                return;
+//            }
+//        }
+        Serializer.serializeTable(t, strTableName);
+//        } catch (Exception e) {
+//            throw new DBAppException(e.getMessage());
+//        }
     }
 
     public void updateTable(String strTableName,
@@ -292,13 +304,16 @@ public class DBApp {
 
 
     public void createIndex(String strTableName,
-                            String[] strarrColName) throws DBAppException {
-        try {
+                            String[] strarrColName) throws DBAppException, IOException, ClassNotFoundException, ParseException {
+//        try {
 
             File tableToCreate = new File(directoryPathResourcesData + strTableName + ".ser");
             //check that the table exists
             if (!tableToCreate.exists()) {
                 throw new DBAppException("Table doesn't exist");
+            }
+            for (int i = 0; i < strarrColName.length; i++) {
+                strarrColName[i] = strarrColName[i].toLowerCase();
             }
             Arrays.sort(strarrColName);
             String indexName = IndexNameGetter.getIndexName(strarrColName);
@@ -321,6 +336,9 @@ public class DBApp {
                 if (!tableColNames.contains(strarrColName[i])) {
                     throw new DBAppException("Column " + strarrColName[i] + " doesn't exist in table " + strTableName);
                 }
+                if (t.getIndexNames() != null && t.getIndexNames().get(t.getColNames().indexOf(strarrColName[i])) != null) {
+                    throw new DBAppException("Column " + strarrColName[i] + " already has an index");
+                }
             }
             Octree ot = new Octree(t, strarrColName);
 
@@ -328,9 +346,9 @@ public class DBApp {
             inserter.insertAllRecords();
             Serializer.serializeIndex(ot);
             Serializer.serializeTable(t, strTableName);
-        } catch (Exception e) {
-            throw new DBAppException(e.getMessage());
-        }
+//        } catch (Exception e) {
+//            throw new DBAppException(e.getMessage());
+//        }
 
     }
 
@@ -340,7 +358,7 @@ public class DBApp {
         String indexName = IndexNameGetter.getIndexName(strarrColName);
         Table t = Serializer.deserializeTable(strTableName);
         Octree ot = Serializer.deserializeIndex(t, indexName);
-        ot.printIndex();
+        ot.printIndexDFS();
     }
 
 }
