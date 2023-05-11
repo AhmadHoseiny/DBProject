@@ -48,6 +48,9 @@ public abstract class Node implements Serializable {
             } else if (typePerCol.get(i).equals("java.lang.String")) {
                 String s = (String) minPerCol.get(i);
                 String t = (String) maxPerCol.get(i);
+                if(s.length() < t.length()){
+                    s += t.substring(s.length(), t.length());
+                }
                 this.mid.add(getMiddleString(s, t));
             } else if (typePerCol.get(i).equals("java.util.Date")) {
                 Date min = (Date) minPerCol.get(i);
@@ -87,36 +90,20 @@ public abstract class Node implements Serializable {
         return "{" + " Left Limit: " + leftLimit + " Right Limit: " + rightLimit;
     }
 
+
+
+
     // Function to print the string at
     // the middle of lexicographically
     // increasing sequence of strings from S to T
     // Method outsourced from GeeksForGeeks and modified, the link is: https://www.geeksforgeeks.org/print-middle-string-lexicographically-increasing-sequence-strings-s-t/
     public static String getMiddleString(String S, String T) {
+        //s and t will both be of same lenth
 
-        int N = Math.max(S.length(), T.length());
-
+        int N = S.length();
         // Stores the base 26 digits after addition
         int[] a1 = new int[N + 1];
 
-        // refer to assumption #11 in Assumptions.txt
-        if(S.length()<T.length()){
-            StringBuilder sb = new StringBuilder();
-            for(int i=0 ; i<S.length() ; i++)
-                sb.append(S.charAt(i));
-            for(int i=0 ; i<T.length()-S.length() ; i++){
-                sb.append('a');
-            }
-            S = sb.toString();
-        }
-        else if (T.length()<S.length()){
-            StringBuilder sb = new StringBuilder();
-            for(int i=0 ; i<T.length() ; i++)
-                sb.append(T.charAt(i));
-            for(int i=0 ; i<S.length()-T.length() ; i++){
-                sb.append('a');
-            }
-            T = sb.toString();
-        }
 
 
         for (int i = 0; i < N; i++) {

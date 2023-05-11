@@ -3,9 +3,13 @@ package tables;
 import exceptions.DBAppException;
 import helper_classes.ReadConfigFile;
 import helper_classes.NullWrapper;
+import index.Octree;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -153,30 +157,49 @@ public class Page implements Serializable {
     }
 
     //returns false when page is empty after deletion
-    public boolean deleteAllMatchingTuples(Vector<String> colNames, Hashtable<String, Object> htblColNameValue) {
+    public boolean deleteAllMatchingTuples(Vector<String> colNames,
+                                           Hashtable<String, Object> htblColNameValue,
+                                           int oldPageIndex, int newPageIndex,
+                                           Table t, HashSet<Octree> deserializedOctrees) throws DBAppException, IOException, ParseException, ClassNotFoundException {
 
-        for (int i = 0; i < this.getPage().size(); i++) {
+        Vector<Vector<Object>> newPage = new Vector<>();
+        int cntDeleted = 0;
+        HashMap<Integer, Integer> toBeUpdated = new HashMap<>(); //oldRowIndex --> newRowIndex
+
+        for(int i=0 ; i<this.getPage().size() ; i++){
             Vector<Object> tuple = this.getPage().get(i);
             boolean valueExists = true;
             for (int j = 0; j < colNames.size(); j++) {
                 String colName = colNames.get(j);
-                if (htblColNameValue.containsKey(colName) && htblColNameValue.get(colName) == null) {
-                    valueExists &= tuple.get(j) == null;
-                    continue;
-                }
                 Comparable value = (Comparable) htblColNameValue.get(colName);
                 if (value != null) {
                     valueExists &= value.equals(tuple.get(j));
                 }
             }
-            if (valueExists)
-                this.getPage().remove(i--);
+            //to be deleted
+            if (valueExists){
+                t.deleteInOctree(deserializedOctrees, tuple, oldPageIndex, i);
+                cntDeleted++;
+            }
+            else{
+                newPage.add(tuple);
+                toBeUpdated.put(i, i-cntDeleted);
+            }
         }
 
+        for(int oldRowIndex : toBeUpdated.keySet()){
+            int newRowIndex = toBeUpdated.get(oldRowIndex);
+            Vector<Object> tuple = this.getPage().get(oldRowIndex);
+            t.updatePointerInOctree(deserializedOctrees, tuple, oldPageIndex, oldRowIndex,
+                    newPageIndex, newRowIndex);
+        }
+
+        this.page = newPage;
         if (this.getPage().size() == 0)
             return false;
 
         return true;
+
 
     }
 

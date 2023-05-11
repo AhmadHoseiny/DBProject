@@ -1,5 +1,7 @@
 package index;
 
+import helper_classes.GenericComparator;
+
 import java.io.IOException;
 import java.util.Vector;
 
@@ -22,7 +24,7 @@ public class NonLeaf extends Node {
         Vector<Comparable> mid = this.getMid();
 //        System.out.println("mid: " + mid + " keyData: " + keyData);
         for (int i = 0; i < 3; i++)
-            if (keyData.get(i).compareTo(mid.get(i)) > 0)
+            if (GenericComparator.compare(keyData.get(i), mid.get(i)) > 0)
                 index |= 1 << i;
 
         return index;
@@ -38,7 +40,8 @@ public class NonLeaf extends Node {
                     newLeft.add(this.leftLimit.get(j));
                     newRight.add(this.mid.get(j));
                 } else {
-                    newLeft.add(Incrementer.increment(this.mid.get(j)));
+//                    newLeft.add(Incrementer.increment(this.mid.get(j)));
+                    newLeft.add(this.mid.get(j));
                     newRight.add(this.rightLimit.get(j));
                 }
             }
@@ -52,5 +55,29 @@ public class NonLeaf extends Node {
 
     public String toString() {
         return super.toString() + "}";
+    }
+
+    public Integer countKeysInAllChildren(){
+        int count = 0;
+        for (int i = 0; i < MAX_CHILDREN; i++) {
+            Node child = this.getChildren()[i];
+            if(child instanceof NonLeaf)
+                return null;
+            count += ((Leaf) child).keyDataVector.size();
+        }
+        return count;
+    }
+    public Leaf mergeChildren() throws IOException {
+        Leaf merged = new Leaf();
+        for (int i = 0; i < MAX_CHILDREN; i++) {
+            Node child = this.getChildren()[i];
+            merged.keyDataVector.addAll(((Leaf) child).keyDataVector);
+            merged.pageIndexVector.addAll(((Leaf) child).pageIndexVector);
+            merged.rowIndexVector.addAll(((Leaf) child).rowIndexVector);
+        }
+        for(int i = 0; i < merged.keyDataVector.size(); i++){
+            merged.hasData.setElementAt(true, i);
+        }
+        return merged;
     }
 }

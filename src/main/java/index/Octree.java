@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Vector;
 
 public class Octree implements Serializable {
@@ -110,8 +112,17 @@ public class Octree implements Serializable {
         octreeInserter.insert(keyData, pageIndex, rowIndex);
 
     }
+    public void delete(Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
+        OctreeDeleter octreeDeleter = new OctreeDeleter(this);
+        octreeDeleter.delete(keyData, pageIndex, rowIndex);
 
+    }
+
+    public void decrementPageIndicesLargerThanInput(int pageIndex) {
+        OctreeDeleter octreeDeleter = new OctreeDeleter(this);
+        octreeDeleter.decrementPageIndicesLargerThanInput(pageIndex);
+    }
     public void printIndexDFS() {
         printIndexDFS(root);
     }
@@ -150,5 +161,21 @@ public class Octree implements Serializable {
             q = nxtLevel;
         }
 
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Octree octree = (Octree) o;
+        return root.equals(octree.root) && strTableName.equals(octree.strTableName) && Arrays.equals(strarrColName, octree.strarrColName) && table.equals(octree.table) && minPerCol.equals(octree.minPerCol) && maxPerCol.equals(octree.maxPerCol) && typePerCol.equals(octree.typePerCol);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(root, strTableName, table, minPerCol, maxPerCol, typePerCol);
+        result = 31 * result + Arrays.hashCode(strarrColName);
+        return result;
     }
 }

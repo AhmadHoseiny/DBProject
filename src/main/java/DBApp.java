@@ -98,10 +98,10 @@ public class DBApp {
             htblColNameValue = new Hashtable();
             int id = sc.nextInt();
             String name = sc.next();
-//            double gpa = sc.nextDouble();
+            double gpa = sc.nextDouble();
             htblColNameValue.put("id", id);
             htblColNameValue.put("name", name);
-//            htblColNameValue.put("gpa", gpa);
+            htblColNameValue.put("gpa", gpa);
             dbApp.insertIntoTable("Student", htblColNameValue);
         }
 
@@ -109,14 +109,16 @@ public class DBApp {
 
     public static void testUpdateStudentTable() throws DBAppException {
         Hashtable<String, Object> htblColNameValue = new Hashtable();
-        htblColNameValue.put("gpa", 0.95);
+        htblColNameValue.put("gpa", 0.1);
         DBApp dbApp = new DBApp();
-        dbApp.updateTable("Student", "4", htblColNameValue);
+        dbApp.updateTable("Student", "8", htblColNameValue);
     }
 
     public static void testDeleteFromStudentTable() throws DBAppException {
         Hashtable<String, Object> htblColNameValue = new Hashtable();
-        htblColNameValue.put("gpa", 4.95);
+//        htblColNameValue.put("gpa", 2.0);
+//        htblColNameValue.put("id", 8);
+//        htblColNameValue.put("name", "gogo");
         DBApp dbApp = new DBApp();
         dbApp.deleteFromTable("Student", htblColNameValue);
     }
@@ -210,16 +212,16 @@ public class DBApp {
                             Hashtable<String, String> htblColNameMax)
             throws DBAppException, IOException, ParseException {
 
-//        try {
+        try {
             File tableToCreate = new File(directoryPathResourcesData + strTableName + ".ser");
             if (tableToCreate.exists()) {
                 throw new DBAppException("Table already exists");
             }
             Table t = new Table(strTableName, strClusteringKeyColumn, htblColNameType, htblColNameMin, htblColNameMax);
             Serializer.serializeTable(t, strTableName);
-//        } catch (Exception e) {
-//            throw new DBAppException(e.getMessage());
-//        }
+        } catch (Exception e) {
+            throw new DBAppException(e.getMessage());
+        }
 
     }
 

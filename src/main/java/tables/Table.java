@@ -241,9 +241,10 @@ public class Table implements Serializable {
         if (htblColNameValue.get(colNames.get(0)) == null)
             throw new DBAppException("Tuple has no clustering key value");
 
-        if (!checkNoNulls(htblColNameValue)) {
-            return;
-        }
+        //nulls can be inserted
+//        if (!checkNoNulls(htblColNameValue)) {
+//            return;
+//        }
 
         //Don't forget to check between min & max
         if (!isValidTuple(htblColNameValue)) {
@@ -396,10 +397,28 @@ public class Table implements Serializable {
 
     }
 
+    public void deleteInOctree(HashSet<Octree> deserializedOctrees, Vector<Object> curTuple, int pageIndex, int tupleIndex) throws IOException, DBAppException, ParseException, ClassNotFoundException {
+
+        for (Octree octree : deserializedOctrees) {
+            Vector<Comparable> keyData = new Vector<>();
+            String colName1 = octree.getStrarrColName()[0];
+            String colName2 = octree.getStrarrColName()[1];
+            String colName3 = octree.getStrarrColName()[2];
+//            System.out.println(colName1 + " " + colName2 + " " + colName3);
+
+            keyData.add((Comparable) curTuple.get(colNames.indexOf(colName1)));
+            keyData.add((Comparable) curTuple.get(colNames.indexOf(colName2)));
+            keyData.add((Comparable) curTuple.get(colNames.indexOf(colName3)));
+//            System.out.println("keyData1: " + keyData);
+            octree.delete(keyData, pageIndex, tupleIndex);
+
+        }
+
+    }
+
     public void updatePointerInOctree(HashSet<Octree> deserializedOctrees, Vector<Object> curTuple, int oldPageIndex, int oldTupleIndex, int newPageIndex, int newTupleIndex) throws DBAppException, IOException, ParseException, ClassNotFoundException {
 
         for (Octree octree : deserializedOctrees) {
-
             Vector<Comparable> keyData = new Vector<>();
             String colName1 = octree.getStrarrColName()[0];
             String colName2 = octree.getStrarrColName()[1];
@@ -467,15 +486,49 @@ public class Table implements Serializable {
         int index = getPageIndex(clusteringKeyVal);
         if (index == -1) //clustering key does not exist
             return;
+        int pageIndex = index;
 
         Page p = Serializer.deserializePage(tableName, index);
+        int rowIndex = p.getTupleIndex(clusteringKeyVal);
+        Vector<Object> oldTuple = (Vector<Object>) p.getPage().get(rowIndex).clone();
         p.updateTuple(clusteringKeyVal, colNames, htblColNameValue);
+        Vector<Object> newTuple = p.getPage().get(rowIndex);
         Serializer.serializePage(p, this.getTableName(), index);
+
+        //update in octree
+        HashSet<Octree> deserializedOctrees = new HashSet<>();
+        HashSet<String> alreadyGotten = new HashSet<>();
+        for (String indexN : indexNames) {
+
+            if (indexN == null) {
+                continue;
+            }
+
+            if (alreadyGotten.contains(indexN)) {
+                continue;
+            }
+
+            alreadyGotten.add(indexN);
+
+            Octree octree = Serializer.deserializeIndex(this, indexN);
+            deserializedOctrees.add(octree);
+
+        }
+
+        System.out.println("oldTuple: " + oldTuple);
+        System.out.println(pageIndex + " " + rowIndex);
+        deleteInOctree(deserializedOctrees, oldTuple, pageIndex, rowIndex);
+        insertInOctree(deserializedOctrees, newTuple, pageIndex, rowIndex);
+
+        for (Octree octree : deserializedOctrees) {
+            Serializer.serializeIndex(octree);
+        }
+
 
     }
 
     //implement a method that takes a clustering key and deletes its tuple from a specific page after deserializnig it and then serializing it again after deleting the tuple from it
-    public void deleteTuple(Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException {
+    public void deleteTuple(Hashtable<String, Object> htblColNameValue) throws DBAppException, IOException, ClassNotFoundException, ParseException {
 
         Hashtable<String, Object> newHtblCol = new Hashtable<>();
         for (Map.Entry<String, Object> e : htblColNameValue.entrySet()) {
@@ -512,18 +565,47 @@ public class Table implements Serializable {
                 throw new DBAppException("Invalid column name " + e.getKey());
         }
 
+        HashSet<Octree> deserializedOctrees = new HashSet<>();
+        HashSet<String> alreadyGotten = new HashSet<>();
+        for (String index : indexNames) {
+
+            if (index == null) {
+                continue;
+            }
+
+            if (alreadyGotten.contains(index)) {
+                continue;
+            }
+
+            alreadyGotten.add(index);
+
+            Octree octree = Serializer.deserializeIndex(this, index);
+            deserializedOctrees.add(octree);
+
+        }
+
+
         //a unique row
         if (htblColNameValue.containsKey(this.getClusteringKey())) {
+
             int index = getPageIndex((Comparable) htblColNameValue.get(getColNames().get(0)));
             if (index == -1) { // No matching Tuples to be deleted exist
                 return;
             }
             Page p = Serializer.deserializePage(tableName, index);
+            int tupleIndex = p.getTupleIndex((Comparable) htblColNameValue.get(getColNames().get(0)));
+            Vector<Object> tuple = p.getPage().get(tupleIndex);
             boolean nonEmptyPage = p.deleteSingleTuple((Comparable) htblColNameValue.get(getColNames().get(0)), colNames, htblColNameValue);
+            deleteInOctree(deserializedOctrees, tuple, index, tupleIndex);
+
             if (nonEmptyPage) {
                 Comparable minKey = (Comparable) p.getPage().get(0).get(0);
                 minPerPage.put(index, minKey);
                 Serializer.serializePage(p, this.getTableName(), index);
+                for(int i=tupleIndex ; i<p.getPage().size() ; i++){
+                    updatePointerInOctree(deserializedOctrees, p.getPage().get(i),
+                            index, i+1, index, i);
+                }
             } else {
                 File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + index + ".ser");
                 fileToDelete.delete();
@@ -534,18 +616,30 @@ public class Table implements Serializable {
                     minPerPage.put(i - 1, minPerPage.get(i));
                 }
                 minPerPage.remove(fileCount - 1);
-
+                for(Octree octree : deserializedOctrees){
+                    octree.decrementPageIndicesLargerThanInput(index);
+                }
             }
-        } else {
+        }
+        else {
             LinkedList<Integer> pagesToDelete = new LinkedList<>();
+            int cntDeletedPages = 0;
             for (int i = 0; i < fileCount; i++) {
                 Page p = Serializer.deserializePage(tableName, i);
-                boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue);
+                int oldPageIndex = i;
+                int newPageIndex = i-cntDeletedPages;
+                //takes care of
+                // (1) Updating the page index and row index of non deleted tuples
+                // (2) Deleting the deleted tuples from the octree
+                boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue,
+                        oldPageIndex, newPageIndex,
+                        this, deserializedOctrees);
                 if (nonEmptyPage) {
                     Comparable minKey = (Comparable) p.getPage().get(0).get(0);
                     minPerPage.put(i, minKey);
                     Serializer.serializePage(p, this.getTableName(), i);
                 } else {
+                    cntDeletedPages++;
                     pagesToDelete.add(i);
                 }
             }
@@ -570,6 +664,9 @@ public class Table implements Serializable {
 
         }
 
+        for (Octree octree : deserializedOctrees) {
+            Serializer.serializeIndex(octree);
+        }
     }
 
 }
