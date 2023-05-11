@@ -5,36 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/helper_classes/GenericComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/index/OctreeDeleter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/NullWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/NullWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Operator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/Incrementer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Leaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Octree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DBApp.config" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student.ser" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Student.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Indices/GpaIdNameIndex.ser" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Student/Indices/GpaIdNameIndex.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_0.ser" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_0.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Data/Student/Pages/Page_1.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/NullWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/NullWrapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Operator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/Operator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/index/Incrementer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/index/Leaf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Leaf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/index/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/index/NonLeaf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/NonLeaf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/index/Octree.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Octree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tables/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tables/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

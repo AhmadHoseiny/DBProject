@@ -4,13 +4,11 @@ import exceptions.DBAppException;
 import helper_classes.Operator;
 import helper_classes.SQLTerm;
 import helper_classes.Serializer;
+import index.Octree;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Vector;
+import java.util.*;
 
 public class MyIterator implements Iterator {
 
@@ -25,6 +23,55 @@ public class MyIterator implements Iterator {
     private boolean nextCalled;
     private Vector<Object> nextTuple;
 
+    private boolean usingIndex;
+    private String indexName;
+    private Vector<Vector<Object>> resultSet;
+//    String indexColsNames[];
+//    int positionsOfColsToBeUsedInIndexInQuery[];
+    public void compUsingIndex() {
+        boolean canUseIndex = true;
+        for(int i=0 ; i<strarrOperators.length ; i++){
+            canUseIndex &= strarrOperators[i].equals("and");
+        }
+        if(!canUseIndex){
+            usingIndex = false;
+            return;
+        }
+        HashMap<String, Integer> hm = new HashMap<>(); //indexName --> no. of columns present in query
+        HashSet<String> hsColNames = new HashSet<>();
+        for(int i=0 ; i<arrSQLTerms.length ; i++){
+            String colName = arrSQLTerms[i]._strColumnName;
+            if(!hsColNames.contains(colName)){
+                hsColNames.add(colName);
+                String indexName = table.getIndexNames().get(table.getColNames().indexOf(colName));
+                if(indexName != null)
+                    hm.put(indexName, hm.getOrDefault(indexName, 0)+1);
+            }
+        }
+        for(String indexN : hm.keySet()){
+            if(hm.get(indexN) == 3){
+                this.usingIndex = true;
+                this.indexName = indexN;
+                return;
+            }
+        }
+        this.usingIndex = false;
+    }
+    public void compResultSet() throws DBAppException, IOException, ParseException, ClassNotFoundException {
+
+        Octree octree = Serializer.deserializeIndex(table, indexName);
+        String indexColsNames[] = octree.getStrarrColName();
+        int positionsOfColsToBeUsedInIndexInQuery[] = new int[3];
+        for(int i=0 ; i<3 ; i++){
+            for(int j=0 ; j<arrSQLTerms.length ; j++){
+                if(indexColsNames[i].equals(arrSQLTerms[j]._strColumnName)){
+                    positionsOfColsToBeUsedInIndexInQuery[i] = j;
+                    break;
+                }
+            }
+        }
+        
+    }
     public MyIterator(SQLTerm[] arrSQLTerms, String[] strarrOperators)
             throws DBAppException, IOException, ClassNotFoundException, ParseException {
 
@@ -40,6 +87,7 @@ public class MyIterator implements Iterator {
         if (arrSQLTerms.length == 0)
             throw new DBAppException("Nothing to iterate over");
 
+
         //initializing iterator
         this.arrSQLTerms = arrSQLTerms;
         this.strarrOperators = strarrOperators;
@@ -51,6 +99,12 @@ public class MyIterator implements Iterator {
 
         this.nextCalled = false;
         this.nextTuple = null;
+
+        //to determine if we are using the index or not
+        this.compUsingIndex();
+        if(this.usingIndex){
+            this.compResultSet();
+        }
     }
 
     public Table getTable() {
@@ -103,9 +157,9 @@ public class MyIterator implements Iterator {
             if (i == 0) {
                 exists = curExists;
             } else {
-                if (strarrOperators[i - 1].equals("AND")) {
+                if (strarrOperators[i - 1].equals("and")) {
                     exists &= curExists;
-                } else if (strarrOperators[i - 1].equals("OR")) {
+                } else if (strarrOperators[i - 1].equals("or")) {
                     exists |= curExists;
                 } else {
                     exists ^= curExists;

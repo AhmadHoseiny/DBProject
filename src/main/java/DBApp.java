@@ -213,6 +213,7 @@ public class DBApp {
             throws DBAppException, IOException, ParseException {
 
         try {
+            strTableName = strTableName.toLowerCase();
             File tableToCreate = new File(directoryPathResourcesData + strTableName + ".ser");
             if (tableToCreate.exists()) {
                 throw new DBAppException("Table already exists");
@@ -229,6 +230,7 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue)
             throws DBAppException, IOException, ClassNotFoundException, ParseException {
 //        try {
+        strTableName = strTableName.toLowerCase();
         Table t = Serializer.deserializeTable(strTableName);
 //        String filePath = directoryPathResourcesData + strTableName + "/Pages";
 //        File tablesDirectory = new File(filePath);
@@ -251,6 +253,7 @@ public class DBApp {
                             Hashtable<String, Object> htblColNameValue)
             throws DBAppException {
         try {
+            strTableName = strTableName.toLowerCase();
             Table t = Serializer.deserializeTable(strTableName);
             t.updateTuple(strClusteringKeyValue, htblColNameValue);
             Serializer.serializeTable(t, strTableName);
@@ -263,6 +266,7 @@ public class DBApp {
                                 Hashtable<String, Object> htblColNameValue)
             throws DBAppException {
         try {
+            strTableName = strTableName.toLowerCase();
             Table t = Serializer.deserializeTable(strTableName);
             t.deleteTuple(htblColNameValue);
             Serializer.serializeTable(t, strTableName);
@@ -274,6 +278,7 @@ public class DBApp {
     public void printTable(String strTableName) throws DBAppException {
 
         try {
+            strTableName = strTableName.toLowerCase();
             File folder = new File(directoryPathResourcesData + strTableName + "/Pages");
             int fileCount = folder.listFiles().length;
 
@@ -294,6 +299,17 @@ public class DBApp {
             throws DBAppException {
 
         try {
+            for(int i=0 ; i<arrSQLTerms.length ; i++){
+                arrSQLTerms[i]._strTableName = arrSQLTerms[i]._strTableName.toLowerCase();
+                arrSQLTerms[i]._strColumnName = arrSQLTerms[i]._strColumnName.toLowerCase();
+                if(arrSQLTerms[i]._objValue instanceof String){
+                    arrSQLTerms[i]._objValue = ((String) arrSQLTerms[i]._objValue).toLowerCase();
+                }
+            }
+            for(int i=0 ; i<strarrOperators.length ; i++){
+                strarrOperators[i] = strarrOperators[i].toLowerCase();
+            }
+
             MyIterator it = new MyIterator(arrSQLTerms, strarrOperators);
             return it;
         } catch (Exception e) {
@@ -301,14 +317,13 @@ public class DBApp {
 //            return null;
         }
 
-
     }
 
 
     public void createIndex(String strTableName,
                             String[] strarrColName) throws DBAppException, IOException, ClassNotFoundException, ParseException {
 //        try {
-
+            strTableName = strTableName.toLowerCase();
             File tableToCreate = new File(directoryPathResourcesData + strTableName + ".ser");
             //check that the table exists
             if (!tableToCreate.exists()) {
@@ -356,6 +371,7 @@ public class DBApp {
 
 
     public void printIndex(String strTableName, String[] strarrColName) throws IOException, DBAppException, ParseException, ClassNotFoundException {
+        strTableName = strTableName.toLowerCase();
         Arrays.sort(strarrColName);
         String indexName = IndexNameGetter.getIndexName(strarrColName);
         Table t = Serializer.deserializeTable(strTableName);
