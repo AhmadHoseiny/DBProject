@@ -184,4 +184,28 @@ public class Octree implements Serializable {
         return octreeSearcher.searchForSelect(objValues, operators);
 
     }
+    public TreeMap<Integer, LinkedList<Integer>> searchForDelete(Vector<Comparable> objValues) throws DBAppException {
+
+        OctreeSearcher octreeSearcher = new OctreeSearcher(this);
+        return octreeSearcher.searchForDelete(objValues);
+
+    }
+
+    public void setPageIndicesOfXToY(int oldPageIndex, int newPageIndex) {
+        setPageIndicesOfXToY(this.root, oldPageIndex, newPageIndex);
+    }
+    public void setPageIndicesOfXToY(Node root, int oldPageIndex, int newPageIndex) {
+        if (root instanceof Leaf) {
+            ((Leaf) root).setPageIndicesOfXToY(oldPageIndex, newPageIndex);
+            return;
+        }
+        for (Node child : ((NonLeaf) root).getChildren()) {
+            setPageIndicesOfXToY(child, oldPageIndex, newPageIndex);
+        }
+    }
+
+    public void clear() throws IOException {
+        this.root = new Leaf();
+        this.root.set(minPerCol, maxPerCol, typePerCol);
+    }
 }

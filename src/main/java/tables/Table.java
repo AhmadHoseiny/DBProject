@@ -548,15 +548,7 @@ public class Table implements Serializable {
         }
         File folder = new File(directoryPathResourcesData + tableName + "/Pages");
         int fileCount = folder.listFiles().length;
-        //if the table is empty, we delete all records (truncate)
-        if (htblColNameValue.isEmpty()) {
-            for (int i = 0; i < fileCount; i++) {
-                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + i + ".ser");
-                fileToDelete.delete();
-            }
-            minPerPage.clear();
-            return;
-        }
+
 
         for (Map.Entry<String, Object> e : htblColNameValue.entrySet()) {
             if (!this.getColNames().contains(e.getKey()))
@@ -581,6 +573,24 @@ public class Table implements Serializable {
             deserializedOctrees.add(octree);
 
         }
+
+
+        //if the table is empty, we delete all records (truncate)
+        if (htblColNameValue.isEmpty()) { //all octrees should also be cleared
+            for (int i = 0; i < fileCount; i++) {
+                File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + i + ".ser");
+                fileToDelete.delete();
+            }
+            minPerPage.clear();
+            for(Octree octree : deserializedOctrees){
+                octree.clear();
+            }
+            for (Octree octree : deserializedOctrees) {
+                Serializer.serializeIndex(octree);
+            }
+            return;
+        }
+
 
 
         //a unique row
@@ -619,27 +629,75 @@ public class Table implements Serializable {
                 }
             }
         } else {
+
             LinkedList<Integer> pagesToDelete = new LinkedList<>();
             int cntDeletedPages = 0;
-            for (int i = 0; i < fileCount; i++) {
-                Page p = Serializer.deserializePage(tableName, i);
-                int oldPageIndex = i;
-                int newPageIndex = i - cntDeletedPages;
-                //takes care of
-                // (1) Updating the page index and row index of non deleted tuples
-                // (2) Deleting the deleted tuples from the octree
-                boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue,
-                        oldPageIndex, newPageIndex,
-                        this, deserializedOctrees);
-                if (nonEmptyPage) {
-                    Comparable minKey = (Comparable) p.getPage().get(0).get(0);
-                    minPerPage.put(i, minKey);
-                    Serializer.serializePage(p, this.getTableName(), i);
-                } else {
-                    cntDeletedPages++;
-                    pagesToDelete.add(i);
+
+            //To determine if using Index is applicable
+            boolean colsToBeTaken[] = new boolean[3];
+            Octree octree = getIndexToBeUsed(htblColNameValue, deserializedOctrees, colsToBeTaken);
+            if(octree != null){ //we will use the index
+//                System.out.println("I used the index!!!");
+                //building the objValues vector
+                Vector<Comparable> objValues = new Vector();
+                for(int i=0 ; i<3 ; i++){
+                    if(colsToBeTaken[i]){
+                        objValues.add((Comparable)htblColNameValue.get(octree.getStrarrColName()[i]));
+                    }
+                    else{
+                        objValues.add(null);
+                    }
+                }
+
+                TreeMap<Integer, LinkedList<Integer>> resPointers = octree.searchForDelete(objValues);
+                for (int i = 0; i < fileCount; i++) {
+                    if(resPointers.containsKey(i)){
+                        Page p = Serializer.deserializePage(tableName, i);
+                        int oldPageIndex = i;
+                        int newPageIndex = i - cntDeletedPages;
+                        //takes care of
+                        // (1) Updating the page index and row index of non deleted tuples
+                        // (2) Deleting the deleted tuples from the octree
+                        boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue,
+                                oldPageIndex, newPageIndex,
+                                this, deserializedOctrees);
+                        if (nonEmptyPage) {
+                            Comparable minKey = (Comparable) p.getPage().get(0).get(0);
+                            minPerPage.put(i, minKey);
+                            Serializer.serializePage(p, this.getTableName(), i);
+                        } else {
+                            cntDeletedPages++;
+                            pagesToDelete.add(i);
+                        }
+                    }
+                    else{
+                        if(cntDeletedPages > 0)
+                            octree.setPageIndicesOfXToY(i, i-cntDeletedPages);
+                    }
                 }
             }
+            else{ //normal linear search
+                for (int i = 0; i < fileCount; i++) {
+                    Page p = Serializer.deserializePage(tableName, i);
+                    int oldPageIndex = i;
+                    int newPageIndex = i - cntDeletedPages;
+                    //takes care of
+                    // (1) Updating the page index and row index of non deleted tuples
+                    // (2) Deleting the deleted tuples from the octree
+                    boolean nonEmptyPage = p.deleteAllMatchingTuples(colNames, htblColNameValue,
+                            oldPageIndex, newPageIndex,
+                            this, deserializedOctrees);
+                    if (nonEmptyPage) {
+                        Comparable minKey = (Comparable) p.getPage().get(0).get(0);
+                        minPerPage.put(i, minKey);
+                        Serializer.serializePage(p, this.getTableName(), i);
+                    } else {
+                        cntDeletedPages++;
+                        pagesToDelete.add(i);
+                    }
+                }
+            }
+
 
             int j = 0;
             for (int i = 0; i < fileCount; i++) {
@@ -664,6 +722,27 @@ public class Table implements Serializable {
         for (Octree octree : deserializedOctrees) {
             Serializer.serializeIndex(octree);
         }
+    }
+
+    public Octree getIndexToBeUsed(Hashtable<String, Object> htblColNameValue,
+                                   HashSet<Octree> deserializedOctrees, boolean colsToBeTaken[]){
+        for(int i=3 ; i>=1 ; i--){
+            for(Octree octree : deserializedOctrees){
+                int cnt = 0;
+                colsToBeTaken = new boolean[3];
+                for(int j=0 ; j<3 ; j++){
+                    String colName = octree.getStrarrColName()[j];
+                    if(htblColNameValue.containsKey(colName)){
+                        cnt++;
+                        colsToBeTaken[j] = true;
+                    }
+                }
+                if(cnt == i){
+                    return octree;
+                }
+            }
+        }
+        return null; //no applicable octrees found
     }
 
 }

@@ -30,15 +30,15 @@ public class DBApp {
 
 //        testUpdateStudentTable();
 
-//        testDeleteFromStudentTable();
+        testDeleteFromStudentTable();
 
-//        testPrintTableStudent();
+        testPrintTableStudent();
 
 //        testSQLTerm();
 
 //        testCreateIndex();
 
-//        testPrintIndex();
+        testPrintIndex();
 
     }
 
@@ -48,19 +48,25 @@ public class DBApp {
         htblColNameType.put("id", "java.lang.Integer");
         htblColNameType.put("name", "java.lang.String");
         htblColNameType.put("gpa", "java.lang.double");
-        htblColNameType.put("dob", "java.util.Date");
+//        htblColNameType.put("age", "java.lang.Integer");
+//        htblColNameType.put("salary", "java.lang.Integer");
+//        htblColNameType.put("dob", "java.util.Date");
 
         Hashtable<String, String> htblColNameMin = new Hashtable<>();
         htblColNameMin.put("id", "1");
         htblColNameMin.put("name", "aaaaaaaaaaa");
         htblColNameMin.put("gpa", "0.01");
-        htblColNameMin.put("dob", "1900-01-01");
+//        htblColNameMin.put("age", "0");
+//        htblColNameMin.put("salary", "0");
+//        htblColNameMin.put("dob", "1900-01-01");
 
         Hashtable<String, String> htblColNameMax = new Hashtable<>();
         htblColNameMax.put("id", "32");
         htblColNameMax.put("name", "zzzzzzzzzzz");
         htblColNameMax.put("gpa", "10.0");
-        htblColNameMax.put("dob", "2023-05-12");
+//        htblColNameMax.put("age", "110");
+//        htblColNameMax.put("salary", "10000000");
+//        htblColNameMax.put("dob", "2023-05-12");
 
         DBApp dbApp = new DBApp();
         dbApp.createTable("Student", "id", htblColNameType,
@@ -119,14 +125,18 @@ public class DBApp {
             int id = sc.nextInt();
             String name = sc.next();
             double gpa = sc.nextDouble();
-            String pattern = "yyyy-MM-dd";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            Date date = simpleDateFormat.parse(sc.next());
+            int age = sc.nextInt();
+            int salary = sc.nextInt();
+//            String pattern = "yyyy-MM-dd";
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+//            Date date = simpleDateFormat.parse(sc.next());
 
             htblColNameValue.put("id", id);
             htblColNameValue.put("name", name);
             htblColNameValue.put("gpa", gpa);
-            htblColNameValue.put("dob", date);
+//            htblColNameValue.put("age", age);
+//            htblColNameValue.put("salary", salary);
+//            htblColNameValue.put("dob", date);
             dbApp.insertIntoTable("Student", htblColNameValue);
         }
 
@@ -141,9 +151,11 @@ public class DBApp {
 
     public static void testDeleteFromStudentTable() throws DBAppException {
         Hashtable<String, Object> htblColNameValue = new Hashtable();
-//        htblColNameValue.put("gpa", 2.0);
+//        htblColNameValue.put("gpa", 0.7);
 //        htblColNameValue.put("id", 8);
-//        htblColNameValue.put("name", "gogo");
+//        htblColNameValue.put("name", "AbDo");
+//        htblColNameValue.put("age", 20);
+//        htblColNameValue.put("salary", 100000);
         DBApp dbApp = new DBApp();
         dbApp.deleteFromTable("Student", htblColNameValue);
     }
@@ -227,13 +239,13 @@ public class DBApp {
 
     public static void testCreateIndex() throws DBAppException, IOException, ParseException, ClassNotFoundException {
         DBApp dbApp = new DBApp();
-        String[] strarrColNames = {"dob", "name", "gpa"};
+        String[] strarrColNames = {"age", "name", "salary"};
         dbApp.createIndex("Student", strarrColNames);
     }
 
     public static void testPrintIndex() throws DBAppException, IOException, ParseException, ClassNotFoundException {
         DBApp dbApp = new DBApp();
-        String[] strarrColNames = {"dob", "name", "gpa"};
+        String[] strarrColNames = {"age", "name", "salary"};
         dbApp.printIndex("Student", strarrColNames);
     }
 

@@ -1,4 +1,5 @@
 student,id,java.lang.Integer,true,null,null,1,32
-student,gpa,java.lang.double,false,DobGpaNameIndex,Octree,0.01,10.0
-student,name,java.lang.String,false,DobGpaNameIndex,Octree,aaaaaaaaaaa,zzzzzzzzzzz
-student,dob,java.util.Date,false,DobGpaNameIndex,Octree,1900-01-01,2023-05-12
+student,gpa,java.lang.double,false,null,null,0.01,10.0
+student,age,java.lang.Integer,false,AgeNameSalaryIndex,Octree,0,110
+student,name,java.lang.String,false,AgeNameSalaryIndex,Octree,aaaaaaaaaaa,zzzzzzzzzzz
+student,salary,java.lang.Integer,false,AgeNameSalaryIndex,Octree,0,10000000

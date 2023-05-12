@@ -8,10 +8,7 @@ import index.Octree;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.*;
 
 public class Page implements Serializable {
     private Vector<Vector<Object>> page;
@@ -198,7 +195,6 @@ public class Page implements Serializable {
             return false;
 
         return true;
-
 
     }
 
