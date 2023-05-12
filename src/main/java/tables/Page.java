@@ -1,8 +1,8 @@
 package tables;
 
 import exceptions.DBAppException;
-import helper_classes.ReadConfigFile;
 import helper_classes.NullWrapper;
+import helper_classes.ReadConfigFile;
 import index.Octree;
 
 import java.io.IOException;
@@ -166,7 +166,7 @@ public class Page implements Serializable {
         int cntDeleted = 0;
         HashMap<Integer, Integer> toBeUpdated = new HashMap<>(); //oldRowIndex --> newRowIndex
 
-        for(int i=0 ; i<this.getPage().size() ; i++){
+        for (int i = 0; i < this.getPage().size(); i++) {
             Vector<Object> tuple = this.getPage().get(i);
             boolean valueExists = true;
             for (int j = 0; j < colNames.size(); j++) {
@@ -177,17 +177,16 @@ public class Page implements Serializable {
                 }
             }
             //to be deleted
-            if (valueExists){
+            if (valueExists) {
                 t.deleteInOctree(deserializedOctrees, tuple, oldPageIndex, i);
                 cntDeleted++;
-            }
-            else{
+            } else {
                 newPage.add(tuple);
-                toBeUpdated.put(i, i-cntDeleted);
+                toBeUpdated.put(i, i - cntDeleted);
             }
         }
 
-        for(int oldRowIndex : toBeUpdated.keySet()){
+        for (int oldRowIndex : toBeUpdated.keySet()) {
             int newRowIndex = toBeUpdated.get(oldRowIndex);
             Vector<Object> tuple = this.getPage().get(oldRowIndex);
             t.updatePointerInOctree(deserializedOctrees, tuple, oldPageIndex, oldRowIndex,

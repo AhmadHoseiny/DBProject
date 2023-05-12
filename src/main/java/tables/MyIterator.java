@@ -1,6 +1,7 @@
 package tables;
 
 import exceptions.DBAppException;
+import helper_classes.GenericComparator;
 import helper_classes.Operator;
 import helper_classes.SQLTerm;
 import helper_classes.Serializer;
@@ -26,92 +27,7 @@ public class MyIterator implements Iterator {
     private boolean usingIndex;
     private String indexName;
     private Vector<Vector<Object>> resultSet;
-
-    public void compUsingIndex() {
-        usingIndex = checkANDConditions();
-        if (usingIndex) {
-            indexName = checkIfColumnsInIndex(arrSQLTerms);
-            if (indexName == null)
-                usingIndex = false;
-        }
-    }
-
-    public void compResultSet() throws DBAppException, IOException, ParseException, ClassNotFoundException {
-
-        Octree octree = Serializer.deserializeIndex(table, indexName);
-        Vector<Comparable> objValues = new Vector<>();
-        Vector<String> operators = new Vector<>();
-
-        for (int i = 0; i< 3; i++) {
-            String currColName = octree.getStrarrColName()[i];
-            Comparable currObjValue = null;
-            String currOperator = null;
-            for (SQLTerm term: arrSQLTerms) {
-                if(term._strOperator.equals("!="))
-                    continue;
-                if (term._strColumnName.equals(currColName)) {
-                    if (currOperator == null) {
-                        currObjValue = term._objValue;
-                        currOperator = term._strOperator;
-                    }
-                    else if (!currOperator.equals("=") && term._strOperator.equals("=")) {
-                        currObjValue = term._objValue;
-                        currOperator = term._strOperator;
-                    }
-                    else if (currOperator.equals("=")) {
-                        break;
-                    }
-                }
-            }
-            objValues.add(currObjValue);
-            operators.add(currOperator);
-        }
-        //pageIndex --> LinkedList of rowIndices
-        TreeMap<Integer, LinkedList<Integer>> resPointers = octree.searchForSelect(objValues, operators);
-        
-
-//        resultSet = octree.searchForSelect(objValues, operators);
-
-
-    }
-
-    public boolean checkANDConditions() {
-        for (String operator: this.strarrOperators) {
-            if (!operator.equals("and"))
-                return false;
-        }
-        return true;
-    }
-
-    public String checkIfColumnsInIndex(SQLTerm[] arrSQLTerms) {
-        for (String index: table.getIndexNames()) {
-            String[] columnNames = index.split("(?=\\p{Upper})");
-            String colName1 = columnNames[0].toLowerCase();
-            String colName2 = columnNames[1].toLowerCase();
-            String colName3 = columnNames[2].toLowerCase();
-            HashSet<String> colNames = new HashSet<>();
-            int count = 0;
-            for (SQLTerm term: arrSQLTerms) {
-                if(term._strOperator.equals("!="))
-                    continue;
-                if (term._strColumnName.equals(colName1) && !colNames.contains(colName1)) {
-                    colNames.add(term._strColumnName);
-                    count++;
-                }
-                else if (term._strColumnName.equals(colName2) && !colNames.contains(colName2)) {
-                    colNames.add(term._strColumnName);
-                    count++;
-                }
-                else if (term._strColumnName.equals(colName3) && !colNames.contains(colName3)) {
-                    colNames.add(term._strColumnName);
-                    count++;
-                }
-            }
-            if (count == 3)
-                return index;
-        }
-        return null;
-    }
+    private int resultSetPointer;
 
     public MyIterator(SQLTerm[] arrSQLTerms, String[] strarrOperators)
             throws DBAppException, IOException, ClassNotFoundException, ParseException {
@@ -143,9 +59,113 @@ public class MyIterator implements Iterator {
 
         //to determine if we are using the index or not
         this.compUsingIndex();
-        if(this.usingIndex){
+        System.out.println("Using index(Constructor): " + usingIndex);
+        if (this.usingIndex) {
+            this.resultSet = new Vector<>();
+            this.resultSetPointer = 0;
             this.compResultSet();
         }
+    }
+
+    public void compUsingIndex() {
+        usingIndex = checkANDConditions();
+//        System.out.println("Using index: " + usingIndex);
+        if (usingIndex) {
+            indexName = checkIfColumnsInIndex(arrSQLTerms);
+            if (indexName == null)
+                usingIndex = false;
+        }
+    }
+
+    public void compResultSet() throws DBAppException, IOException, ParseException, ClassNotFoundException {
+
+        Octree octree = Serializer.deserializeIndex(table, indexName);
+        Vector<Comparable> objValues = new Vector<>();
+        Vector<String> operators = new Vector<>();
+
+        for (int i = 0; i < 3; i++) {
+            String currColName = octree.getStrarrColName()[i];
+            Comparable currObjValue = null;
+            String currOperator = null;
+            for (SQLTerm term : arrSQLTerms) {
+                if (term._strOperator.equals("!="))
+                    continue;
+                if (term._strColumnName.equals(currColName)) {
+                    if (currOperator == null) {
+                        currObjValue = term._objValue;
+                        currOperator = term._strOperator;
+                    } else if (!currOperator.equals("=") && term._strOperator.equals("=")) {
+                        currObjValue = term._objValue;
+                        currOperator = term._strOperator;
+                    } else if (currOperator.equals("=")) {
+                        break;
+                    }
+                }
+            }
+            objValues.add(currObjValue);
+            operators.add(currOperator);
+        }
+        //pageIndex --> LinkedList of rowIndices
+        TreeMap<Integer, LinkedList<Integer>> resPointers = octree.searchForSelect(objValues, operators);
+        for (int pageIndex : resPointers.keySet()) {
+            LinkedList<Integer> rowIndices = resPointers.get(pageIndex);
+            Page p = Serializer.deserializePage(table.getTableName(), pageIndex);
+            for (int rowIndex : rowIndices) {
+                Vector<Object> tuple = p.getPage().get(rowIndex);
+                if (existsInResultSet(tuple)) {
+                    resultSet.add(tuple);
+                }
+            }
+        }
+
+        Collections.sort(resultSet, (a, b) -> GenericComparator.compare((Comparable) a.get(0), (Comparable) b.get(0)));
+
+//        resultSet = octree.searchForSelect(objValues, operators);
+
+
+    }
+
+    public boolean checkANDConditions() {
+        for (String operator : this.strarrOperators) {
+            if (!operator.equals("and"))
+                return false;
+        }
+        return true;
+    }
+
+    public String checkIfColumnsInIndex(SQLTerm[] arrSQLTerms) {
+        for (String index : table.getIndexNames()) {
+            if (index == null)
+                continue;
+            String[] columnNames = index.split("(?=\\p{Upper})");
+            String colName1 = columnNames[0].toLowerCase();
+            String colName2 = columnNames[1].toLowerCase();
+            String colName3 = columnNames[2].toLowerCase();
+//            System.out.println(colName1 + " " + colName2 + " " + colName3);
+            HashSet<String> colNames = new HashSet<>();
+            int count = 0;
+            for (SQLTerm term : arrSQLTerms) {
+                if (term._strOperator.equals("!="))
+                    continue;
+                if (term._strColumnName.equals(colName1) && !colNames.contains(colName1)) {
+                    colNames.add(term._strColumnName);
+                    count++;
+//                    System.out.println("Count: " + count + " " + colName1);
+                } else if (term._strColumnName.equals(colName2) && !colNames.contains(colName2)) {
+                    colNames.add(term._strColumnName);
+                    count++;
+//                    System.out.println("Count: " + count + " " + colName2);
+                } else if (term._strColumnName.equals(colName3) && !colNames.contains(colName3)) {
+                    colNames.add(term._strColumnName);
+                    count++;
+//                    System.out.println("Count: " + count + " " + colName3);
+                }
+            }
+//            System.out.println("Count: " + count);
+            if (count == 3)
+                return index;
+        }
+        return null;
     }
 
     public Table getTable() {
@@ -238,30 +258,41 @@ public class MyIterator implements Iterator {
 
     @Override
     public boolean hasNext() throws NoSuchElementException {
-        if (nextCalled)
-            return nextTuple == null ? false : true;
-        try {
-            doNextJob();
-        } catch (Exception e) {
-            throw new NoSuchElementException(e.getMessage());
+        if (this.usingIndex) {
+            if (resultSetPointer == resultSet.size())
+                return false;
+        } else {
+            if (nextCalled)
+                return nextTuple == null ? false : true;
+            try {
+                doNextJob();
+            } catch (Exception e) {
+                throw new NoSuchElementException(e.getMessage());
 //            System.out.println(e.getMessage());
+            }
+            if (nextTuple == null)
+                return false;
         }
-        if (nextTuple == null)
-            return false;
         return true;
     }
 
     @Override
     public Object next() throws NoSuchElementException {
-        if (!nextCalled)
-            try {
-                doNextJob();
-            } catch (Exception e) {
-                throw new NoSuchElementException(e.getMessage());
+        if (this.usingIndex) {
+            if (resultSetPointer == resultSet.size())
+                throw new NoSuchElementException("No more elements");
+            return resultSet.get(resultSetPointer++);
+        } else {
+            if (!nextCalled)
+                try {
+                    doNextJob();
+                } catch (Exception e) {
+                    throw new NoSuchElementException(e.getMessage());
 //                System.out.println(e.getMessage());
-            }
-        nextCalled = false;
-        return nextTuple;
+                }
+            nextCalled = false;
+            return nextTuple;
+        }
     }
 
 }

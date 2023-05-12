@@ -346,8 +346,7 @@ public class Table implements Serializable {
 
             if (!newInsertFlag) {
                 updatePointerInOctree(deserializedOctrees, curPage.getPage().get(0), pageIndex - 1, maxPageSize - 1, pageIndex, 0);
-            }
-            else {
+            } else {
                 newInsertFlag = false;
             }
 
@@ -365,8 +364,7 @@ public class Table implements Serializable {
             Serializer.serializePage(page, this.getTableName(), pageIndex);
             if (lastTuple.get(0) == htblColNameValue.get(colNames.get(0))) {
                 insertInOctree(deserializedOctrees, lastTuple, pageIndex, 0);
-            }
-            else {
+            } else {
                 updatePointerInOctree(deserializedOctrees, lastTuple, pageIndex - 1, maxPageSize - 1, pageIndex, 0);
             }
         }
@@ -602,9 +600,9 @@ public class Table implements Serializable {
                 Comparable minKey = (Comparable) p.getPage().get(0).get(0);
                 minPerPage.put(index, minKey);
                 Serializer.serializePage(p, this.getTableName(), index);
-                for(int i=tupleIndex ; i<p.getPage().size() ; i++){
+                for (int i = tupleIndex; i < p.getPage().size(); i++) {
                     updatePointerInOctree(deserializedOctrees, p.getPage().get(i),
-                            index, i+1, index, i);
+                            index, i + 1, index, i);
                 }
             } else {
                 File fileToDelete = new File(directoryPathResourcesData + tableName + "/Pages/Page_" + index + ".ser");
@@ -616,18 +614,17 @@ public class Table implements Serializable {
                     minPerPage.put(i - 1, minPerPage.get(i));
                 }
                 minPerPage.remove(fileCount - 1);
-                for(Octree octree : deserializedOctrees){
+                for (Octree octree : deserializedOctrees) {
                     octree.decrementPageIndicesLargerThanInput(index);
                 }
             }
-        }
-        else {
+        } else {
             LinkedList<Integer> pagesToDelete = new LinkedList<>();
             int cntDeletedPages = 0;
             for (int i = 0; i < fileCount; i++) {
                 Page p = Serializer.deserializePage(tableName, i);
                 int oldPageIndex = i;
-                int newPageIndex = i-cntDeletedPages;
+                int newPageIndex = i - cntDeletedPages;
                 //takes care of
                 // (1) Updating the page index and row index of non deleted tuples
                 // (2) Deleting the deleted tuples from the octree

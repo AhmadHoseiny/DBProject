@@ -7,6 +7,7 @@ import java.util.Vector;
 
 public class OctreeDeleter {
     Octree octree;
+
     public OctreeDeleter(Octree octree) {
         this.octree = octree;
     }
@@ -16,6 +17,7 @@ public class OctreeDeleter {
         Node cur = octree.findNode(octree.root, keyData);
         deleteHelper(keyData, pageIndex, rowIndex, cur);
     }
+
     public void deleteHelper(Vector<Comparable> keyData, int pageIndex, int rowIndex, Node cur) throws IOException {
 
         //if the leaf had space, insert the data into it (it also includes duplicates handling)
@@ -31,7 +33,7 @@ public class OctreeDeleter {
         Integer cntChildren = ((NonLeaf) parent).countKeysInAllChildren();
         int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
         //the nonLeaf has enough keys in all its children(strictly more than max), so nothing to do
-        if(cntChildren==null || Integer.compare(cntChildren, maximumEntriesInOctreeNode)>0){
+        if (cntChildren == null || Integer.compare(cntChildren, maximumEntriesInOctreeNode) > 0) {
             return;
         }
 
@@ -41,7 +43,7 @@ public class OctreeDeleter {
         merged.set(parent.leftLimit, parent.rightLimit, octree.typePerCol);
 
         Node grandParent = parent.getParent();
-        if(grandParent==null){
+        if (grandParent == null) {
             octree.root = merged;
             return;
         }
@@ -56,16 +58,17 @@ public class OctreeDeleter {
     }
 
     public void decrementPageIndicesLargerThanInput(int pageIndex) {
-       dfs(octree.root, pageIndex);
+        dfs(octree.root, pageIndex);
     }
+
     public void dfs(Node cur, int pageIndex) {
 
-        if (cur instanceof Leaf){
+        if (cur instanceof Leaf) {
             ((Leaf) cur).decrementPageIndicesLargerThanInput(pageIndex);
             return;
         }
 
-        for(Node child : ((NonLeaf) cur).getChildren()){
+        for (Node child : ((NonLeaf) cur).getChildren()) {
             dfs(child, pageIndex);
         }
 

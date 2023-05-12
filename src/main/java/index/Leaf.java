@@ -80,12 +80,12 @@ public class Leaf extends Node {
         return super.toString() + " " + keyDataVector.toString() + " " + pageIndexVector.toString() + " " + rowIndexVector.toString() + "}";
     }
 
-    public void deleteData( Vector<Comparable> keyData, int pageIndex, int rowIndex) {
+    public void deleteData(Vector<Comparable> keyData, int pageIndex, int rowIndex) {
         for (int i = 0; i < keyDataVector.size(); i++) {
             if (isDuplicate(keyDataVector.get(i), keyData)) {
                 for (int j = 0; j < pageIndexVector.get(i).size(); j++) {
                     if (Integer.compare(pageIndexVector.get(i).get(j), pageIndex) == 0 &&
-                            Integer.compare(rowIndexVector.get(i).get(j), rowIndex)==0) {
+                            Integer.compare(rowIndexVector.get(i).get(j), rowIndex) == 0) {
                         pageIndexVector.get(i).remove(j);
                         rowIndexVector.get(i).remove(j);
                         if (pageIndexVector.get(i).size() == 0) {
@@ -102,10 +102,10 @@ public class Leaf extends Node {
         }
     }
 
-    public void decrementPageIndicesLargerThanInput(int pageIndex){
-        for(Vector<Integer> v : pageIndexVector){
-            for(int i = 0; i < v.size(); i++){
-                if(Integer.compare(v.get(i), pageIndex)>0){
+    public void decrementPageIndicesLargerThanInput(int pageIndex) {
+        for (Vector<Integer> v : pageIndexVector) {
+            for (int i = 0; i < v.size(); i++) {
+                if (Integer.compare(v.get(i), pageIndex) > 0) {
                     v.set(i, v.get(i) - 1);
                 }
             }

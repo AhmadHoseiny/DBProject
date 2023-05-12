@@ -57,16 +57,17 @@ public class NonLeaf extends Node {
         return super.toString() + "}";
     }
 
-    public Integer countKeysInAllChildren(){
+    public Integer countKeysInAllChildren() {
         int count = 0;
         for (int i = 0; i < MAX_CHILDREN; i++) {
             Node child = this.getChildren()[i];
-            if(child instanceof NonLeaf)
+            if (child instanceof NonLeaf)
                 return null;
             count += ((Leaf) child).keyDataVector.size();
         }
         return count;
     }
+
     public Leaf mergeChildren() throws IOException {
         Leaf merged = new Leaf();
         for (int i = 0; i < MAX_CHILDREN; i++) {
@@ -75,7 +76,7 @@ public class NonLeaf extends Node {
             merged.pageIndexVector.addAll(((Leaf) child).pageIndexVector);
             merged.rowIndexVector.addAll(((Leaf) child).rowIndexVector);
         }
-        for(int i = 0; i < merged.keyDataVector.size(); i++){
+        for (int i = 0; i < merged.keyDataVector.size(); i++) {
             merged.hasData.setElementAt(true, i);
         }
         return merged;

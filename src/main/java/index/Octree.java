@@ -109,6 +109,7 @@ public class Octree implements Serializable {
         octreeInserter.insert(keyData, pageIndex, rowIndex);
 
     }
+
     public void delete(Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
         OctreeDeleter octreeDeleter = new OctreeDeleter(this);
@@ -120,6 +121,7 @@ public class Octree implements Serializable {
         OctreeDeleter octreeDeleter = new OctreeDeleter(this);
         octreeDeleter.decrementPageIndicesLargerThanInput(pageIndex);
     }
+
     public void printIndexDFS() {
         printIndexDFS(root);
     }
@@ -138,19 +140,19 @@ public class Octree implements Serializable {
     public void printIndexBFS() {
         ArrayDeque<Node> q = new ArrayDeque();
         q.add(root);
-        while(!q.isEmpty()){
+        while (!q.isEmpty()) {
             int cnt = 0;
             ArrayDeque<Node> nxtLevel = new ArrayDeque();
-            while(!q.isEmpty()){
+            while (!q.isEmpty()) {
                 Node cur = q.pollFirst();
-                System.out.print(cur +" !! ");
+                System.out.print(cur + " !! ");
                 cnt++;
-                if(cnt==8){
+                if (cnt == 8) {
                     System.out.println(" *** ");
                 }
-                if(cur instanceof Leaf)
+                if (cur instanceof Leaf)
                     continue;
-                for(Node child : ((NonLeaf) cur).getChildren()){
+                for (Node child : ((NonLeaf) cur).getChildren()) {
                     nxtLevel.addLast(child);
                 }
             }

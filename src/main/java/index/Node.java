@@ -1,7 +1,5 @@
 package index;
 
-import helper_classes.ReadConfigFile;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +11,59 @@ public abstract class Node implements Serializable {
     Node parent;
     Integer indexInParent;
 
+    // Function to print the string at
+    // the middle of lexicographically
+    // increasing sequence of strings from S to T
+    // Method outsourced from GeeksForGeeks and modified, the link is: https://www.geeksforgeeks.org/print-middle-string-lexicographically-increasing-sequence-strings-s-t/
+    public static String getMiddleString(String S, String T) {
+        //s and t will both be of same lenth
+
+        int N = S.length();
+        // Stores the base 26 digits after addition
+        int[] a1 = new int[N + 1];
+
+
+        for (int i = 0; i < N; i++) {
+            a1[i + 1] = (int) S.charAt(i) - 97
+                    + (int) T.charAt(i) - 97;
+        }
+
+        // Iterate from right to left
+        // and add carry to next position
+        for (int i = N; i >= 1; i--) {
+            a1[i - 1] += (int) a1[i] / 26;
+            a1[i] %= 26;
+        }
+
+        // Reduce the number to find the middle
+        // string by dividing each position by 2
+        for (int i = 0; i <= N; i++) {
+
+            // If current value is odd,
+            // carry 26 to the next index value
+            if ((a1[i] & 1) != 0) {
+
+                if (i + 1 <= N) {
+                    a1[i + 1] += 26;
+                }
+            }
+
+            a1[i] = (int) a1[i] / 2;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= N; i++) {
+            sb.append((char) (a1[i] + 97));
+        }
+//        System.out.println(S + " " + T + " " + sb);
+        return sb.toString();
+    }
+
+//    public boolean isInside(Comparable x, Comparable y, Comparable z) {
+//        return x.compareTo(leftLimit.get(0)) >= 0 && x.compareTo(rightLimit.get(0)) <= 0 &&
+//                y.compareTo(leftLimit.get(1)) >= 0 && y.compareTo(rightLimit.get(1)) <= 0 &&
+//                z.compareTo(leftLimit.get(2)) >= 0 && z.compareTo(rightLimit.get(2)) <= 0;
+//    }
 
     public void setBounds(Vector<Comparable> lefts, Vector<Comparable> rights) {
         leftLimit = new Vector<>();
@@ -24,13 +75,6 @@ public abstract class Node implements Serializable {
             rightLimit.add(x);
         }
     }
-
-//    public boolean isInside(Comparable x, Comparable y, Comparable z) {
-//        return x.compareTo(leftLimit.get(0)) >= 0 && x.compareTo(rightLimit.get(0)) <= 0 &&
-//                y.compareTo(leftLimit.get(1)) >= 0 && y.compareTo(rightLimit.get(1)) <= 0 &&
-//                z.compareTo(leftLimit.get(2)) >= 0 && z.compareTo(rightLimit.get(2)) <= 0;
-//    }
-
 
     public void setMid(Vector<Comparable> minPerCol, Vector<Comparable> maxPerCol, Vector<String> typePerCol) throws IOException {
         this.mid = new Vector<>();
@@ -48,7 +92,7 @@ public abstract class Node implements Serializable {
             } else if (typePerCol.get(i).equals("java.lang.String")) {
                 String s = (String) minPerCol.get(i);
                 String t = (String) maxPerCol.get(i);
-                if(s.length() < t.length()){
+                if (s.length() < t.length()) {
                     s += t.substring(s.length(), t.length());
                 }
                 this.mid.add(getMiddleString(s, t));
@@ -88,58 +132,6 @@ public abstract class Node implements Serializable {
 
     public String toString() {
         return "{" + " Left Limit: " + leftLimit + " Right Limit: " + rightLimit;
-    }
-
-
-
-
-    // Function to print the string at
-    // the middle of lexicographically
-    // increasing sequence of strings from S to T
-    // Method outsourced from GeeksForGeeks and modified, the link is: https://www.geeksforgeeks.org/print-middle-string-lexicographically-increasing-sequence-strings-s-t/
-    public static String getMiddleString(String S, String T) {
-        //s and t will both be of same lenth
-
-        int N = S.length();
-        // Stores the base 26 digits after addition
-        int[] a1 = new int[N + 1];
-
-
-
-        for (int i = 0; i < N; i++) {
-            a1[i + 1] = (int)S.charAt(i) - 97
-                    + (int)T.charAt(i) - 97;
-        }
-
-        // Iterate from right to left
-        // and add carry to next position
-        for (int i = N; i >= 1; i--) {
-            a1[i - 1] += (int)a1[i] / 26;
-            a1[i] %= 26;
-        }
-
-        // Reduce the number to find the middle
-        // string by dividing each position by 2
-        for (int i = 0; i <= N; i++) {
-
-            // If current value is odd,
-            // carry 26 to the next index value
-            if ((a1[i] & 1) != 0) {
-
-                if (i + 1 <= N) {
-                    a1[i + 1] += 26;
-                }
-            }
-
-            a1[i] = (int)a1[i] / 2;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= N; i++) {
-            sb.append((char)(a1[i] + 97));
-        }
-//        System.out.println(S + " " + T + " " + sb);
-        return sb.toString();
     }
 
 }
