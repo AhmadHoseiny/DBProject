@@ -47,6 +47,8 @@ public class MyIterator implements Iterator {
             Comparable currObjValue = null;
             String currOperator = null;
             for (SQLTerm term: arrSQLTerms) {
+                if(term._strOperator.equals("!="))
+                    continue;
                 if (term._strColumnName.equals(currColName)) {
                     if (currOperator == null) {
                         currObjValue = term._objValue;
@@ -64,6 +66,9 @@ public class MyIterator implements Iterator {
             objValues.add(currObjValue);
             operators.add(currOperator);
         }
+        //pageIndex --> LinkedList of rowIndices
+        TreeMap<Integer, LinkedList<Integer>> resPointers = octree.searchForSelect(objValues, operators);
+        
 
 //        resultSet = octree.searchForSelect(objValues, operators);
 
@@ -87,6 +92,8 @@ public class MyIterator implements Iterator {
             HashSet<String> colNames = new HashSet<>();
             int count = 0;
             for (SQLTerm term: arrSQLTerms) {
+                if(term._strOperator.equals("!="))
+                    continue;
                 if (term._strColumnName.equals(colName1) && !colNames.contains(colName1)) {
                     colNames.add(term._strColumnName);
                     count++;

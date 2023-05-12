@@ -7,10 +7,7 @@ import tables.Table;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 public class Octree implements Serializable {
     //While deserializing the octree, its corresponding table should also be deserialized, and call initialize() on it.
@@ -179,10 +176,10 @@ public class Octree implements Serializable {
         return result;
     }
 
-//    public Vector<Vector<Object>> searchForSelect(Vector<Comparable> objValues, Vector<String> operators) {
-//
-//        OctreeSearcher octreeSearcher = new OctreeSearcher(this);
-////        return octreeSearcher.searchForSelect(objValues, operators);
-//
-//    }
+    public TreeMap<Integer, LinkedList<Integer>> searchForSelect(Vector<Comparable> objValues, Vector<String> operators) throws DBAppException {
+
+        OctreeSearcher octreeSearcher = new OctreeSearcher(this);
+        return octreeSearcher.searchForSelect(objValues, operators);
+
+    }
 }
