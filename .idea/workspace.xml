@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/index/OctreeSearcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/index/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Octree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

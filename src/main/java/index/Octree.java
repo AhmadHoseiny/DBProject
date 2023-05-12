@@ -178,4 +178,11 @@ public class Octree implements Serializable {
         result = 31 * result + Arrays.hashCode(strarrColName);
         return result;
     }
+
+//    public Vector<Vector<Object>> searchForSelect(Vector<Comparable> objValues, Vector<String> operators) {
+//
+//        OctreeSearcher octreeSearcher = new OctreeSearcher(this);
+////        return octreeSearcher.searchForSelect(objValues, operators);
+//
+//    }
 }

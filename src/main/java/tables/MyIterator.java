@@ -26,52 +26,86 @@ public class MyIterator implements Iterator {
     private boolean usingIndex;
     private String indexName;
     private Vector<Vector<Object>> resultSet;
-//    String indexColsNames[];
-//    int positionsOfColsToBeUsedInIndexInQuery[];
+
     public void compUsingIndex() {
-        boolean canUseIndex = true;
-        for(int i=0 ; i<strarrOperators.length ; i++){
-            canUseIndex &= strarrOperators[i].equals("and");
+        usingIndex = checkANDConditions();
+        if (usingIndex) {
+            indexName = checkIfColumnsInIndex(arrSQLTerms);
+            if (indexName == null)
+                usingIndex = false;
         }
-        if(!canUseIndex){
-            usingIndex = false;
-            return;
-        }
-        HashMap<String, Integer> hm = new HashMap<>(); //indexName --> no. of columns present in query
-        HashSet<String> hsColNames = new HashSet<>();
-        for(int i=0 ; i<arrSQLTerms.length ; i++){
-            String colName = arrSQLTerms[i]._strColumnName;
-            if(!hsColNames.contains(colName)){
-                hsColNames.add(colName);
-                String indexName = table.getIndexNames().get(table.getColNames().indexOf(colName));
-                if(indexName != null)
-                    hm.put(indexName, hm.getOrDefault(indexName, 0)+1);
-            }
-        }
-        for(String indexN : hm.keySet()){
-            if(hm.get(indexN) == 3){
-                this.usingIndex = true;
-                this.indexName = indexN;
-                return;
-            }
-        }
-        this.usingIndex = false;
     }
+
     public void compResultSet() throws DBAppException, IOException, ParseException, ClassNotFoundException {
 
         Octree octree = Serializer.deserializeIndex(table, indexName);
-        String indexColsNames[] = octree.getStrarrColName();
-        int positionsOfColsToBeUsedInIndexInQuery[] = new int[3];
-        for(int i=0 ; i<3 ; i++){
-            for(int j=0 ; j<arrSQLTerms.length ; j++){
-                if(indexColsNames[i].equals(arrSQLTerms[j]._strColumnName)){
-                    positionsOfColsToBeUsedInIndexInQuery[i] = j;
-                    break;
+        Vector<Comparable> objValues = new Vector<>();
+        Vector<String> operators = new Vector<>();
+
+        for (int i = 0; i< 3; i++) {
+            String currColName = octree.getStrarrColName()[i];
+            Comparable currObjValue = null;
+            String currOperator = null;
+            for (SQLTerm term: arrSQLTerms) {
+                if (term._strColumnName.equals(currColName)) {
+                    if (currOperator == null) {
+                        currObjValue = term._objValue;
+                        currOperator = term._strOperator;
+                    }
+                    else if (!currOperator.equals("=") && term._strOperator.equals("=")) {
+                        currObjValue = term._objValue;
+                        currOperator = term._strOperator;
+                    }
+                    else if (currOperator.equals("=")) {
+                        break;
+                    }
                 }
             }
+            objValues.add(currObjValue);
+            operators.add(currOperator);
         }
-        
+
+//        resultSet = octree.searchForSelect(objValues, operators);
+
+
     }
+
+    public boolean checkANDConditions() {
+        for (String operator: this.strarrOperators) {
+            if (!operator.equals("and"))
+                return false;
+        }
+        return true;
+    }
+
+    public String checkIfColumnsInIndex(SQLTerm[] arrSQLTerms) {
+        for (String index: table.getIndexNames()) {
+            String[] columnNames = index.split("(?=\\p{Upper})");
+            String colName1 = columnNames[0].toLowerCase();
+            String colName2 = columnNames[1].toLowerCase();
+            String colName3 = columnNames[2].toLowerCase();
+            HashSet<String> colNames = new HashSet<>();
+            int count = 0;
+            for (SQLTerm term: arrSQLTerms) {
+                if (term._strColumnName.equals(colName1) && !colNames.contains(colName1)) {
+                    colNames.add(term._strColumnName);
+                    count++;
+                }
+                else if (term._strColumnName.equals(colName2) && !colNames.contains(colName2)) {
+                    colNames.add(term._strColumnName);
+                    count++;
+                }
+                else if (term._strColumnName.equals(colName3) && !colNames.contains(colName3)) {
+                    colNames.add(term._strColumnName);
+                    count++;
+                }
+            }
+            if (count == 3)
+                return index;
+        }
+        return null;
+    }
+
     public MyIterator(SQLTerm[] arrSQLTerms, String[] strarrOperators)
             throws DBAppException, IOException, ClassNotFoundException, ParseException {
 
