@@ -129,6 +129,7 @@ public class Octree implements Serializable {
     public void printIndexDFS(Node cur) {
         if (cur == null)
             return;
+//        if (cur instanceof Leaf)
         System.out.println(cur);
         if (cur instanceof NonLeaf) {
             for (Node child : ((NonLeaf) cur).getChildren()) {

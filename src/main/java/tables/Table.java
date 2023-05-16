@@ -286,8 +286,12 @@ public class Table implements Serializable {
             this.table.add(page);
             page.insertTuple(colNames, htblColNameValue);
             minPerPage.put(0, (Comparable) htblColNameValue.get(clusteringKey));
+//            System.out.println(page.getPage().get(0));
             Serializer.serializePage(page, this.getTableName(), 0);
             insertInOctree(deserializedOctrees, page.getPage().get(0), 0, 0);
+            for (Octree octree : deserializedOctrees) {
+                Serializer.serializeIndex(octree);
+            }
             return;
 
         }
@@ -637,7 +641,7 @@ public class Table implements Serializable {
             boolean colsToBeTaken[] = new boolean[3];
             Octree octree = getIndexToBeUsed(htblColNameValue, deserializedOctrees, colsToBeTaken);
             if(octree != null){ //we will use the index
-//                System.out.println("I used the index!!!");
+//                System.out.println("I used the index!!!" + octree.getStrarrColName()[0] + " " + octree.getStrarrColName()[1] + " " + octree.getStrarrColName()[2]);
                 //building the objValues vector
                 Vector<Comparable> objValues = new Vector();
                 for(int i=0 ; i<3 ; i++){

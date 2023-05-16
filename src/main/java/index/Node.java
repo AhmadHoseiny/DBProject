@@ -11,7 +11,7 @@ public abstract class Node implements Serializable {
     Node parent;
     Integer indexInParent;
 
-    // Function to print the string at
+    // Function to get the string at
     // the middle of lexicographically
     // increasing sequence of strings from S to T
     // Method outsourced from GeeksForGeeks and modified, the link is: https://www.geeksforgeeks.org/print-middle-string-lexicographically-increasing-sequence-strings-s-t/
@@ -131,7 +131,8 @@ public abstract class Node implements Serializable {
     }
 
     public String toString() {
-        return "{" + " Left Limit: " + leftLimit + " Right Limit: " + rightLimit;
+
+        return "{" + " Left Limit: " + leftLimit + " Right Limit: " + rightLimit + " " + indexInParent;
     }
 
 }

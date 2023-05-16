@@ -41,18 +41,21 @@ public class Leaf extends Node {
             }
         }
 //        System.out.println("keyDataVector.size() = " + keyDataVector.size() + " maximumEntriesInOctreeNode = " + ReadConfigFile.getMaximumEntriesInOctreeNode());
-//        System.out.println(keyData);
+//        System.out.println("keyData in InsertData in Leaf " + keyData);
         int maximumEntriesInOctreeNode = ReadConfigFile.getMaximumEntriesInOctreeNode();
         if (keyDataVector.size() < maximumEntriesInOctreeNode) {
             keyDataVector.add(keyData);
             addPointerToTable(pageIndex, rowIndex, keyDataVector.size() - 1);
+            System.out.println("keyDataVector " + keyDataVector + " keydataVector0 " + keyDataVector.get(0) + " true");
             return true;
         } else {
+//            System.out.println("false");
             return false;
         }
     }
 
     public void addPointerToTable(int pageIndex, int rowIndex, int keyDataIndexInNode) {
+//        System.out.println("addPointerToTable " + keyDataIndexInNode + " " +  hasData.get(keyDataIndexInNode) + " " + pageIndex + " " + rowIndex);
         if (!hasData.get(keyDataIndexInNode)) {
             pageIndexVector.add(new Vector<>());
             rowIndexVector.add(new Vector<>());
@@ -60,6 +63,7 @@ public class Leaf extends Node {
         }
         this.pageIndexVector.get(keyDataIndexInNode).add(pageIndex);
         this.rowIndexVector.get(keyDataIndexInNode).add(rowIndex);
+//        System.out.println("addPointerToTable " + keyDataIndexInNode + " " +  hasData.get(keyDataIndexInNode) + " " + pageIndex + " " + rowIndex);
     }
 
     public void updatePointer(Vector<Comparable> keyData, int oldPageIndex, int oldRowIndex, int newPageIndex, int newRowIndex) {
@@ -77,7 +81,7 @@ public class Leaf extends Node {
     }
 
     public String toString() {
-        return super.toString() + " " + keyDataVector.toString() + " " + pageIndexVector.toString() + " " + rowIndexVector.toString() + "}";
+        return super.toString() + " " + keyDataVector.toString() + " " + pageIndexVector.toString() + " " + rowIndexVector.toString() + " }";
     }
 
     public void deleteData(Vector<Comparable> keyData, int pageIndex, int rowIndex) {
