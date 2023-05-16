@@ -30,15 +30,15 @@ public class DBApp {
 
 //        testUpdateStudentTable();
 
-        testDeleteFromStudentTable();
+//        testDeleteFromStudentTable();
 
-        testPrintTableStudent();
+//        testPrintTableStudent();
 
 //        testSQLTerm();
 
 //        testCreateIndex();
 
-        testPrintIndex();
+//        testPrintIndex();
 
     }
 
@@ -423,5 +423,6 @@ public class DBApp {
         Octree ot = Serializer.deserializeIndex(t, indexName);
         ot.printIndexDFS();
     }
+
 
 }

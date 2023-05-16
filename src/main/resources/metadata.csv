@@ -1,5 +1,4 @@
-student,id,java.lang.Integer,true,null,null,1,32
-student,gpa,java.lang.double,false,null,null,0.01,10.0
-student,age,java.lang.Integer,false,AgeNameSalaryIndex,Octree,0,110
-student,name,java.lang.String,false,AgeNameSalaryIndex,Octree,aaaaaaaaaaa,zzzzzzzzzzz
-student,salary,java.lang.Integer,false,AgeNameSalaryIndex,Octree,0,10000000
+student,id,java.lang.Integer,true,null,null,-2147483648,2147483647
+student,age,java.lang.double,false,null,null,4.9E-324,1.7976931348623157E308
+student,name,java.lang.String,false,null,null,,        
+student,dob,java.util.Date,false,null,null,1970-01-01,2025-01-01
