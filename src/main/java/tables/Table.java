@@ -138,7 +138,6 @@ public class Table implements Serializable {
                 continue;
 
             switch (colTypes.get(i)) {
-
                 case "java.lang.Integer":
                     isValid &= htblColNameValue.get(colNames.get(i)) instanceof Integer;
                     break;
@@ -177,6 +176,8 @@ public class Table implements Serializable {
 
     public boolean isValidTuple(Hashtable<String, Object> htblColNameValue) {
 
+//        System.out.println("here " + isValidTupleType(htblColNameValue));
+//        System.out.println(isValidTupleMinMax(htblColNameValue));
         return isValidTupleType(htblColNameValue) && isValidTupleMinMax(htblColNameValue);
 
     }
@@ -517,8 +518,8 @@ public class Table implements Serializable {
 
         }
 
-        System.out.println("oldTuple: " + oldTuple);
-        System.out.println(pageIndex + " " + rowIndex);
+//        System.out.println("oldTuple: " + oldTuple);
+//        System.out.println(pageIndex + " " + rowIndex);
         deleteInOctree(deserializedOctrees, oldTuple, pageIndex, rowIndex);
         insertInOctree(deserializedOctrees, newTuple, pageIndex, rowIndex);
 
