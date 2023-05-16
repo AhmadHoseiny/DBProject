@@ -59,7 +59,7 @@ public class MyIterator implements Iterator {
 
         //to determine if we are using the index or not
         this.compUsingIndex();
-        System.out.println("Using index(Constructor): " + usingIndex);
+//        System.out.println("Using index(Constructor): " + usingIndex);
         if (this.usingIndex) {
             this.resultSet = new Vector<>();
             this.resultSetPointer = 0;

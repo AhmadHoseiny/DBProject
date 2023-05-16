@@ -4,35 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/grammars/SQLiteLexer.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/grammars/SQLiteLexer.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/grammars/SQLiteParser.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" afterDir="false" />
+    <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="Updated Exception Handling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DBProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/MySQLParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student/Indices/AgeNameSalaryIndex.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student/Pages/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student/Pages/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student/Pages/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student/Pages/Page_3.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/student.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/student/Indices/AgeNameSalaryIndex.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/student/Pages/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/student/Pages/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/student/Pages/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Data/student/Pages/Page_3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Main.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/MySQLParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/MySQLParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/MySQLiteParserBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/MySQLiteParserBaseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/MyIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/MyIterator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tables/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Table.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +87,7 @@
       <recent name="D:\GUC\IntelliJ workspace\DBProject\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MySQLParser">
+  <component name="RunManager" selected="Application.DBApp">
     <configuration name="DBApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBApp" />
       <module name="DBProject" />
@@ -132,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MySQLParser" />
         <item itemvalue="Application.DBApp" />
+        <item itemvalue="Application.MySQLParser" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -159,7 +144,7 @@
       <workItem from="1683996701461" duration="801000" />
       <workItem from="1684064201102" duration="1064000" />
       <workItem from="1684065285674" duration="337000" />
-      <workItem from="1684151791273" duration="10499000" />
+      <workItem from="1684151791273" duration="30496000" />
     </task>
     <task id="LOCAL-00001" summary="Trial Setups 2.0">
       <created>1678902844097</created>

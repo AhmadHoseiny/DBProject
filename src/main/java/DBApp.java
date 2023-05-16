@@ -4,6 +4,7 @@ import helper_classes.IndexNameGetter;
 import helper_classes.SQLTerm;
 import helper_classes.Serializer;
 import index.Octree;
+import parser.MySQLParser;
 import tables.MyIterator;
 import tables.Page;
 import tables.Table;
@@ -23,6 +24,16 @@ public class DBApp {
     }
 
     public static void main(String[] args) throws DBAppException, IOException, ParseException, ClassNotFoundException {
+//        StringBuffer createStrBuff = new StringBuffer();
+//        createStrBuff.append("Create Table Student(\n" +
+//                "\tid int primary key,\n" +
+//                "\tname varchar(20),\n" +
+//                "\tage decimal(10, 5),\n" +
+//                "\tdob DATETIME\n" +
+//                ");");
+//        DBApp dbApp = new DBApp();
+//        dbApp.parseSQL(createStrBuff);
+
 
 //        testCreateStudentTable();
 
@@ -245,7 +256,7 @@ public class DBApp {
 
     public static void testPrintIndex() throws DBAppException, IOException, ParseException, ClassNotFoundException {
         DBApp dbApp = new DBApp();
-        String[] strarrColNames = {"age", "name", "salary"};
+        String[] strarrColNames = {"age", "dob", "name"};
         dbApp.printIndex("Student", strarrColNames);
     }
 
@@ -327,7 +338,6 @@ public class DBApp {
             strTableName = strTableName.toLowerCase();
             File folder = new File(directoryPathResourcesData + strTableName + "/Pages");
             int fileCount = folder.listFiles().length;
-
             for (int i = 0; i < fileCount; i++) {
                 Page p;
                 p = Serializer.deserializePage(strTableName, i);
@@ -413,6 +423,11 @@ public class DBApp {
 //            throw new DBAppException(e.getMessage());
 //        }
 
+    }
+
+    public Iterator parseSQL( StringBuffer strbufSQL ) throws
+            DBAppException{
+        return MySQLParser.parse(strbufSQL);
     }
 
     public void printIndex(String strTableName, String[] strarrColName) throws IOException, DBAppException, ParseException, ClassNotFoundException {
