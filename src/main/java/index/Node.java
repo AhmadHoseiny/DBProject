@@ -55,15 +55,8 @@ public abstract class Node implements Serializable {
         for (int i = 1; i <= N; i++) {
             sb.append((char) (a1[i] + 97));
         }
-//        System.out.println(S + " " + T + " " + sb);
         return sb.toString();
     }
-
-//    public boolean isInside(Comparable x, Comparable y, Comparable z) {
-//        return x.compareTo(leftLimit.get(0)) >= 0 && x.compareTo(rightLimit.get(0)) <= 0 &&
-//                y.compareTo(leftLimit.get(1)) >= 0 && y.compareTo(rightLimit.get(1)) <= 0 &&
-//                z.compareTo(leftLimit.get(2)) >= 0 && z.compareTo(rightLimit.get(2)) <= 0;
-//    }
 
     public void setBounds(Vector<Comparable> lefts, Vector<Comparable> rights) {
         leftLimit = new Vector<>();

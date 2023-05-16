@@ -22,7 +22,6 @@ public class NonLeaf extends Node {
     public int getChildIndex(Vector<Comparable> keyData) {
         int index = 0;
         Vector<Comparable> mid = this.getMid();
-//        System.out.println("mid: " + mid + " keyData: " + keyData);
         for (int i = 0; i < 3; i++)
             if (GenericComparator.compare(keyData.get(i), mid.get(i)) > 0)
                 index |= 1 << i;
@@ -31,7 +30,6 @@ public class NonLeaf extends Node {
     }
 
     public void split(Vector<String> typePerCol) throws IOException {
-//        System.out.println(this.leftLimit + " " + this.mid + " " + this.rightLimit);
         for (int i = 0; i < NonLeaf.MAX_CHILDREN; i++) {
             Vector<Comparable> newLeft = new Vector<>();
             Vector<Comparable> newRight = new Vector<>();

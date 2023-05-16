@@ -47,7 +47,6 @@ public class Table implements Serializable {
             if (e.getKey().equals(this.clusteringKey))
                 continue;
             colNames.add(e.getKey().toLowerCase());
-//            System.out.println(e.getKey().toLowerCase());
         }
 
         Hashtable<String, String> newHtblColNameMin = newHashtableCreator(htblColNameType, htblColNameMin);
@@ -176,8 +175,6 @@ public class Table implements Serializable {
 
     public boolean isValidTuple(Hashtable<String, Object> htblColNameValue) {
 
-//        System.out.println("here " + isValidTupleType(htblColNameValue));
-//        System.out.println(isValidTupleMinMax(htblColNameValue));
         return isValidTupleType(htblColNameValue) && isValidTupleMinMax(htblColNameValue);
 
     }
@@ -287,7 +284,6 @@ public class Table implements Serializable {
             this.table.add(page);
             page.insertTuple(colNames, htblColNameValue);
             minPerPage.put(0, (Comparable) htblColNameValue.get(clusteringKey));
-//            System.out.println(page.getPage().get(0));
             Serializer.serializePage(page, this.getTableName(), 0);
             insertInOctree(deserializedOctrees, page.getPage().get(0), 0, 0);
             for (Octree octree : deserializedOctrees) {
@@ -312,7 +308,6 @@ public class Table implements Serializable {
         if (lastTuple == null || (lastTuple != null && lastTuple.get(0) != htblColNameValue.get(colNames.get(0)))) {
             tupleIndex = curPage.getTupleIndex((Comparable) htblColNameValue.get(colNames.get(0)));
             insertInOctree(deserializedOctrees, curPage.getPage().get(tupleIndex), pageIndex, tupleIndex);
-//            System.out.println("Inserted in page " + pageIndex + " at index " + tupleIndex);
             for (int i = tupleIndex + 1; i < Math.min(curPage.getPage().size(), maxPageSize); i++) {
                 updatePointerInOctree(deserializedOctrees, curPage.getPage().get(i), pageIndex, i - 1, pageIndex, i);
             }
@@ -388,12 +383,10 @@ public class Table implements Serializable {
             String colName1 = octree.getStrarrColName()[0];
             String colName2 = octree.getStrarrColName()[1];
             String colName3 = octree.getStrarrColName()[2];
-//            System.out.println(colName1 + " " + colName2 + " " + colName3);
 
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName1)));
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName2)));
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName3)));
-//            System.out.println("keyData1: " + keyData);
             octree.insert(keyData, pageIndex, tupleIndex);
 
         }
@@ -407,12 +400,10 @@ public class Table implements Serializable {
             String colName1 = octree.getStrarrColName()[0];
             String colName2 = octree.getStrarrColName()[1];
             String colName3 = octree.getStrarrColName()[2];
-//            System.out.println(colName1 + " " + colName2 + " " + colName3);
 
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName1)));
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName2)));
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName3)));
-//            System.out.println("keyData1: " + keyData);
             octree.delete(keyData, pageIndex, tupleIndex);
 
         }
@@ -426,12 +417,10 @@ public class Table implements Serializable {
             String colName1 = octree.getStrarrColName()[0];
             String colName2 = octree.getStrarrColName()[1];
             String colName3 = octree.getStrarrColName()[2];
-//            System.out.println(colName1 + " " + colName2 + " " + colName3);
 
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName1)));
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName2)));
             keyData.add((Comparable) curTuple.get(colNames.indexOf(colName3)));
-//            System.out.println("keyData1: " + keyData);
             octree.updatePointer(keyData, oldPageIndex, oldTupleIndex, newPageIndex, newTupleIndex);
 
         }
@@ -518,8 +507,6 @@ public class Table implements Serializable {
 
         }
 
-//        System.out.println("oldTuple: " + oldTuple);
-//        System.out.println(pageIndex + " " + rowIndex);
         deleteInOctree(deserializedOctrees, oldTuple, pageIndex, rowIndex);
         insertInOctree(deserializedOctrees, newTuple, pageIndex, rowIndex);
 
@@ -642,7 +629,6 @@ public class Table implements Serializable {
             boolean colsToBeTaken[] = new boolean[3];
             Octree octree = getIndexToBeUsed(htblColNameValue, deserializedOctrees, colsToBeTaken);
             if(octree != null){ //we will use the index
-//                System.out.println("I used the index!!!" + octree.getStrarrColName()[0] + " " + octree.getStrarrColName()[1] + " " + octree.getStrarrColName()[2]);
                 //building the objValues vector
                 Vector<Comparable> objValues = new Vector();
                 for(int i=0 ; i<3 ; i++){

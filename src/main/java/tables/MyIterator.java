@@ -59,7 +59,6 @@ public class MyIterator implements Iterator {
 
         //to determine if we are using the index or not
         this.compUsingIndex();
-//        System.out.println("Using index(Constructor): " + usingIndex);
         if (this.usingIndex) {
             this.resultSet = new Vector<>();
             this.resultSetPointer = 0;
@@ -69,7 +68,6 @@ public class MyIterator implements Iterator {
 
     public void compUsingIndex() {
         usingIndex = checkANDConditions();
-//        System.out.println("Using index: " + usingIndex);
         if (usingIndex) {
             indexName = checkIfColumnsInIndex(arrSQLTerms);
             if (indexName == null)
@@ -141,7 +139,6 @@ public class MyIterator implements Iterator {
             String colName1 = columnNames[0].toLowerCase();
             String colName2 = columnNames[1].toLowerCase();
             String colName3 = columnNames[2].toLowerCase();
-//            System.out.println(colName1 + " " + colName2 + " " + colName3);
             HashSet<String> colNames = new HashSet<>();
             int count = 0;
             for (SQLTerm term : arrSQLTerms) {
@@ -150,18 +147,14 @@ public class MyIterator implements Iterator {
                 if (term._strColumnName.equals(colName1) && !colNames.contains(colName1)) {
                     colNames.add(term._strColumnName);
                     count++;
-//                    System.out.println("Count: " + count + " " + colName1);
                 } else if (term._strColumnName.equals(colName2) && !colNames.contains(colName2)) {
                     colNames.add(term._strColumnName);
                     count++;
-//                    System.out.println("Count: " + count + " " + colName2);
                 } else if (term._strColumnName.equals(colName3) && !colNames.contains(colName3)) {
                     colNames.add(term._strColumnName);
                     count++;
-//                    System.out.println("Count: " + count + " " + colName3);
                 }
             }
-//            System.out.println("Count: " + count);
             if (count == 3)
                 return index;
         }
@@ -268,7 +261,6 @@ public class MyIterator implements Iterator {
                 doNextJob();
             } catch (Exception e) {
                 throw new NoSuchElementException(e.getMessage());
-//            System.out.println(e.getMessage());
             }
             if (nextTuple == null)
                 return false;
@@ -288,7 +280,6 @@ public class MyIterator implements Iterator {
                     doNextJob();
                 } catch (Exception e) {
                     throw new NoSuchElementException(e.getMessage());
-//                System.out.println(e.getMessage());
                 }
             nextCalled = false;
             return nextTuple;

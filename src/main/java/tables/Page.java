@@ -82,7 +82,6 @@ public class Page implements Serializable {
             return 0;
         Comparable cur = (Comparable) this.getPage().get(index).get(0);
         if (cur.compareTo(strClusteringVal) == 0) {
-//            System.out.println(cur + " " + strClusteringVal);
             throw new DBAppException("Duplicate Clustering Key");
         }
 

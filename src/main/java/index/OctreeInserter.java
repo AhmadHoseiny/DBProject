@@ -14,10 +14,7 @@ public class OctreeInserter {
 
     public void insert(Vector<Comparable> keyData, int pageIndex, int rowIndex) throws IOException {
 
-//        System.out.println("KeyData in OctreeInserterInsert " + keyData);
-
         Node cur = octree.findNode(octree.root, keyData);
-//        System.out.println("cur Node " + cur.toString());
         insertHelper(keyData, pageIndex, rowIndex, cur);
 
     }
@@ -33,10 +30,8 @@ public class OctreeInserter {
 
         //if the leaf had space, insert the data into it (it also includes duplicates handling)
         if (((Leaf) cur).insertData(keyData, pageIndex, rowIndex)) {
-//            System.out.println(((Leaf) cur).keyDataVector);
             return;
         }
-//        System.out.println("? " + keyData +"__" + cur);
         //otherwise, the node needs to be split
 
         // create a newNode and set its limits to the limits of the current node

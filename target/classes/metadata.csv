@@ -14,3 +14,10 @@ transcripts,course_name,java.lang.String,false,Course_nameGpaStudent_idIndex,Oct
 transcripts,student_id,java.lang.String,false,Course_nameGpaStudent_idIndex,Octree,43-0000,99-9999
 pcs,pc_id,java.lang.Integer,true,null,null,0,20000
 pcs,student_id,java.lang.String,false,null,null,43-0000,99-9999
+student,id,java.lang.Integer,true,null,null,0,100
+student,age,java.lang.Double,false,AgeDobNameIndex,Octree,0.0,100.0
+student,name,java.lang.String,false,AgeDobNameIndex,Octree,aaaaaaaaaaa,zzzzzzzzzzz
+student,dob,java.util.Date,false,AgeDobNameIndex,Octree,1900-01-01,2023-05-12
+student,id,java.lang.Integer,true,null,null,-2147483648,2147483647
+student,gpa,java.lang.double,false,null,null,4.9E-324,1.7976931348623157E308
+student,name,java.lang.String,false,null,null,,        
