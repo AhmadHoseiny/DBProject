@@ -10,7 +10,7 @@
 
 ## Introduction
 
-This is a simple database management system that allows users to create, read, update, and delete data from a database. The database is stored in a file called `Data` and is created if it does not exist. The database is a simple key-value(s) store that stores data in a Vector format. The database is implemented in java.
+This is a simple database management system that allows users to create, read, update, and delete data from a database. The database is stored in a file called `Data` and is created if it does not exist. The database is a simple key-value(s) store that stores data in a Vector format. The database is implemented in java, and the data is serialized to the disk and deserialized whenever needed. To optimize queries and other functionalities, binary search is used in insert, update, single delete, and point query functionalities.
 
 ## Functionalities
 
@@ -213,7 +213,6 @@ MyIterator resultSet = dbApp.selectFromTable("students", htblColNameValue);
 while (resultSet.hasNext()) {
     System.out.println(resultSet.next());
 }
-
 ```
 Performing a range query is supported in SQL format. The following is an example of a range query:
 ```java
@@ -232,6 +231,16 @@ while (resultSet.hasNext()) {
 
     dbApp.parseSQL(strbufSQL);
     ```
+To print any table you can use the following method:
+```java
+dbApp.printTable("students");
+```
+To print any octree index you can use the following method:
+```java
+String[] strarrColNames = { "id", "name", "gpa" };
+
+dbApp.printIndex("students", strarrColNames);
+```
 
 ## Tools
 
