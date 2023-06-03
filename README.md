@@ -1,5 +1,13 @@
 # Database Management System
 
+- [Navigation](#navigation)
+    - [Introduction](#introduction)
+    - [Functionalities](#functionalities)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Tools](#tools)
+    - [Contributors](#contributors)
+
 ## Introduction
 
 This is a simple database management system that allows users to create, read, update, and delete data from a database. The database is stored in a file called `Data` and is created if it does not exist. The database is a simple key-value(s) store that stores data in a Vector format. The database is implemented in java.
@@ -117,7 +125,7 @@ To use the database management system, clone the repo, compile the code, and run
 ```java
 DBApp dbApp = new DBApp();
 ```
-Next you will have to create parameters that constrict the input you introduce to each field in the table.
+Next you will have to create parameters that constraint the input you introduce to each field in the table.
 ```java
 Hashtable<String, String> htblColNameType = new Hashtable<String, String>();
 htblColNameType.put("id", "java.lang.Integer");
