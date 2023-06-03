@@ -5,9 +5,9 @@ import helper_classes.SQLTerm;
 import helper_classes.Serializer;
 import index.Octree;
 import parser.MySQLParser;
-import tables.MyIterator;
-import tables.Page;
-import tables.Table;
+import helper_classes.MyIterator;
+import page.Page;
+import table.Table;
 
 import java.io.File;
 import java.util.Arrays;

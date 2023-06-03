@@ -1,7 +1,7 @@
 package helper_classes;
 
 import exceptions.DBAppException;
-import tables.Table;
+import table.Table;
 
 import java.io.File;
 import java.io.FileWriter;

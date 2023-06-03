@@ -3,7 +3,7 @@ package parser;
 import exceptions.DBAppException;
 import helper_classes.SQLTerm;
 import helper_classes.Serializer;
-import tables.Table;
+import table.Table;
 
 import java.lang.reflect.Method;
 import java.text.ParseException;

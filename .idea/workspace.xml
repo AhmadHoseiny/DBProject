@@ -5,62 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/table/TableDeleter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/table/TableInserter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/table/TableUpdater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_05_2023_9_48_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_05_2023_9_48_pm__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assumptions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assumptions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBProject.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Leaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/NonLeaf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/index/OctreeInserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/OctreeInserter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/MySQLParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/index/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Octree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tables/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_4.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_5.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_6.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_4.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_5.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_6.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students/Indices/AgeGpaNameIndex.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students/Indices/DobIdSalaryIndex.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Indices/Course_nameGpaStudent_idIndex.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_0.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_1.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_2.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_4.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_5.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_6.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/courses_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pcs_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/students_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/transcripts_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Milestone2PrivateTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/MyIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/table/Table.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/classpath.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/courses_table.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/AllRecordInIndexInserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/AllRecordInIndexInserter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/Octree.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Octree.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/parser/MySQLParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/MySQLParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/parser/MySQLiteParserBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/MySQLiteParserBaseListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pcs_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/students_table.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tables/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tables/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/transcripts_table.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/MyIterator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/Page.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tables/Table.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,25 +86,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/GUC/IntelliJ workspace/Kernel-Simulator&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/GUC/IntelliJ workspace/Kernel-Simulator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.build",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\GUC\IntelliJ workspace\DBProject\src\main\resources" />

@@ -1,8 +1,8 @@
 package helper_classes;
 
 import index.Octree;
-import tables.Page;
-import tables.Table;
+import page.Page;
+import table.Table;
 
 import java.io.File;
 import java.io.IOException;

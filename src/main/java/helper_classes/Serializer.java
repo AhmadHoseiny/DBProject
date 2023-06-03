@@ -2,8 +2,8 @@ package helper_classes;
 
 import exceptions.DBAppException;
 import index.Octree;
-import tables.Page;
-import tables.Table;
+import page.Page;
+import table.Table;
 
 import java.io.*;
 import java.text.ParseException;

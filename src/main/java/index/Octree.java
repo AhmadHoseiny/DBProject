@@ -2,7 +2,7 @@ package index;
 
 import exceptions.DBAppException;
 import helper_classes.CSVFileManipulator;
-import tables.Table;
+import table.Table;
 
 import java.io.IOException;
 import java.io.Serializable;
