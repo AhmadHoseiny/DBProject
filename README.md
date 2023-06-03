@@ -71,7 +71,9 @@ Each functionality from the above list can be used in SQL queries. The following
     ```sql
     CREATE INDEX ON table_name (column_name);
     ```
+<details>
 
+ <summary> project structure </summary>
 - Perform a range query on a table
 
     ```sql
@@ -89,6 +91,8 @@ Each functionality from the above list can be used in SQL queries. The following
     ```sql
     SELECT * FROM table_name WHERE column_name <> value1;
     ```
+    
+</details>
 
 - Perform a point query on a table
 
