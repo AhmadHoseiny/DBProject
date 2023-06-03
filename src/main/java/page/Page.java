@@ -9,7 +9,10 @@ import table.Table;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Vector;
 
 public class Page implements Serializable {
     private Vector<Vector<Object>> page;

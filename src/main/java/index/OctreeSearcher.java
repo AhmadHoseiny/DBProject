@@ -110,6 +110,7 @@ public class OctreeSearcher {
         return resPointers;
 
     }
+
     public void dfsForDelete(Node cur, Vector<Comparable> objValues) {
         if (cur instanceof Leaf) {
             leavesForDelete.add((Leaf) cur);
@@ -121,18 +122,18 @@ public class OctreeSearcher {
             dfsForDelete(((NonLeaf) cur).getChildren()[mask], objValues);
         }
     }
+
     public void genMasksForDelete(int idx, NonLeaf cur,
                                   Vector<Comparable> objValues,
-                                  int mask, LinkedList<Integer> resMasks){
+                                  int mask, LinkedList<Integer> resMasks) {
         if (idx == 3) {
             resMasks.addLast(mask);
             return;
         }
-        if(objValues.get(idx) == null){ //to support partial queries
+        if (objValues.get(idx) == null) { //to support partial queries
             genMasksForDelete(idx + 1, cur, objValues, mask, resMasks);
             genMasksForDelete(idx + 1, cur, objValues, mask | (1 << idx), resMasks);
-        }
-        else{
+        } else {
             int newMask = mask;
             if (GenericComparator.compare(objValues.get(idx), cur.getMid().get(idx)) > 0)
                 newMask |= (1 << idx);

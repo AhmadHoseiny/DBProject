@@ -111,7 +111,7 @@ public class Leaf extends Node {
         }
     }
 
-    public void setPageIndicesOfXToY(int oldPageIndex, int newPageIndex){
+    public void setPageIndicesOfXToY(int oldPageIndex, int newPageIndex) {
         for (Vector<Integer> v : pageIndexVector) {
             for (int i = 0; i < v.size(); i++) {
                 if (Integer.compare(v.get(i), oldPageIndex) == 0) {

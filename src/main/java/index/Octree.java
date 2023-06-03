@@ -185,6 +185,7 @@ public class Octree implements Serializable {
         return octreeSearcher.searchForSelect(objValues, operators);
 
     }
+
     public TreeMap<Integer, LinkedList<Integer>> searchForDelete(Vector<Comparable> objValues) throws DBAppException {
 
         OctreeSearcher octreeSearcher = new OctreeSearcher(this);
@@ -195,6 +196,7 @@ public class Octree implements Serializable {
     public void setPageIndicesOfXToY(int oldPageIndex, int newPageIndex) {
         setPageIndicesOfXToY(this.root, oldPageIndex, newPageIndex);
     }
+
     public void setPageIndicesOfXToY(Node root, int oldPageIndex, int newPageIndex) {
         if (root instanceof Leaf) {
             ((Leaf) root).setPageIndicesOfXToY(oldPageIndex, newPageIndex);

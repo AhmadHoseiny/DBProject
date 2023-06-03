@@ -1,7 +1,5 @@
 package helper_classes;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GenericComparator {
@@ -19,11 +17,9 @@ public class GenericComparator {
         if (arg1 instanceof Date && arg2 instanceof Date) {
             if (((Date) arg1).getTime() < ((Date) arg2).getTime()) {
                 return -1;
-            }
-            else if (((Date) arg1).getTime() == ((Date) arg2).getTime()) {
+            } else if (((Date) arg1).getTime() == ((Date) arg2).getTime()) {
                 return 0;
-            }
-            else {
+            } else {
                 return 1;
             }
         }

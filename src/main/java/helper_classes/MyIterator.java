@@ -1,10 +1,6 @@
 package helper_classes;
 
 import exceptions.DBAppException;
-import helper_classes.GenericComparator;
-import helper_classes.Operator;
-import helper_classes.SQLTerm;
-import helper_classes.Serializer;
 import index.Octree;
 import page.Page;
 import table.Table;

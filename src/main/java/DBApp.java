@@ -1,12 +1,8 @@
 import exceptions.DBAppException;
-import helper_classes.AllRecordInIndexInserter;
-import helper_classes.IndexNameGetter;
-import helper_classes.SQLTerm;
-import helper_classes.Serializer;
+import helper_classes.*;
 import index.Octree;
-import parser.MySQLParser;
-import helper_classes.MyIterator;
 import page.Page;
+import parser.MySQLParser;
 import table.Table;
 
 import java.io.File;

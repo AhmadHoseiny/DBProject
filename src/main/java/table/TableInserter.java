@@ -87,26 +87,7 @@ public class TableInserter {
             table.insertInOctree(deserializedOctrees, lastTuple, pageIndex + 1, 0);
             newInsertFlag = true;
         }
-//        int tupleIndex = curPage.getTupleIndex((Comparable) insertedTuple.get(0));
-//        for (String index: indexNames) {
-//            Vector<Comparable> keyData = new Vector<>();
-//            String[] columnNames = index.split("(?=\\p{Upper})");
-//            String colName1 = this.getColNamesFirstLetterCaps().get(columnNames[0]);
-//            String colName2 = this.getColNamesFirstLetterCaps().get(columnNames[1]);
-//            String colName3 = this.getColNamesFirstLetterCaps().get(columnNames[2]);
-//
-//            keyData.add((Comparable) htblColNameValue.get(colName1));
-//            keyData.add((Comparable) htblColNameValue.get(colName2));
-//            keyData.add((Comparable) htblColNameValue.get(colName3));
-//            Octree oct = Serializer.deserializeIndex(this, index);
-//            for ( int i = pageIndex; i < this.minPerPage.size(); i++) {
-//                for (int j = tupleIndex; j < curPage.getPage().size(); j++) {
-//
-//                }
-//            }
-//        }
         pageIndex++;
-//        boolean once = false;
         while (lastTuple != null && pageIndex < fileCount) {
             curPage = Serializer.deserializePage(table.getTableName(), pageIndex);
 

@@ -359,19 +359,19 @@ public class Table implements Serializable {
     }
 
     public Octree getIndexToBeUsed(Hashtable<String, Object> htblColNameValue,
-                                   HashSet<Octree> deserializedOctrees, boolean colsToBeTaken[]){
-        for(int i=3 ; i>=1 ; i--){
-            for(Octree octree : deserializedOctrees){
+                                   HashSet<Octree> deserializedOctrees, boolean colsToBeTaken[]) {
+        for (int i = 3; i >= 1; i--) {
+            for (Octree octree : deserializedOctrees) {
                 int cnt = 0;
                 Arrays.fill(colsToBeTaken, false);
-                for(int j=0 ; j<3 ; j++){
+                for (int j = 0; j < 3; j++) {
                     String colName = octree.getStrarrColName()[j];
-                    if(htblColNameValue.containsKey(colName)){
+                    if (htblColNameValue.containsKey(colName)) {
                         cnt++;
                         colsToBeTaken[j] = true;
                     }
                 }
-                if(cnt == i){
+                if (cnt == i) {
                     return octree;
                 }
             }

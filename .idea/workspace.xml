@@ -5,46 +5,181 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6b2d301-0450-4dde-a64b-c77968293ae7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/table/TableDeleter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/table/TableInserter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/table/TableUpdater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_9_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_05_2023_9_48_pm__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_05_2023_9_48_pm__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/AllRecordInIndexInserter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/CSVFileManipulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/Serializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/GenericComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/GenericComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/IndexNameGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/IndexNameGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/helper_classes/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/MyIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/index/Leaf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Leaf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/index/Octree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/Octree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/MySQLiteParserBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/MyIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/helper_classes/MyIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/page/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tables/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/index/OctreeSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/index/OctreeSearcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/page/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/page/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/table/TableInserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/table/TableInserter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_0.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/courses/Pages/Page_1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/employee.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/employee/Pages/Page_0.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_0.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/pcs/Pages/Page_1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/student.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students/Indices/First_nameGpaLast_nameIndex.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students/Pages/Page_0.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students/Pages/Page_1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/students/Pages/Page_2.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_0.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data/transcripts/Pages/Page_1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/metadata.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DBApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DBApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/exceptions/DBAppException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/exceptions/DBAppException.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/AllRecordInIndexInserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/AllRecordInIndexInserter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/CSVFileManipulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/DirectoryCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/DirectoryCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/GenericComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/GenericComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/IndexNameGetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/IndexNameGetter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/MetadataValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/MetadataValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/MyIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/MyIterator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/NullWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/NullWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Operator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/Operator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/ReadConfigFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/ReadConfigFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/SQLTerm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/SQLTerm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/helper_classes/Serializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/Leaf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Leaf.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/NonLeaf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/NonLeaf.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/index/Octree.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/Octree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/metadata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/metadata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/OctreeDeleter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/OctreeDeleter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/OctreeInserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/OctreeInserter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/index/OctreeSearcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/index/OctreeSearcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/page/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/page/Page.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/parser/MySQLParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/MySQLParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/parser/MySQLiteParserBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/MySQLiteParserBaseListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tables/MyIterator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tables/Page.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tables/Table.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteLexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteLexer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Aggregate_funcContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Aggregate_funcContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Aggregate_function_invocationContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Aggregate_function_invocationContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$AliasContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$AliasContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Alter_table_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Alter_table_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Analyze_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Analyze_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Any_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Any_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Asc_descContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Asc_descContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Attach_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Attach_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Base_window_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Base_window_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Begin_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Begin_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Collation_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Collation_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_aliasContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_aliasContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_constraintContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_constraintContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_defContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_defContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_name_listContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Column_name_listContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Commit_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Commit_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Common_table_expressionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Common_table_expressionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Common_table_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Common_table_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Compound_operatorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Compound_operatorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Compound_select_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Compound_select_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Conflict_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Conflict_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_index_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_index_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_table_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_table_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_trigger_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_trigger_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_view_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_view_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_virtual_table_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Create_virtual_table_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Cte_table_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Cte_table_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Default_DEFAULT__valueContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Default_DEFAULT__valueContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Delete_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Delete_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Delete_stmt_limitedContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Delete_stmt_limitedContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Detach_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Detach_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Drop_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Drop_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Error_messageContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Error_messageContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$ExprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$ExprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Expr_asc_descContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Expr_asc_descContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Factored_select_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Factored_select_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$FilenameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$FilenameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Filter_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Filter_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Foreign_key_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Foreign_key_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Foreign_tableContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Foreign_tableContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_leftContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_leftContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_rightContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_rightContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_singleContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_singleContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_specContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Frame_specContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Function_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Function_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Index_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Index_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Indexed_columnContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Indexed_columnContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Initial_selectContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Initial_selectContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Insert_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Insert_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Join_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Join_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Join_constraintContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Join_constraintContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Join_operatorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Join_operatorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$KeywordContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$KeywordContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Limit_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Limit_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Literal_valueContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Literal_valueContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Module_argumentContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Module_argumentContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Module_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Module_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$NameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$NameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$New_table_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$New_table_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Of_OF_fsetContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Of_OF_fsetContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Order_by_exprContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Order_by_exprContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Order_by_expr_asc_descContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Order_by_expr_asc_descContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Order_by_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Order_by_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Ordering_termContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Ordering_termContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Over_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Over_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$ParseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$ParseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Partition_byContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Partition_byContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Pragma_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Pragma_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Pragma_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Pragma_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Pragma_valueContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Pragma_valueContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Qualified_table_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Qualified_table_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Raise_functionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Raise_functionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Recursive__selectContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Recursive__selectContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Recursive_cteContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Recursive_cteContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Reindex_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Reindex_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Release_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Release_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Result_columnContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Result_columnContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Rollback_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Rollback_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Savepoint_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Savepoint_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Savepoint_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Savepoint_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Schema_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Schema_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Select_coreContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Select_coreContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Select_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Select_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Signed_numberContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Signed_numberContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Simple_funcContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Simple_funcContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Simple_function_invocationContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Simple_function_invocationContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Simple_select_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Simple_select_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Sql_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Sql_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Sql_stmt_listContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Sql_stmt_listContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_aliasContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_aliasContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_constraintContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_constraintContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_function_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_function_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_or_index_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_or_index_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_or_subqueryContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Table_or_subqueryContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Transaction_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Transaction_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Trigger_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Trigger_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Type_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Type_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Unary_operatorContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Unary_operatorContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Update_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Update_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Update_stmt_limitedContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Update_stmt_limitedContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Upsert_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Upsert_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Vacuum_stmtContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Vacuum_stmtContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$View_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$View_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_defnContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_defnContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_functionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_functionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_function_invocationContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_function_invocationContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_nameContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$Window_nameContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$With_clauseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser$With_clauseContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParserBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParserBaseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParserBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParserBaseVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParserListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParserListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/parser/SQLiteParserVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/parser/SQLiteParserVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/table/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/table/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/table/TableDeleter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/table/TableDeleter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/table/TableInserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/table/TableInserter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/table/TableUpdater.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/table/TableUpdater.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,25 +221,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/GUC/IntelliJ workspace/Kernel-Simulator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.build",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GUC/IntelliJ workspace/Kernel-Simulator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\GUC\IntelliJ workspace\DBProject\src\main\resources" />
