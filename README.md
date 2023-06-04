@@ -91,7 +91,7 @@ CREATE INDEX ON table_name (column_name);
  <summary>Perform a range query on a table </summary>
 
 ```sql
-    SELECT * FROM table_name WHERE column_name < value1;
+SELECT * FROM table_name WHERE column_name < value1;
 ```
 
 ```sql
@@ -103,7 +103,7 @@ SELECT * FROM table_name WHERE column_name != value1;
 ```
 
 ```sql
-    SELECT * FROM table_name WHERE column_name <> value1;
+SELECT * FROM table_name WHERE column_name <> value1;
 ```
 
 </details>
