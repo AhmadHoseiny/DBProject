@@ -10,7 +10,7 @@
 
 <br>
 
-## Introduction
+## Introduction:
 
 This is a simple database management system that allows users to create, read, update, and delete data from a database. The database is stored in a file called <span style="font-weight: 700">Data</span> and is created if it does not exist. The database is a simple key-value(s) store that stores data in a Vector format. The database is implemented in java, and the data is serialized to the disk and deserialized whenever needed. To optimize queries and other functionalities, binary search is used in insert, update, single delete, and point query functionalities.
 
